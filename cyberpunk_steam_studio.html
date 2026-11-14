@@ -42,28 +42,61 @@
     body {
       background-color: #040509 !important;
       color: #e6f1ff !important;
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      font-family: 'Inter', system-ui, 'Noto Sans', 'Liberation Sans', -apple-system, sans-serif;
+      font-size-adjust: from-font;
       margin: 0;
       padding: 0;
     }
 
-    /* Custom Scrollbars */
-    ::-webkit-scrollbar {
-      width: 6px;
-      height: 6px;
+    /* Cross-Platform Custom Scrollbars (Firefox + Chromium on Linux & Windows) */
+    * {
+      scrollbar-width: thin;
+      scrollbar-color: var(--cp-cyan) #05070c;
     }
 
-    ::-webkit-scrollbar-track {
-      background: #05070c;
+    @supports not (scrollbar-color: auto) {
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: #05070c;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: var(--cp-cyan);
+        border-radius: 0px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--cp-yellow);
+      }
     }
 
-    ::-webkit-scrollbar-thumb {
-      background: var(--cp-cyan);
-      border-radius: 0px;
+    /* Accessible OS Deployment Tabs */
+    .os-tab {
+      position: relative;
+      border-bottom: 2px solid transparent;
+      transition: color 150ms ease;
     }
 
-    ::-webkit-scrollbar-thumb:hover {
-      background: var(--cp-yellow);
+    .os-tab[aria-selected="true"] {
+      color: #00f0ff;
+    }
+
+    .os-tab[aria-selected="true"]::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -1px;
+      border-bottom: 2px solid #00f0ff;
+    }
+
+    .os-tab:focus-visible {
+      outline: 2px solid #fcee09;
+      outline-offset: 2px;
     }
 
     /* Cyberpunk Clipped Card Utility */
@@ -1302,8 +1335,9 @@
       --cp-text-main: #e6f1ff;
       --cp-text-muted: #7a8ba3;
       --cp-text-dark: #050608;
-      --cp-font-ui: 'Rajdhani', 'Motiva Sans', 'Segoe UI', sans-serif;
-      --cp-font-mono: 'Share Tech Mono', Consolas, monospace;
+      --cp-font-ui: 'Rajdhani', 'Motiva Sans', 'Noto Sans', 'Liberation Sans', 'Segoe UI', sans-serif;
+      --cp-font-mono: 'Share Tech Mono', 'JetBrains Mono', 'Noto Sans Mono', 'Liberation Mono', 'DejaVu Sans Mono', Consolas, monospace;
+      font-size-adjust: from-font;
 
 
       --cp-glow-yellow: 0 0 12px rgba(var(--cp-rgb-yellow), 0.45), 0 0 2px rgba(var(--cp-rgb-yellow), 0.85);
@@ -3524,7 +3558,7 @@
 
         <!-- Installation & Architecture Guide Card -->
         <div class="p-4 rounded-lg border border-[#1b2436] bg-[#090c14] space-y-2.5">
-          <div class="flex items-center justify-between">
+          <div class="flex items-center justify-between gap-2">
             <h2
               class="text-xs font-mono uppercase tracking-widest font-semibold flex items-center gap-2 text-[#fcee09]">
               <span>⚡</span> 04 // Millennium Deployment Path
@@ -3533,18 +3567,59 @@
               class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Steam
               Ready</span>
           </div>
-          <ol class="text-xs text-[#7a8ba8] space-y-1.5 list-decimal list-inside leading-relaxed">
-            <li>Theme folder: <code
-                class="text-[#e6f1ff] font-mono bg-black/50 px-1 py-0.5 rounded">Steam/millennium/themes/Cyberpunk2077/</code>
-            </li>
-            <li>Click <strong class="text-[#fcee09]">⬇ Download Theme Bundle (.zip)</strong> below to export the full
-              customized <code class="text-[#00f0ff] font-mono">Cyberpunk2077/</code> folder (all CSS, JS, <code
-                class="text-[#00f0ff] font-mono">skin.json</code>, and <code
-                class="text-[#00f0ff] font-mono">options/*.css</code>), or copy any single file from the <strong>05 //
-                Theme Code Compiler</strong> tabs.</li>
-            <li>Right-click and select <strong class="text-[#fcee09]">Reload</strong>, or click the <strong
-                class="text-[#fcee09]">Reload</strong> button (top left) inside Steam to hot-reload.</li>
-          </ol>
+
+          <div role="tablist" aria-label="Deployment Operating System"
+            class="flex items-center gap-4 border-b border-[#1b2436] text-[11px] font-mono uppercase tracking-wider">
+            <button type="button" role="tab" id="os-tab-linux" aria-selected="true" aria-controls="os-panel-linux"
+              tabindex="0" class="os-tab pb-1.5 text-[#7a8ba8] hover:text-[#e6f1ff] cursor-pointer">
+              Linux
+            </button>
+            <button type="button" role="tab" id="os-tab-windows" aria-selected="false" aria-controls="os-panel-windows"
+              tabindex="-1" class="os-tab pb-1.5 text-[#7a8ba8] hover:text-[#e6f1ff] cursor-pointer">
+              Windows
+            </button>
+          </div>
+
+          <div id="os-panel-linux" role="tabpanel" aria-labelledby="os-tab-linux" class="space-y-2">
+            <ol class="text-xs text-[#7a8ba8] space-y-1.5 list-decimal list-inside leading-relaxed">
+              <li>Theme folder: <code
+                  class="text-[#e6f1ff] font-mono bg-black/50 px-1 py-0.5 rounded break-all">~/.steam/steam/millennium/themes/Cyberpunk2077/</code>
+              </li>
+              <li>Click <strong class="text-[#fcee09]">⬇ Download Theme Bundle (.zip)</strong> below to export the full
+                customized <code class="text-[#00f0ff] font-mono">Cyberpunk2077/</code> folder (all CSS, JS, <code
+                  class="text-[#00f0ff] font-mono">skin.json</code>, and <code
+                  class="text-[#00f0ff] font-mono">options/*.css</code>), then extract it or copy single files from
+                <strong>05 // Theme Code Compiler</strong>:
+              </li>
+            </ol>
+            <div class="flex items-center justify-between gap-2 bg-black/60 border border-[#1b2436] rounded px-2 py-1.5">
+              <code id="linux-install-cmd"
+                class="text-[10px] font-mono text-[#00f0ff] truncate">mkdir -p ~/.steam/steam/millennium/themes &amp;&amp; unzip -o ~/Downloads/Cyberpunk2077-*.zip -d ~/.steam/steam/millennium/themes/</code>
+              <button type="button" id="btn-copy-linux-cmd"
+                class="shrink-0 text-[10px] font-mono px-2 py-0.5 rounded bg-[#00f0ff]/10 hover:bg-[#00f0ff]/20 text-[#00f0ff] border border-[#00f0ff]/30 transition cursor-pointer">
+                Copy
+              </button>
+            </div>
+            <p class="text-xs text-[#7a8ba8] leading-relaxed">
+              3. Right-click inside Steam and select <strong class="text-[#fcee09]">Reload</strong>, or restart Steam
+              after extracting.
+            </p>
+          </div>
+
+          <div id="os-panel-windows" role="tabpanel" aria-labelledby="os-tab-windows" hidden class="space-y-1.5">
+            <ol class="text-xs text-[#7a8ba8] space-y-1.5 list-decimal list-inside leading-relaxed">
+              <li>Theme folder: <code
+                  class="text-[#e6f1ff] font-mono bg-black/50 px-1 py-0.5 rounded break-all">C:\Program Files (x86)\Steam\millennium\themes\Cyberpunk2077\</code>
+              </li>
+              <li>Click <strong class="text-[#fcee09]">⬇ Download Theme Bundle (.zip)</strong> below to export the full
+                customized <code class="text-[#00f0ff] font-mono">Cyberpunk2077/</code> folder (all CSS, JS, <code
+                  class="text-[#00f0ff] font-mono">skin.json</code>, and <code
+                  class="text-[#00f0ff] font-mono">options/*.css</code>), or copy any single file from the <strong>05 //
+                  Theme Code Compiler</strong> tabs.</li>
+              <li>Right-click and select <strong class="text-[#fcee09]">Reload</strong>, or click the <strong
+                  class="text-[#fcee09]">Reload</strong> button (top left) inside Steam to hot-reload.</li>
+            </ol>
+          </div>
         </div>
 
       </aside>
@@ -4860,7 +4935,9 @@
               <p class="text-[#7a8ba8]">
                 Place all theme files inside:<br>
                 <code
-                  class="text-[#e6f1ff] font-mono bg-black px-1.5 py-0.5 rounded block mt-1 break-all border border-[#1b2436]">C:\Program Files (x86)\Steam\millennium\themes\Cyberpunk2077\</code>
+                  class="text-[#e6f1ff] font-mono bg-black px-1.5 py-0.5 rounded block mt-1 break-all border border-[#1b2436]">Linux: ~/.steam/steam/millennium/themes/Cyberpunk2077/</code>
+                <code
+                  class="text-[#e6f1ff] font-mono bg-black px-1.5 py-0.5 rounded block mt-1 break-all border border-[#1b2436]">Windows: C:\Program Files (x86)\Steam\millennium\themes\Cyberpunk2077\</code>
               </p>
               <ul class="space-y-1 text-[#7a8ba8] list-disc list-inside pt-1">
                 <li><code class="text-[#00f0ff] font-mono">skin.json</code> — Theme manifest &amp; UI toggles</li>
@@ -4894,7 +4971,9 @@
                     class="text-[#fcee09]">Reload</strong>
                   button (top left) to apply edits immediately.</li>
                 <li><strong class="text-[#e6f1ff]">Resize Docked Friends</strong>: Drag the vertical cyan divider on the
-                  inner edge of the Docked Friends panel to resize its width (`180px`–`500px`).</li>
+                  inner edge of the Docked Friends panel to resize its width (<code
+                    class="text-[#e6f1ff] font-mono">210px</code>–<code
+                    class="text-[#e6f1ff] font-mono">480px</code>).</li>
               </ol>
             </div>
 
@@ -4909,7 +4988,8 @@
                   at runtime on each user's client.</li>
                 <li><strong class="text-[#e6f1ff]">Share with Friends</strong>: Zip the <code
                     class="text-[#e6f1ff] font-mono">Cyberpunk2077</code> folder and have your friend extract it into
-                  <code class="text-[#e6f1ff] font-mono">Steam/millennium/themes/Cyberpunk2077</code>.
+                  <code class="text-[#e6f1ff] font-mono">~/.steam/steam/millennium/themes/Cyberpunk2077</code> (Linux) or
+                  <code class="text-[#e6f1ff] font-mono">Steam\millennium\themes\Cyberpunk2077</code> (Windows).
                 </li>
                 <li><strong class="text-[#e6f1ff]">Licensing</strong>: Clean-room original CSS/JS code using SIL Open
                   Font License (OFL) Google Fonts (<code class="text-[#e6f1ff]">Orbitron</code>, <code
@@ -5381,8 +5461,8 @@ body {
   --cp-text-main: #e6f1ff;
   --cp-text-muted: #7a8ba3;
   --cp-text-dark: #050608;
-  --cp-font-ui: 'Rajdhani', 'Motiva Sans', 'Segoe UI', sans-serif;
-  --cp-font-mono: 'Share Tech Mono', Consolas, monospace;
+  --cp-font-ui: 'Rajdhani', 'Motiva Sans', 'Noto Sans', 'Liberation Sans', 'Segoe UI', sans-serif;
+  --cp-font-mono: 'Share Tech Mono', 'JetBrains Mono', 'Noto Sans Mono', 'Liberation Mono', 'DejaVu Sans Mono', Consolas, monospace;
 
   /* Glows & Chamfers */
   --cp-glow-yellow: 0 0 12px rgba(252, 238, 9, 0.45), 0 0 2px rgba(252, 238, 9, 0.85);
@@ -7144,8 +7224,8 @@ div[role="radiogroup"] div[role="radio"][aria-checked="true"] {
   --cp-bg-card-hover: rgba(24, 32, 52, 0.96);
   --cp-text-main: #e6f1ff;
   --cp-text-muted: #7a8ba3;
-  --cp-font-ui: 'Rajdhani', 'Motiva Sans', sans-serif;
-  --cp-font-mono: 'Share Tech Mono', Consolas, monospace;
+  --cp-font-ui: 'Rajdhani', 'Motiva Sans', 'Noto Sans', 'Liberation Sans', 'Segoe UI', sans-serif;
+  --cp-font-mono: 'Share Tech Mono', 'JetBrains Mono', 'Noto Sans Mono', 'Liberation Mono', 'DejaVu Sans Mono', Consolas, monospace;
   --cp-store-max-width: 1200px;
 }
 
@@ -7167,7 +7247,7 @@ body.v6,
     radial-gradient(circle at 20% 0%, rgba(255, 0, 85, 0.08) 0%, transparent 45%),
     radial-gradient(circle at 80% 100%, rgba(0, 240, 255, 0.08) 0%, transparent 45%) !important;
   color: #e6f1ff !important;
-  font-family: 'Rajdhani', 'Motiva Sans', sans-serif !important;
+  font-family: var(--cp-font-ui) !important;
 }
 
 /* Cyberpunk Scrollbars (Vertical & Horizontal Side-Scrolling Support) */
@@ -8831,8 +8911,8 @@ body,
   --cp-green: #00ff9d;
   --cp-text-main: #e6f1ff;
   --cp-text-muted: #7a8ba3;
-  --cp-font-ui: 'Rajdhani', 'Motiva Sans', sans-serif;
-  --cp-font-mono: 'Share Tech Mono', Consolas, monospace;
+  --cp-font-ui: 'Rajdhani', 'Motiva Sans', 'Noto Sans', 'Liberation Sans', 'Segoe UI', sans-serif;
+  --cp-font-mono: 'Share Tech Mono', 'JetBrains Mono', 'Noto Sans Mono', 'Liberation Mono', 'DejaVu Sans Mono', Consolas, monospace;
 
   background-color: var(--cp-bg-void) !important;
   color: var(--cp-text-main) !important;
@@ -9117,8 +9197,8 @@ html.web_chat_frame body.ContextMenuPopupBody {
           "@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Orbitron:wght@600;700;900&family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap');"
         );
         const uiStack = state.font === 'Share Tech Mono'
-          ? "'Share Tech Mono', Consolas, monospace"
-          : "'Chakra Petch', 'Rajdhani', 'Motiva Sans', 'Segoe UI', sans-serif";
+          ? "'Share Tech Mono', 'JetBrains Mono', 'Noto Sans Mono', 'Liberation Mono', 'DejaVu Sans Mono', Consolas, monospace"
+          : "'Chakra Petch', 'Rajdhani', 'Motiva Sans', 'Noto Sans', 'Liberation Sans', 'Segoe UI', sans-serif";
         css = css.replace(/--cp-font-ui:\s*[^;]+;/g, `--cp-font-ui: ${uiStack};`);
       }
 
@@ -9435,7 +9515,7 @@ html.web_chat_frame body.ContextMenuPopupBody {
     const friendStore = app && app.FriendStore;
     if (!friendStore) {
       listContainerEl.innerHTML =
-        '<div style="padding:12px;font-family:\\'Share Tech Mono\\',monospace;font-size:11px;color:#64748b;">// CONNECTING TO NEURAL NET...</div>';
+        '<div style="padding:12px;font-family:var(--cp-font-mono, \\'Share Tech Mono\\', monospace);font-size:11px;color:#64748b;">// CONNECTING TO NEURAL NET...</div>';
       return;
     }
 
@@ -9535,6 +9615,24 @@ html.web_chat_frame body.ContextMenuPopupBody {
     }
   }
 
+  /** Attach drag move/end listeners with blur and zero-button guards for X11/Wayland edge releases. */
+  function bindDragLifecycle(isActive, onMove, onEnd) {
+    const finish = () => {
+      if (!isActive()) return;
+      onEnd();
+    };
+    document.addEventListener('mousemove', (e) => {
+      if (!isActive()) return;
+      if (e.buttons === 0) {
+        finish();
+        return;
+      }
+      onMove(e);
+    });
+    document.addEventListener('mouseup', finish);
+    window.addEventListener('blur', finish);
+  }
+
   function setupFriendsResizer(resizer, panel) {
     let isResizing = false;
     let startX = 0;
@@ -9557,19 +9655,19 @@ html.web_chat_frame body.ContextMenuPopupBody {
       direction = isOnLeft ? 1 : -1;
     });
 
-    document.addEventListener('mousemove', (e) => {
-      if (!isResizing) return;
-      const dx = (e.clientX - startX) * direction;
-      const newWidth = Math.max(210, Math.min(480, startWidth + dx));
-      panel.style.width = newWidth + 'px';
-    });
-
-    document.addEventListener('mouseup', () => {
-      if (!isResizing) return;
-      isResizing = false;
-      resizer.classList.remove('cp-resizing');
-      localStorage.setItem('cp_friends_panel_width', parseInt(panel.style.width, 10));
-    });
+    bindDragLifecycle(
+      () => isResizing,
+      (e) => {
+        const dx = (e.clientX - startX) * direction;
+        const newWidth = Math.max(210, Math.min(480, startWidth + dx));
+        panel.style.width = newWidth + 'px';
+      },
+      () => {
+        isResizing = false;
+        resizer.classList.remove('cp-resizing');
+        localStorage.setItem('cp_friends_panel_width', parseInt(panel.style.width, 10));
+      }
+    );
   }
 
   function setupBidirectionalGamesResizer() {
@@ -9603,16 +9701,17 @@ html.web_chat_frame body.ContextMenuPopupBody {
       true
     );
 
-    document.addEventListener('mousemove', (e) => {
-      if (!isResizing) return;
-      const dx = (e.clientX - startX) * direction;
-      const newWidth = Math.max(240, Math.min(window.innerWidth * 0.45, startWidth + dx));
-      gamesPanel.style.width = newWidth + 'px';
-    });
-
-    document.addEventListener('mouseup', () => {
-      isResizing = false;
-    });
+    bindDragLifecycle(
+      () => isResizing,
+      (e) => {
+        const dx = (e.clientX - startX) * direction;
+        const newWidth = Math.max(240, Math.min(window.innerWidth * 0.45, startWidth + dx));
+        gamesPanel.style.width = newWidth + 'px';
+      },
+      () => {
+        isResizing = false;
+      }
+    );
   }
 
   /* ==========================================================================
@@ -10370,14 +10469,110 @@ html.web_chat_frame body.ContextMenuPopupBody {
       renderCodeOutput();
     }
 
+    const copyResetTimers = new WeakMap();
+    const copyOriginalLabels = new WeakMap();
+
+    function legacyCopy(text) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.setAttribute('readonly', '');
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      let ok = false;
+      try {
+        ok = document.execCommand('copy');
+      } catch (_) {
+        ok = false;
+      }
+      ta.remove();
+      return ok;
+    }
+
+    function showCopyFeedback(btn, label) {
+      if (!btn) return;
+      if (!copyOriginalLabels.has(btn)) {
+        copyOriginalLabels.set(btn, btn.textContent);
+      }
+      clearTimeout(copyResetTimers.get(btn));
+      btn.textContent = label;
+      const original = copyOriginalLabels.get(btn);
+      copyResetTimers.set(
+        btn,
+        setTimeout(() => {
+          btn.textContent = original;
+        }, 1800)
+      );
+    }
+
+    async function copyTextToClipboard(text, btn, successLabel = '✓ Copied!') {
+      if (typeof text !== 'string') return;
+      let copied = false;
+      if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function' && window.isSecureContext) {
+        try {
+          await navigator.clipboard.writeText(text);
+          copied = true;
+        } catch (_) {
+          copied = false;
+        }
+      }
+      if (!copied) {
+        copied = legacyCopy(text);
+      }
+      showCopyFeedback(btn, copied ? successLabel : '✗ Copy failed');
+    }
+
     function copyActiveCode() {
-      const text = getActiveCodeContent();
-      navigator.clipboard.writeText(text).then(() => {
-        const btn = document.getElementById('btn-copy');
-        const original = btn.innerHTML;
-        btn.innerHTML = '✓ Copied to Clipboard!';
-        setTimeout(() => { btn.innerHTML = original; }, 1800);
-      });
+      copyTextToClipboard(getActiveCodeContent(), document.getElementById('btn-copy'), '✓ Copied to Clipboard!');
+    }
+
+    function initOsDeploymentUI() {
+      const tablist = document.querySelector('[role="tablist"][aria-label="Deployment Operating System"]');
+      if (tablist && !tablist.dataset.bound) {
+        tablist.dataset.bound = '1';
+        const tabs = Array.from(tablist.querySelectorAll('[role="tab"]'));
+        const activateTab = (nextTab, moveFocus) => {
+          tabs.forEach((tab) => {
+            const selected = tab === nextTab;
+            tab.setAttribute('aria-selected', selected ? 'true' : 'false');
+            tab.setAttribute('tabindex', selected ? '0' : '-1');
+            const panel = document.getElementById(tab.getAttribute('aria-controls'));
+            if (panel) panel.hidden = !selected;
+          });
+          if (moveFocus) nextTab.focus();
+        };
+
+        tabs.forEach((tab) => tab.addEventListener('click', () => activateTab(tab, false)));
+
+        tablist.addEventListener('keydown', (e) => {
+          const idx = tabs.indexOf(document.activeElement);
+          if (idx === -1) return;
+          let nextIdx = idx;
+          if (e.key === 'ArrowRight') nextIdx = (idx + 1) % tabs.length;
+          else if (e.key === 'ArrowLeft') nextIdx = (idx - 1 + tabs.length) % tabs.length;
+          else if (e.key === 'Home') nextIdx = 0;
+          else if (e.key === 'End') nextIdx = tabs.length - 1;
+          else return;
+          e.preventDefault();
+          activateTab(tabs[nextIdx], true);
+        });
+      }
+
+      const linuxCopyBtn = document.getElementById('btn-copy-linux-cmd');
+      if (linuxCopyBtn && !linuxCopyBtn.dataset.bound) {
+        linuxCopyBtn.dataset.bound = '1';
+        linuxCopyBtn.addEventListener('click', () => {
+          const cmd = document.getElementById('linux-install-cmd')?.textContent.trim() || '';
+          copyTextToClipboard(cmd, linuxCopyBtn, '✓ Copied!');
+        });
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initOsDeploymentUI);
+    } else {
+      initOsDeploymentUI();
     }
 
     function crc32Bytes(bytes) {

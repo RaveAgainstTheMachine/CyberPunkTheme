@@ -16,8 +16,8 @@
   --cp-bg-card-hover: rgba(24, 32, 52, 0.96);
   --cp-text-main: #e6f1ff;
   --cp-text-muted: #7a8ba3;
-  --cp-font-ui: 'Rajdhani', 'Motiva Sans', sans-serif;
-  --cp-font-mono: 'Share Tech Mono', Consolas, monospace;
+  --cp-font-ui: 'Rajdhani', 'Motiva Sans', 'Noto Sans', 'Liberation Sans', 'Segoe UI', sans-serif;
+  --cp-font-mono: 'Share Tech Mono', 'JetBrains Mono', 'Noto Sans Mono', 'Liberation Mono', 'DejaVu Sans Mono', Consolas, monospace;
   --cp-store-max-width: 1200px;
 }
 
@@ -39,7 +39,7 @@ body.v6,
     radial-gradient(circle at 20% 0%, rgba(255, 0, 85, 0.08) 0%, transparent 45%),
     radial-gradient(circle at 80% 100%, rgba(0, 240, 255, 0.08) 0%, transparent 45%) !important;
   color: #e6f1ff !important;
-  font-family: 'Rajdhani', 'Motiva Sans', sans-serif !important;
+  font-family: var(--cp-font-ui) !important;
 }
 
 /* Cyberpunk Scrollbars (Vertical & Horizontal Side-Scrolling Support) */

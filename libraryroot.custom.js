@@ -172,7 +172,7 @@
     const friendStore = app && app.FriendStore;
     if (!friendStore) {
       listContainerEl.innerHTML =
-        '<div style="padding:12px;font-family:\'Share Tech Mono\',monospace;font-size:11px;color:#64748b;">// CONNECTING TO NEURAL NET...</div>';
+        '<div style="padding:12px;font-family:var(--cp-font-mono, \'Share Tech Mono\', monospace);font-size:11px;color:#64748b;">// CONNECTING TO NEURAL NET...</div>';
       return;
     }
 
@@ -272,6 +272,24 @@
     }
   }
 
+  /** Attach drag move/end listeners with blur and zero-button guards for X11/Wayland edge releases. */
+  function bindDragLifecycle(isActive, onMove, onEnd) {
+    const finish = () => {
+      if (!isActive()) return;
+      onEnd();
+    };
+    document.addEventListener('mousemove', (e) => {
+      if (!isActive()) return;
+      if (e.buttons === 0) {
+        finish();
+        return;
+      }
+      onMove(e);
+    });
+    document.addEventListener('mouseup', finish);
+    window.addEventListener('blur', finish);
+  }
+
   function setupFriendsResizer(resizer, panel) {
     let isResizing = false;
     let startX = 0;
@@ -294,19 +312,19 @@
       direction = isOnLeft ? 1 : -1;
     });
 
-    document.addEventListener('mousemove', (e) => {
-      if (!isResizing) return;
-      const dx = (e.clientX - startX) * direction;
-      const newWidth = Math.max(210, Math.min(480, startWidth + dx));
-      panel.style.width = newWidth + 'px';
-    });
-
-    document.addEventListener('mouseup', () => {
-      if (!isResizing) return;
-      isResizing = false;
-      resizer.classList.remove('cp-resizing');
-      localStorage.setItem('cp_friends_panel_width', parseInt(panel.style.width, 10));
-    });
+    bindDragLifecycle(
+      () => isResizing,
+      (e) => {
+        const dx = (e.clientX - startX) * direction;
+        const newWidth = Math.max(210, Math.min(480, startWidth + dx));
+        panel.style.width = newWidth + 'px';
+      },
+      () => {
+        isResizing = false;
+        resizer.classList.remove('cp-resizing');
+        localStorage.setItem('cp_friends_panel_width', parseInt(panel.style.width, 10));
+      }
+    );
   }
 
   function setupBidirectionalGamesResizer() {
@@ -340,16 +358,17 @@
       true
     );
 
-    document.addEventListener('mousemove', (e) => {
-      if (!isResizing) return;
-      const dx = (e.clientX - startX) * direction;
-      const newWidth = Math.max(240, Math.min(window.innerWidth * 0.45, startWidth + dx));
-      gamesPanel.style.width = newWidth + 'px';
-    });
-
-    document.addEventListener('mouseup', () => {
-      isResizing = false;
-    });
+    bindDragLifecycle(
+      () => isResizing,
+      (e) => {
+        const dx = (e.clientX - startX) * direction;
+        const newWidth = Math.max(240, Math.min(window.innerWidth * 0.45, startWidth + dx));
+        gamesPanel.style.width = newWidth + 'px';
+      },
+      () => {
+        isResizing = false;
+      }
+    );
   }
 
   /* ==========================================================================

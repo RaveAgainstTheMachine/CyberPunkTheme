@@ -76,11 +76,21 @@ A high-contrast Cyberpunk 2077 Kiroshi Optics & Netrunner HUD theme for the Stea
 
 ## Installation
 
-1. Ensure [Millennium](https://steambrew.app/) is installed for Steam.
+1. Ensure [Millennium](https://steambrew.app/) is installed for Steam:
+   - **Linux**: `curl -fsSL "https://steambrew.app/install.sh" | bash` (or AUR `millennium` + `millennium-x86` on Arch-based distros; ensure `libXtst.so.6` is available if required by your Steam runtime).
+   - **Windows**: Install via the official Millennium installer from [steambrew.app](https://steambrew.app/).
 2. Download or clone this repository into your Steam Millennium themes directory so `skin.json` sits directly inside the theme folder:
    ```text
-   <Steam Directory>\millennium\themes\Cyberpunk2077\
+   Linux:   ~/.steam/steam/millennium/themes/Cyberpunk2077/
+   Windows: <Steam Directory>\millennium\themes\Cyberpunk2077\
    ```
+   For default Linux installs:
+   ```bash
+   mkdir -p ~/.steam/steam/millennium/themes
+   git clone https://github.com/RaveAgainstTheMachine/CyberPunkTheme.git ~/.steam/steam/millennium/themes/Cyberpunk2077
+   ```
+   *(Or symlink a local checkout for live theme development: `ln -sfn /path/to/CyberPunkTheme ~/.steam/steam/millennium/themes/Cyberpunk2077`.)*
+
    For default Windows installs:
    ```powershell
    git clone https://github.com/RaveAgainstTheMachine/CyberPunkTheme.git "C:\Program Files (x86)\Steam\millennium\themes\Cyberpunk2077"
@@ -118,7 +128,7 @@ Cyberpunk2077/
 
 ## Optional Customizer (`cyberpunk_steam_studio.html`)
 
-Open `cyberpunk_steam_studio.html` in a modern browser (Firefox, Chrome, or Edge) to customize colors, faction presets, and panel defaults, then copy or export the generated `skin.json`, CSS, and JS files.
+Open `cyberpunk_steam_studio.html` directly in a modern browser on Linux or Windows (Firefox, Chrome, Chromium, or Edge — works over `file://` as well as HTTP) to customize colors, faction presets, and panel defaults, switch between Linux and Windows deployment instructions, then copy or export the generated `skin.json`, CSS, and JS files.
 
 ## License & Disclaimer
 

@@ -17,8 +17,8 @@ body,
   --cp-green: #00ff9d;
   --cp-text-main: #e6f1ff;
   --cp-text-muted: #7a8ba3;
-  --cp-font-ui: 'Rajdhani', 'Motiva Sans', sans-serif;
-  --cp-font-mono: 'Share Tech Mono', Consolas, monospace;
+  --cp-font-ui: 'Rajdhani', 'Motiva Sans', 'Noto Sans', 'Liberation Sans', 'Segoe UI', sans-serif;
+  --cp-font-mono: 'Share Tech Mono', 'JetBrains Mono', 'Noto Sans Mono', 'Liberation Mono', 'DejaVu Sans Mono', Consolas, monospace;
 
   background-color: var(--cp-bg-void) !important;
   color: var(--cp-text-main) !important;
