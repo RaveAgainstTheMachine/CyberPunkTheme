@@ -2510,11 +2510,7 @@
             <li>Theme folder: <code
                 class="text-[#e6f1ff] font-mono bg-black/50 px-1 py-0.5 rounded">Steam/millennium/themes/Cyberpunk2077/</code>
             </li>
-            <li>Use the <strong>05 // Theme Code Generator</strong> tabs below to copy or download <code
-                class="text-[#00f0ff] font-mono">libraryroot.custom.css</code>, <code
-                class="text-[#00f0ff] font-mono">webkit.css</code>, <code
-                class="text-[#00f0ff] font-mono">friends.custom.css</code>, <code
-                class="text-[#00f0ff] font-mono">libraryroot.custom.js</code>, or the full bundle.</li>
+            <li>Click <strong class="text-[#fcee09]">⬇ Download Theme Bundle (.zip)</strong> below to export the full customized <code class="text-[#00f0ff] font-mono">Cyberpunk2077/</code> folder (all CSS, JS, <code class="text-[#00f0ff] font-mono">skin.json</code>, and <code class="text-[#00f0ff] font-mono">options/*.css</code>), or copy any single file from the <strong>05 // Theme Code Compiler</strong> tabs.</li>
             <li>Right-click and select <strong class="text-[#fcee09]">Reload</strong>, or click the <strong class="text-[#fcee09]">Reload</strong> button (top left) inside Steam to hot-reload.</li>
           </ol>
         </div>
@@ -2943,9 +2939,9 @@
                 class="px-3 py-1.5 text-xs font-mono font-semibold rounded bg-[#00f0ff]/15 text-[#00f0ff] border border-[#00f0ff]/40 hover:bg-[#00f0ff] hover:text-black transition-all cursor-pointer">
                 📋 Copy Current Tab
               </button>
-              <button onclick="downloadActiveCode()"
+              <button onclick="downloadThemeBundle()" id="btn-download-bundle"
                 class="px-3 py-1.5 text-xs font-mono font-semibold rounded bg-[#fcee09] text-black hover:opacity-90 transition-all cursor-pointer">
-                ⬇ Download Tab File
+                ⬇ Download Theme Bundle (.zip)
               </button>
             </div>
           </div>
@@ -4218,20 +4214,44 @@ html.responsive .carousel_container .arrow:hover,
   opacity: 1 !important;
 }
 
+html.responsive body.v7 #module_recommender .carousel_container .arrow.left,
+html.responsive body.v7 #module_recommender .carousel_container .arrow.left:hover,
+html.responsive body.v7 #module_deep_dive .carousel_container .arrow.left,
+html.responsive body.v7 #module_deep_dive .carousel_container .arrow.left:hover,
+html.responsive body.v7 #module_community_recommendations .carousel_container .arrow.left,
+html.responsive body.v7 #module_community_recommendations .carousel_container .arrow.left:hover,
+html.responsive body.v7 .carousel_container:not(.maincap) .arrow.left,
+html.responsive body.v7 .carousel_container:not(.maincap) .arrow.left:hover,
 html.responsive .carousel_container:not(.maincap) .arrow.left,
 html.responsive .carousel_container:not(.maincap) .arrow.left:hover,
 body.v6.widestore .carousel_container:not(.maincap) .arrow.left,
 body.v6.widestore .carousel_container:not(.maincap) .arrow.left:hover,
+.recommended_by_steam_labs_ctn .carousel_container .arrow.left,
+.recommended_by_steam_labs_ctn .carousel_container .arrow.left:hover,
+.deep_dive_block .carousel_container .arrow.left,
+.deep_dive_block .carousel_container .arrow.left:hover,
 .carousel_container:not(.maincap) .arrow.left,
 .carousel_container:not(.maincap) .arrow.left:hover {
   inset-inline-start: -68px !important;
   inset-inline-end: unset !important;
 }
 
+html.responsive body.v7 #module_recommender .carousel_container .arrow.right,
+html.responsive body.v7 #module_recommender .carousel_container .arrow.right:hover,
+html.responsive body.v7 #module_deep_dive .carousel_container .arrow.right,
+html.responsive body.v7 #module_deep_dive .carousel_container .arrow.right:hover,
+html.responsive body.v7 #module_community_recommendations .carousel_container .arrow.right,
+html.responsive body.v7 #module_community_recommendations .carousel_container .arrow.right:hover,
+html.responsive body.v7 .carousel_container:not(.maincap) .arrow.right,
+html.responsive body.v7 .carousel_container:not(.maincap) .arrow.right:hover,
 html.responsive .carousel_container:not(.maincap) .arrow.right,
 html.responsive .carousel_container:not(.maincap) .arrow.right:hover,
 body.v6.widestore .carousel_container:not(.maincap) .arrow.right,
 body.v6.widestore .carousel_container:not(.maincap) .arrow.right:hover,
+.recommended_by_steam_labs_ctn .carousel_container .arrow.right,
+.recommended_by_steam_labs_ctn .carousel_container .arrow.right:hover,
+.deep_dive_block .carousel_container .arrow.right,
+.deep_dive_block .carousel_container .arrow.right:hover,
 .carousel_container:not(.maincap) .arrow.right,
 .carousel_container:not(.maincap) .arrow.right:hover {
   inset-inline-end: -68px !important;
@@ -4426,6 +4446,9 @@ button.CarouselBtnRight,
 [class*="SliderBody"] button.carousel__back-button,
 [class*="SliderBody"] button.CarouselBtnLeft,
 [class*="SliderBody"] button[class*="carousel__back-button"],
+.carousel > button.carousel__back-button,
+.carousel > button.CarouselBtnLeft,
+.carousel > button[class*="carousel__back-button"],
 .nHdn-Ea4zSg- .CarouselBtnLeft,
 ._5uN-ZG0AdmQ-.iZzul86MCHw- .CarouselBtnLeft,
 .MUbRKQFMT7E- button.CarouselBtnLeft {
@@ -4437,6 +4460,9 @@ button.CarouselBtnRight,
 [class*="SliderBody"] button.carousel__next-button,
 [class*="SliderBody"] button.CarouselBtnRight,
 [class*="SliderBody"] button[class*="carousel__next-button"],
+.carousel > button.carousel__next-button,
+.carousel > button.CarouselBtnRight,
+.carousel > button[class*="carousel__next-button"],
 .nHdn-Ea4zSg- .CarouselBtnRight,
 ._5uN-ZG0AdmQ-.iZzul86MCHw- .CarouselBtnRight,
 .MUbRKQFMT7E- button.CarouselBtnRight,
@@ -4447,6 +4473,8 @@ button.CarouselBtnRight,
 }
 
 .home_pagecontent_ctn .ctn_background .carousel_container.paging_capsules,
+.recommended_by_steam_labs_ctn .carousel_container.paging_capsules,
+.deep_dive_block .carousel_container.paging_capsules,
 ._5uN-ZG0AdmQ-,
 .F6Wso3e7oqk- ._5w6AlYMyKXw-,
 .PillScrollRowCtn > .F6Wso3e7oqk-.tvKN6VPvEYo- {
@@ -4454,31 +4482,61 @@ button.CarouselBtnRight,
   padding-inline: 0 !important;
 }
 
-@media screen and (min-width: 911px) and (max-width: 1360px) {
+@media screen and (min-width: 911px) and (max-width: 1335px) {
+  html.responsive body.v7 #module_recommender .carousel_container .arrow.left,
+  html.responsive body.v7 #module_recommender .carousel_container .arrow.left:hover,
+  html.responsive body.v7 #module_deep_dive .carousel_container .arrow.left,
+  html.responsive body.v7 #module_deep_dive .carousel_container .arrow.left:hover,
+  html.responsive body.v7 #module_community_recommendations .carousel_container .arrow.left,
+  html.responsive body.v7 #module_community_recommendations .carousel_container .arrow.left:hover,
+  html.responsive body.v7 .carousel_container:not(.maincap) .arrow.left,
+  html.responsive body.v7 .carousel_container:not(.maincap) .arrow.left:hover,
   html.responsive .carousel_container:not(.maincap) .arrow.left,
   html.responsive .carousel_container:not(.maincap) .arrow.left:hover,
   body.v6.widestore .carousel_container:not(.maincap) .arrow.left,
   body.v6.widestore .carousel_container:not(.maincap) .arrow.left:hover,
+  .recommended_by_steam_labs_ctn .carousel_container .arrow.left,
+  .recommended_by_steam_labs_ctn .carousel_container .arrow.left:hover,
+  .deep_dive_block .carousel_container .arrow.left,
+  .deep_dive_block .carousel_container .arrow.left:hover,
   .carousel_container:not(.maincap) .arrow.left,
   .carousel_container:not(.maincap) .arrow.left:hover,
   [class*="SliderBody"] button.carousel__back-button,
   [class*="SliderBody"] button.CarouselBtnLeft,
   [class*="SliderBody"] button[class*="carousel__back-button"],
+  .carousel > button.carousel__back-button,
+  .carousel > button.CarouselBtnLeft,
+  .carousel > button[class*="carousel__back-button"],
   .nHdn-Ea4zSg- .CarouselBtnLeft,
   ._5uN-ZG0AdmQ-.iZzul86MCHw- .CarouselBtnLeft,
   .MUbRKQFMT7E- button.CarouselBtnLeft {
     inset-inline-start: -48px !important;
   }
 
+  html.responsive body.v7 #module_recommender .carousel_container .arrow.right,
+  html.responsive body.v7 #module_recommender .carousel_container .arrow.right:hover,
+  html.responsive body.v7 #module_deep_dive .carousel_container .arrow.right,
+  html.responsive body.v7 #module_deep_dive .carousel_container .arrow.right:hover,
+  html.responsive body.v7 #module_community_recommendations .carousel_container .arrow.right,
+  html.responsive body.v7 #module_community_recommendations .carousel_container .arrow.right:hover,
+  html.responsive body.v7 .carousel_container:not(.maincap) .arrow.right,
+  html.responsive body.v7 .carousel_container:not(.maincap) .arrow.right:hover,
   html.responsive .carousel_container:not(.maincap) .arrow.right,
   html.responsive .carousel_container:not(.maincap) .arrow.right:hover,
   body.v6.widestore .carousel_container:not(.maincap) .arrow.right,
   body.v6.widestore .carousel_container:not(.maincap) .arrow.right:hover,
+  .recommended_by_steam_labs_ctn .carousel_container .arrow.right,
+  .recommended_by_steam_labs_ctn .carousel_container .arrow.right:hover,
+  .deep_dive_block .carousel_container .arrow.right,
+  .deep_dive_block .carousel_container .arrow.right:hover,
   .carousel_container:not(.maincap) .arrow.right,
   .carousel_container:not(.maincap) .arrow.right:hover,
   [class*="SliderBody"] button.carousel__next-button,
   [class*="SliderBody"] button.CarouselBtnRight,
   [class*="SliderBody"] button[class*="carousel__next-button"],
+  .carousel > button.carousel__next-button,
+  .carousel > button.CarouselBtnRight,
+  .carousel > button[class*="carousel__next-button"],
   .nHdn-Ea4zSg- .CarouselBtnRight,
   ._5uN-ZG0AdmQ-.iZzul86MCHw- .CarouselBtnRight,
   .MUbRKQFMT7E- button.CarouselBtnRight,
@@ -5149,22 +5207,17 @@ html.web_chat_frame body.ContextMenuPopupBody {
 }`;
     }
 
-    function generateOptionsCSS() {
-      return `/* ==========================================================================
-   CYBERPUNK 2077 // MODULAR LAYOUT OPTION FILES (options/*.css)
-   Referenced by skin.json Conditions for live user toggles in Millennium
-   ========================================================================== */
-/* --- options/games-left.css --- */
-/* Games Panel on Left */
+    function getOptionFilesMap() {
+      return {
+        'options/games-left.css': `/* Games Panel on Left */
 ._9sPoVBFyE_vE87mnZJ5aB {
   order: -20 !important;
 }
 ._276E6ijBpjMA2_iTxNhhjc {
   order: -19 !important;
 }
-
-/* --- options/games-right.css --- */
-/* Games Panel on Right */
+`,
+        'options/games-right.css': `/* Games Panel on Right */
 ._9sPoVBFyE_vE87mnZJ5aB {
   order: 20 !important;
 }
@@ -5181,9 +5234,8 @@ html.web_chat_frame body.ContextMenuPopupBody {
   inset-inline-start: auto !important;
   inset-inline-end: 30px !important;
 }
-
-/* --- options/friends-right.css --- */
-/* Friends Panel on Right */
+`,
+        'options/friends-right.css': `/* Friends Panel on Right */
 #cp-friends-resizer {
   order: 29 !important;
   display: block !important;
@@ -5192,9 +5244,8 @@ html.web_chat_frame body.ContextMenuPopupBody {
   order: 30 !important;
   display: flex !important;
 }
-
-/* --- options/friends-left.css --- */
-/* Friends Panel on Left */
+`,
+        'options/friends-left.css': `/* Friends Panel on Left */
 #cp-friends-panel {
   order: -30 !important;
   display: flex !important;
@@ -5203,16 +5254,14 @@ html.web_chat_frame body.ContextMenuPopupBody {
   order: -29 !important;
   display: block !important;
 }
-
-/* --- options/friends-hidden.css --- */
-/* Friends Panel Hidden */
+`,
+        'options/friends-hidden.css': `/* Friends Panel Hidden */
 #cp-friends-panel,
 #cp-friends-resizer {
   display: none !important;
 }
-
-/* --- options/gamepage-info-right.css --- */
-/* Gamepage Info & Friends Column on Right */
+`,
+        'options/gamepage-info-right.css': `/* Gamepage Info & Friends Column on Right */
 ._27RcNu8aXKBpYkHcNNrt-X ._2aor4XVOYzN1PBSREk0UbO {
   float: right !important;
   order: 2 !important;
@@ -5222,9 +5271,8 @@ html.web_chat_frame body.ContextMenuPopupBody {
 ._3yTl3RiWfo-Itg-xp967wP {
   order: 1 !important;
 }
-
-/* --- options/gamepage-info-left.css --- */
-/* Gamepage Info & Friends Column on Left */
+`,
+        'options/gamepage-info-left.css': `/* Gamepage Info & Friends Column on Left */
 ._27RcNu8aXKBpYkHcNNrt-X ._2aor4XVOYzN1PBSREk0UbO {
   float: left !important;
   order: -1 !important;
@@ -5234,7 +5282,19 @@ html.web_chat_frame body.ContextMenuPopupBody {
 ._3yTl3RiWfo-Itg-xp967wP {
   order: 1 !important;
 }
-`;
+`
+      };
+    }
+
+    function generateOptionsCSS() {
+      const header = `/* ==========================================================================
+   CYBERPUNK 2077 // MODULAR LAYOUT OPTION FILES (options/*.css)
+   Referenced by skin.json Conditions for live user toggles in Millennium
+   ========================================================================== */`;
+      const parts = Object.entries(getOptionFilesMap()).map(
+        ([path, css]) => `/* --- ${path} --- */\n${css.trimEnd()}`
+      );
+      return `${header}\n${parts.join('\n\n')}\n`;
     }
 
     function generateLibraryJS() {
@@ -6212,19 +6272,6 @@ html.web_chat_frame body.ContextMenuPopupBody {
       }
     }
 
-    function getActiveFileName() {
-      switch (state.activeTab) {
-        case 'allcss': return 'cyberpunk2077-complete-theme.css';
-        case 'librarycss': return 'libraryroot.custom.css';
-        case 'webkitcss': return 'webkit.css';
-        case 'friendscss': return 'friends.custom.css';
-        case 'optionscss': return 'options-bundle.css';
-        case 'libraryjs': return 'libraryroot.custom.js';
-        case 'skinjson': return 'skin.json';
-        default: return 'libraryroot.custom.css';
-      }
-    }
-
     function renderCodeOutput() {
       const codeEl = document.getElementById('code-output');
       codeEl.textContent = getActiveCodeContent();
@@ -6253,18 +6300,121 @@ html.web_chat_frame body.ContextMenuPopupBody {
       });
     }
 
-    function downloadActiveCode() {
-      const filename = getActiveFileName();
-      const content = getActiveCodeContent();
-      const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+    function crc32Bytes(bytes) {
+      let crc = 0xffffffff;
+      for (let i = 0; i < bytes.length; i++) {
+        crc ^= bytes[i];
+        for (let b = 0; b < 8; b++) {
+          crc = (crc >>> 1) ^ (crc & 1 ? 0xedb88320 : 0);
+        }
+      }
+      return (crc ^ 0xffffffff) >>> 0;
+    }
+
+    /** Build an uncompressed PKZIP archive Blob with UTF-8 paths and Unix file mode metadata. */
+    function createZipBlob(files) {
+      const encoder = new TextEncoder();
+      const now = new Date();
+      const dosTime = ((now.getHours() & 0x1f) << 11) | ((now.getMinutes() & 0x3f) << 5) | ((now.getSeconds() >> 1) & 0x1f);
+      const dosDate = ((Math.max(0, now.getFullYear() - 1980) & 0x7f) << 9) | (((now.getMonth() + 1) & 0x0f) << 5) | (now.getDate() & 0x1f);
+      const localParts = [];
+      const centralParts = [];
+      let offset = 0;
+
+      for (const file of files) {
+        const nameBytes = encoder.encode(file.name);
+        const dataBytes = file.content instanceof Uint8Array ? file.content : encoder.encode(file.content);
+        const crc = crc32Bytes(dataBytes);
+        const size = dataBytes.length;
+
+        const lh = new ArrayBuffer(30 + nameBytes.length);
+        const lv = new DataView(lh);
+        lv.setUint32(0, 0x04034b50, true);
+        lv.setUint16(4, 20, true);
+        lv.setUint16(6, 0x0800, true);
+        lv.setUint16(8, 0, true);
+        lv.setUint16(10, dosTime, true);
+        lv.setUint16(12, dosDate, true);
+        lv.setUint32(14, crc, true);
+        lv.setUint32(18, size, true);
+        lv.setUint32(22, size, true);
+        lv.setUint16(26, nameBytes.length, true);
+        lv.setUint16(28, 0, true);
+        new Uint8Array(lh, 30).set(nameBytes);
+
+        localParts.push(new Uint8Array(lh), dataBytes);
+
+        const ch = new ArrayBuffer(46 + nameBytes.length);
+        const cv = new DataView(ch);
+        cv.setUint32(0, 0x02014b50, true);
+        cv.setUint16(4, 0x0314, true);
+        cv.setUint16(6, 20, true);
+        cv.setUint16(8, 0x0800, true);
+        cv.setUint16(10, 0, true);
+        cv.setUint16(12, dosTime, true);
+        cv.setUint16(14, dosDate, true);
+        cv.setUint32(16, crc, true);
+        cv.setUint32(20, size, true);
+        cv.setUint32(24, size, true);
+        cv.setUint16(28, nameBytes.length, true);
+        cv.setUint16(30, 0, true);
+        cv.setUint16(32, 0, true);
+        cv.setUint16(34, 0, true);
+        cv.setUint16(36, 0, true);
+        cv.setUint32(38, 0x81a40000, true);
+        cv.setUint32(42, offset, true);
+        new Uint8Array(ch, 46).set(nameBytes);
+
+        centralParts.push(new Uint8Array(ch));
+        offset += lh.byteLength + size;
+      }
+
+      const cdSize = centralParts.reduce((sum, part) => sum + part.byteLength, 0);
+      const eocd = new ArrayBuffer(22);
+      const ev = new DataView(eocd);
+      ev.setUint32(0, 0x06054b50, true);
+      ev.setUint16(4, 0, true);
+      ev.setUint16(6, 0, true);
+      ev.setUint16(8, files.length, true);
+      ev.setUint16(10, files.length, true);
+      ev.setUint32(12, cdSize, true);
+      ev.setUint32(16, offset, true);
+      ev.setUint16(20, 0, true);
+
+      return new Blob([...localParts, ...centralParts, new Uint8Array(eocd)], { type: 'application/zip' });
+    }
+
+    function getThemeBundleFiles() {
+      const files = [
+        { name: 'Cyberpunk2077/skin.json', content: generateSkinJson() + '\n' },
+        { name: 'Cyberpunk2077/libraryroot.custom.css', content: generateLibraryCSS() },
+        { name: 'Cyberpunk2077/libraryroot.custom.js', content: generateLibraryJS() },
+        { name: 'Cyberpunk2077/webkit.css', content: generateWebkitCSS() },
+        { name: 'Cyberpunk2077/friends.custom.css', content: generateFriendsCSS() },
+      ];
+      for (const [relPath, css] of Object.entries(getOptionFilesMap())) {
+        files.push({ name: `Cyberpunk2077/${relPath}`, content: css });
+      }
+      return files;
+    }
+
+    function downloadThemeBundle() {
+      const blob = createZipBlob(getThemeBundleFiles());
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = filename;
+      a.download = `Cyberpunk2077-${state.preset}-bundle.zip`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
-      URL.revokeObjectURL(url);
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+
+      const btn = document.getElementById('btn-download-bundle');
+      if (btn) {
+        const original = btn.innerHTML;
+        btn.innerHTML = '✓ Bundle (.zip) Downloaded!';
+        setTimeout(() => { btn.innerHTML = original; }, 2000);
+      }
     }
 
     function toggleSidebar() {
