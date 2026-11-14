@@ -517,8 +517,46 @@
 #steam-window ._3YO5BpDmZERh_G8kaWbaSJ .wn-body { padding: 6px 8px; }
 #steam-window .shelf-header-row { display: flex; align-items: center; justify-content: space-between; padding-bottom: 4px; }
 #steam-window ._2tC_c87MH67xQM7Y0pVyXm { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
-#steam-window .WYgDg9NyCcMIVuMyZ_NBC { aspect-ratio: 2 / 3; position: relative; overflow: hidden; display: flex; flex-direction: column; cursor: pointer; }
-#steam-window .WYgDg9NyCcMIVuMyZ_NBC img { width: 100%; height: 100%; object-fit: cover; display: block; }
+#steam-window .WYgDg9NyCcMIVuMyZ_NBC { aspect-ratio: 2 / 3; position: relative; overflow: hidden; display: block; cursor: pointer; }
+#steam-window .WYgDg9NyCcMIVuMyZ_NBC img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+#steam-window .WYgDg9NyCcMIVuMyZ_NBC ._2d1hSvdpY5L2-GN1EnUb9Z { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
+#steam-window .WYgDg9NyCcMIVuMyZ_NBC ._3AjoLnMNKxYmNTGTJCLfgs._1_Bo2Ied5s2Od4YKYTOsau {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.16s ease, transform 0.16s ease;
+  z-index: 3;
+}
+#steam-window .WYgDg9NyCcMIVuMyZ_NBC:hover ._3AjoLnMNKxYmNTGTJCLfgs._1_Bo2Ied5s2Od4YKYTOsau {
+  opacity: 1;
+}
+#steam-window .WYgDg9NyCcMIVuMyZ_NBC ._3AjoLnMNKxYmNTGTJCLfgs._1_Bo2Ied5s2Od4YKYTOsau svg {
+  width: 12px;
+  height: 12px;
+  display: block;
+  flex-shrink: 0;
+}
+#steam-window .B-vCdL38RiJlhfSRgZv78 ._3OSZu24hLN7YKjqGi7I2Xp {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  padding: 2px 6px;
+  background: rgba(7, 8, 13, 0.9);
+  border: 1px solid rgba(var(--cp-rgb-cyan), 0.45);
+  opacity: 0;
+  transition: opacity 0.16s ease;
+  z-index: 2;
+  pointer-events: none;
+}
+#steam-window .B-vCdL38RiJlhfSRgZv78:hover ._3OSZu24hLN7YKjqGi7I2Xp {
+  opacity: 1;
+}
 
 /* Storefront View in Studio */
 #steam-window .home_page_body_ctn {
