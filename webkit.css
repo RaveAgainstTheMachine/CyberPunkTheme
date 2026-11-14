@@ -216,7 +216,7 @@ body.v6.widestore .carousel_container:not(.maincap) .arrow.right:hover,
   inset-inline-start: unset !important;
 }
 
-/* Preserve full side-peek click target on Hero Carousel spanning Row 1 (.carousel_items) while keeping the 500px overlay 100% transparent */
+/* Preserve full side-peek click target on Hero Carousel spanning Row 1 (.carousel_items) while matching the 23px arrow & peek rail */
 html.responsive .carousel_wide_mode .carousel_container .arrow,
 html.responsive .carousel_wide_mode .carousel_container .arrow:hover,
 html.responsive .carousel_wide_mode .carousel_container.maincap .arrow:hover,
@@ -225,6 +225,7 @@ html.responsive .carousel_wide_mode .carousel_container.maincap .arrow:hover,
 .carousel_wide_mode .carousel_container.maincap .arrow:hover {
   grid-row: 1 / 2 !important;
   grid-column: 1 / 2 !important;
+  box-sizing: border-box !important;
   width: 500px !important;
   height: auto !important;
   min-height: 0 !important;
@@ -232,7 +233,7 @@ html.responsive .carousel_wide_mode .carousel_container.maincap .arrow:hover,
   top: 0 !important;
   bottom: 0 !important;
   margin: 0 !important;
-  padding: 0 10px !important;
+  padding: 0 !important;
   transform: none !important;
   background: transparent !important;
   background-color: transparent !important;
@@ -247,7 +248,7 @@ html.responsive .carousel_wide_mode .carousel_container.maincap .arrow.left:hove
 .carousel_wide_mode .carousel_container .arrow.left,
 .carousel_wide_mode .carousel_container .arrow.left:hover,
 .carousel_wide_mode .carousel_container.maincap .arrow.left:hover {
-  inset-inline-start: calc(0px - 560px) !important;
+  inset-inline-start: -523px !important;
   inset-inline-end: unset !important;
   justify-content: flex-end !important;
   transform: none !important;
@@ -259,10 +260,29 @@ html.responsive .carousel_wide_mode .carousel_container.maincap .arrow.right:hov
 .carousel_wide_mode .carousel_container .arrow.right,
 .carousel_wide_mode .carousel_container .arrow.right:hover,
 .carousel_wide_mode .carousel_container.maincap .arrow.right:hover {
-  inset-inline-end: calc(0px - 560px) !important;
+  inset-inline-end: -523px !important;
   inset-inline-start: unset !important;
   justify-content: flex-start !important;
   transform: none !important;
+}
+
+/* Pull Hero side-peek preview slides from 40px in to 23px so they match the uniform 23px arrow gutter */
+@media screen and (min-width: 1400px) {
+  .carousel_wide_mode .carousel_container.maincap .next {
+    transform: translateX(calc(1200px + 23px)) !important;
+  }
+
+  .carousel_wide_mode .carousel_container.maincap .prev {
+    transform: translateX(calc(-756px - 23px)) !important;
+  }
+
+  :dir(rtl) .carousel_wide_mode .carousel_container.maincap .next {
+    transform: translateX(calc(-756px - 23px)) !important;
+  }
+
+  :dir(rtl) .carousel_wide_mode .carousel_container.maincap .prev {
+    transform: translateX(calc(1200px + 23px)) !important;
+  }
 }
 
 /* Inner arrow badge in classic Store carousels (45x108px dark cyan-bordered HUD box) */
@@ -350,7 +370,14 @@ button.carousel__next-button,
 button.CarouselBtnLeft,
 button.CarouselBtnRight,
 [class*="carousel__back-button"],
-[class*="carousel__next-button"] {
+[class*="carousel__next-button"],
+.nHdn-Ea4zSg- .CarouselBtnLeft,
+.nHdn-Ea4zSg- .CarouselBtnRight,
+._5uN-ZG0AdmQ-.iZzul86MCHw- .CarouselBtnLeft,
+._5uN-ZG0AdmQ-.iZzul86MCHw- .CarouselBtnRight,
+.MUbRKQFMT7E- button.CarouselBtnLeft,
+.MUbRKQFMT7E- button.CarouselBtnRight,
+.DLM2-MZGpkc- {
   box-sizing: border-box !important;
   width: 45px !important;
   min-width: 45px !important;
@@ -378,18 +405,88 @@ button.CarouselBtnRight,
   transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease !important;
 }
 
-[class*="SliderBody"] > button.carousel__back-button,
-[class*="SliderBody"] > button.CarouselBtnLeft,
-[class*="SliderBody"] > button[class*="carousel__back-button"] {
+[class*="SliderBody"] button.carousel__back-button,
+[class*="SliderBody"] button.CarouselBtnLeft,
+[class*="SliderBody"] button[class*="carousel__back-button"],
+.nHdn-Ea4zSg- .CarouselBtnLeft,
+._5uN-ZG0AdmQ-.iZzul86MCHw- .CarouselBtnLeft,
+.MUbRKQFMT7E- button.CarouselBtnLeft {
   inset-inline-start: -68px !important;
   inset-inline-end: unset !important;
+  transform: translateY(-50%) !important;
 }
 
-[class*="SliderBody"] > button.carousel__next-button,
-[class*="SliderBody"] > button.CarouselBtnRight,
-[class*="SliderBody"] > button[class*="carousel__next-button"] {
+[class*="SliderBody"] button.carousel__next-button,
+[class*="SliderBody"] button.CarouselBtnRight,
+[class*="SliderBody"] button[class*="carousel__next-button"],
+.nHdn-Ea4zSg- .CarouselBtnRight,
+._5uN-ZG0AdmQ-.iZzul86MCHw- .CarouselBtnRight,
+.MUbRKQFMT7E- button.CarouselBtnRight,
+.DLM2-MZGpkc- {
   inset-inline-end: -68px !important;
   inset-inline-start: unset !important;
+  transform: translateY(-50%) !important;
+}
+
+/* Normalize inner horizontal wrapper padding so cards and arrows share uniform spacing from top to bottom */
+.home_pagecontent_ctn .ctn_background .carousel_container.paging_capsules,
+._5uN-ZG0AdmQ-,
+.F6Wso3e7oqk- ._5w6AlYMyKXw-,
+.PillScrollRowCtn > .F6Wso3e7oqk-.tvKN6VPvEYo- {
+  margin-inline: 0 !important;
+  padding-inline: 0 !important;
+}
+
+/* Clamp arrow overhang cleanly inside the 50px page gutter on mid-width (e.g. 1280px) windows */
+@media screen and (min-width: 911px) and (max-width: 1360px) {
+  html.responsive .carousel_container:not(.maincap) .arrow.left,
+  html.responsive .carousel_container:not(.maincap) .arrow.left:hover,
+  body.v6.widestore .carousel_container:not(.maincap) .arrow.left,
+  body.v6.widestore .carousel_container:not(.maincap) .arrow.left:hover,
+  .carousel_container:not(.maincap) .arrow.left,
+  .carousel_container:not(.maincap) .arrow.left:hover,
+  [class*="SliderBody"] button.carousel__back-button,
+  [class*="SliderBody"] button.CarouselBtnLeft,
+  [class*="SliderBody"] button[class*="carousel__back-button"],
+  .nHdn-Ea4zSg- .CarouselBtnLeft,
+  ._5uN-ZG0AdmQ-.iZzul86MCHw- .CarouselBtnLeft,
+  .MUbRKQFMT7E- button.CarouselBtnLeft {
+    inset-inline-start: -48px !important;
+  }
+
+  html.responsive .carousel_container:not(.maincap) .arrow.right,
+  html.responsive .carousel_container:not(.maincap) .arrow.right:hover,
+  body.v6.widestore .carousel_container:not(.maincap) .arrow.right,
+  body.v6.widestore .carousel_container:not(.maincap) .arrow.right:hover,
+  .carousel_container:not(.maincap) .arrow.right,
+  .carousel_container:not(.maincap) .arrow.right:hover,
+  [class*="SliderBody"] button.carousel__next-button,
+  [class*="SliderBody"] button.CarouselBtnRight,
+  [class*="SliderBody"] button[class*="carousel__next-button"],
+  .nHdn-Ea4zSg- .CarouselBtnRight,
+  ._5uN-ZG0AdmQ-.iZzul86MCHw- .CarouselBtnRight,
+  .MUbRKQFMT7E- button.CarouselBtnRight,
+  .DLM2-MZGpkc- {
+    inset-inline-end: -48px !important;
+  }
+
+  html.responsive .carousel_wide_mode .carousel_container .arrow.left,
+  html.responsive .carousel_wide_mode .carousel_container .arrow.left:hover,
+  html.responsive .carousel_wide_mode .carousel_container.maincap .arrow.left:hover,
+  .carousel_wide_mode .carousel_container .arrow.left,
+  .carousel_wide_mode .carousel_container .arrow.left:hover,
+  .carousel_wide_mode .carousel_container.maincap .arrow.left:hover {
+    inset-inline-start: -503px !important;
+  }
+
+  html.responsive .carousel_wide_mode .carousel_container .arrow.right,
+  html.responsive .carousel_wide_mode .carousel_container .arrow.right:hover,
+  html.responsive .carousel_wide_mode .carousel_container.maincap .arrow.right:hover,
+  .carousel_wide_mode .carousel_container .arrow.right,
+  .carousel_wide_mode .carousel_container .arrow.right:hover,
+  .carousel_wide_mode .carousel_container.maincap .arrow.right:hover {
+    inset-inline-end: -503px !important;
+  }
 }
 
 button.carousel__back-button:disabled,
