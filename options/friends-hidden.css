@@ -1,0 +1,5 @@
+/* Friends Panel Hidden */
+#cp-friends-panel,
+#cp-friends-resizer {
+  display: none !important;
+}

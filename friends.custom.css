@@ -1,0 +1,87 @@
+/* ==========================================================================
+   CYBERPUNK 2077 // FRIENDS & CHAT POPUP WINDOW STYLING
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap');
+
+:root,
+html,
+body,
+.friendsui-container {
+  --cp-bg-void: #07080d;
+  --cp-bg-panel: #0b0e17;
+  --cp-bg-card: #101522;
+  --cp-yellow: #fcee09;
+  --cp-cyan: #00f0ff;
+  --cp-red: #ff0055;
+  --cp-green: #00ff9d;
+  --cp-text-main: #e6f1ff;
+  --cp-text-muted: #7a8ba3;
+  --cp-font-ui: 'Rajdhani', 'Motiva Sans', sans-serif;
+  --cp-font-mono: 'Share Tech Mono', Consolas, monospace;
+
+  background-color: var(--cp-bg-void) !important;
+  color: var(--cp-text-main) !important;
+  font-family: var(--cp-font-ui) !important;
+}
+
+.friendlist,
+.friendlistListContainer,
+.chatRoomListContainer,
+.chatWindow,
+.multiChatDialog {
+  background: var(--cp-bg-void) !important;
+}
+
+.friendlist .currentUserContainer,
+.friendlist .socialListTab,
+.friendlist .friendsListSectionTitle {
+  background: var(--cp-bg-panel) !important;
+  border-bottom: 1px solid rgba(252, 238, 9, 0.35) !important;
+}
+
+.friendlist .friendlistListContainer .friendGroup {
+  background: var(--cp-bg-card) !important;
+  border: 1px solid rgba(0, 240, 255, 0.2) !important;
+  border-left: 3px solid var(--cp-red) !important;
+  margin-bottom: 6px !important;
+}
+
+.friendlist .friendlistListContainer .groupName {
+  color: var(--cp-yellow) !important;
+  font-family: var(--cp-font-mono) !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.1em !important;
+}
+
+.friendlist .friend:hover {
+  background: linear-gradient(90deg, rgba(0, 240, 255, 0.18) 0%, transparent 100%) !important;
+  border-left: 3px solid var(--cp-cyan) !important;
+}
+
+.friendlist .ingame .nOdcT-MoOaXGePXLyPe0H,
+.friendlist .ingame .playerName {
+  color: var(--cp-green) !important;
+}
+
+.friendlist .online .nOdcT-MoOaXGePXLyPe0H,
+.friendlist .online .playerName {
+  color: var(--cp-cyan) !important;
+}
+
+.friendlist .awayOrSnooze .nOdcT-MoOaXGePXLyPe0H,
+.friendlist .awayOrSnooze .playerName {
+  color: var(--cp-yellow) !important;
+}
+
+.chatWindow .chatEntry,
+._3Ule3rolhZJiBN4yNNtk1s {
+  background: var(--cp-bg-card) !important;
+  border: 1px solid rgba(0, 240, 255, 0.35) !important;
+}
+
+.msg._3qYm9oxf8MdyvQDJgbfCrF,
+.ChatSpeaker {
+  background: var(--cp-bg-card) !important;
+  border-left: 2px solid var(--cp-cyan) !important;
+}

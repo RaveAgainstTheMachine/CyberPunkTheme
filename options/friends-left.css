@@ -1,0 +1,9 @@
+/* Friends Panel on Left */
+#cp-friends-panel {
+  order: -30 !important;
+  display: flex !important;
+}
+#cp-friends-resizer {
+  order: -29 !important;
+  display: block !important;
+}

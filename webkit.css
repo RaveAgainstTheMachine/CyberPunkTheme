@@ -1,0 +1,620 @@
+/* ==========================================================================
+   CYBERPUNK 2077 // STORE & COMMUNITY WEBKIT STYLING
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap');
+
+:root {
+  --cp-store-max-width: 1200px;
+  --store-menu-overlap-height: 98px !important;
+}
+
+* {
+  --store-menu-overlap-height: 98px !important;
+}
+
+:root,
+html,
+body,
+body.v6,
+.responsive_page_frame,
+.responsive_page_content {
+  background: #07080d !important;
+  background-color: #07080d !important;
+  background-image:
+    radial-gradient(circle at 20% 0%, rgba(255, 0, 85, 0.08) 0%, transparent 45%),
+    radial-gradient(circle at 80% 100%, rgba(0, 240, 255, 0.08) 0%, transparent 45%) !important;
+  color: #e6f1ff !important;
+  font-family: 'Rajdhani', 'Motiva Sans', sans-serif !important;
+}
+
+/* Cyberpunk Scrollbars (Vertical & Horizontal Side-Scrolling Support) */
+::-webkit-scrollbar {
+  width: 8px !important;
+  height: 8px !important;
+  background: #06080e !important;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(11, 14, 23, 0.9) !important;
+  border: 1px solid rgba(0, 240, 255, 0.18) !important;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 240, 255, 0.55) !important;
+  border: 1px solid #00f0ff !important;
+  box-shadow: 0 0 8px rgba(0, 240, 255, 0.4) !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #fcee09 !important;
+  border-color: #fcee09 !important;
+  box-shadow: 0 0 12px rgba(252, 238, 9, 0.7) !important;
+}
+
+::-webkit-scrollbar-corner {
+  background: #06080e !important;
+}
+
+/* Remove promotional background overlays on Store while keeping Community .apphub_background visible */
+.store_bg_overlay,
+.menu_takeover_background {
+  background: none !important;
+  display: none !important;
+}
+
+body.responsive_page .apphub_background {
+  background-image: none !important;
+  background: transparent !important;
+}
+
+/* Store & Community Page Content Width & Alignment (1200px centered layout so Hero Ribbon & Arrows align cleanly) */
+body .page_content_ctn,
+body .page_content,
+body .market_page_fullwidth,
+body #BG_bottom,
+body .maincontent,
+body ._22xtsolKcQit92o-LBeRWD {
+  position: relative !important;
+  width: 100% !important;
+  max-width: var(--cp-store-max-width) !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  background: unset !important;
+}
+
+.page_content_ctn.dark,
+.home_cluster_ctn {
+  background: unset !important;
+  background-color: unset !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.home_page_body_ctn .home_pagecontent_ctn {
+  padding: calc(16px / 2) 50px;
+}
+
+/* Enable smooth horizontal side-scrolling on Store horizontal shelves & sliders */
+.store_horizontal_autoslider_ctn,
+.store_horizontal_autoslider,
+.home_tabs_row_ctn,
+[class*="HorizontalScroller"],
+[class*="horizontal_scroller"] {
+  overflow-x: auto !important;
+  scroll-behavior: smooth !important;
+}
+
+/* Adaptive Row-1 Anchor for Classic Store Carousels (arrows always center relative to .carousel_items at any card/thumbs size) */
+.carousel_container {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  grid-template-rows: auto !important;
+}
+
+.carousel_container > .carousel_items {
+  grid-row: 1 / 2 !important;
+  grid-column: 1 / 2 !important;
+}
+
+.carousel_container > .carousel_thumbs {
+  grid-row: 2 / 3 !important;
+  grid-column: 1 / 2 !important;
+  justify-self: center !important;
+}
+
+/* Adaptive Row-1 fallback if any React carousel places dots inside the positioned button wrapper */
+div:has(> button.carousel__back-button):has(> div > button[class*="carousel__dot"]),
+div:has(> button.CarouselBtnLeft):has(> div > button[class*="carousel__dot"]) {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  grid-template-rows: auto !important;
+}
+
+div:has(> button.carousel__back-button):has(> div > button[class*="carousel__dot"]) > div:not(:has(> button[class*="carousel__dot"])),
+div:has(> button.CarouselBtnLeft):has(> div > button[class*="carousel__dot"]) > div:not(:has(> button[class*="carousel__dot"])) {
+  grid-row: 1 / 2 !important;
+  grid-column: 1 / 2 !important;
+}
+
+div:has(> button.carousel__back-button):has(> div > button[class*="carousel__dot"]) > div:has(> button[class*="carousel__dot"]),
+div:has(> button.CarouselBtnLeft):has(> div > button[class*="carousel__dot"]) > div:has(> button[class*="carousel__dot"]) {
+  grid-row: 2 / 3 !important;
+  grid-column: 1 / 2 !important;
+  justify-self: center !important;
+}
+
+div:has(> button.carousel__back-button):has(> div > button[class*="carousel__dot"]) > button,
+div:has(> button.CarouselBtnLeft):has(> div > button[class*="carousel__dot"]) > button {
+  grid-row: 1 / 2 !important;
+  grid-column: 1 / 2 !important;
+}
+
+/* Themed Cyberpunk Store Edge Arrows (Unified 45x108px Cyan-Bordered Box + Crisp Silver Chevron — Confined to Arrow Width Only) */
+html.responsive .carousel_container .arrow,
+html.responsive .carousel_container .arrow:hover,
+.carousel_container .arrow,
+.carousel_container .arrow:hover,
+.carousel_container .arrow.left,
+.carousel_container .arrow.right,
+.carousel_container .arrow.left:hover,
+.carousel_container .arrow.right:hover {
+  grid-row: 1 / 2 !important;
+  grid-column: 1 / 2 !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  width: 45px !important;
+  height: 108px !important;
+  min-height: 44px !important;
+  max-height: 100% !important;
+  top: 50% !important;
+  bottom: auto !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  transform: translateY(-50%) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  opacity: 1 !important;
+}
+
+/* Preserve full side-peek click target on Hero Carousel spanning Row 1 (.carousel_items) while keeping the 500px overlay 100% transparent */
+html.responsive .carousel_wide_mode .carousel_container .arrow,
+html.responsive .carousel_wide_mode .carousel_container .arrow:hover,
+html.responsive .carousel_wide_mode .carousel_container.maincap .arrow:hover,
+.carousel_wide_mode .carousel_container .arrow,
+.carousel_wide_mode .carousel_container .arrow:hover,
+.carousel_wide_mode .carousel_container.maincap .arrow:hover {
+  grid-row: 1 / 2 !important;
+  grid-column: 1 / 2 !important;
+  width: 500px !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  margin: 0 !important;
+  padding: 0 10px !important;
+  transform: none !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+html.responsive .carousel_wide_mode .carousel_container .arrow.left,
+html.responsive .carousel_wide_mode .carousel_container .arrow.left:hover,
+html.responsive .carousel_wide_mode .carousel_container.maincap .arrow.left:hover,
+.carousel_wide_mode .carousel_container .arrow.left,
+.carousel_wide_mode .carousel_container .arrow.left:hover,
+.carousel_wide_mode .carousel_container.maincap .arrow.left:hover {
+  justify-content: flex-end !important;
+  transform: none !important;
+}
+
+html.responsive .carousel_wide_mode .carousel_container .arrow.right,
+html.responsive .carousel_wide_mode .carousel_container .arrow.right:hover,
+html.responsive .carousel_wide_mode .carousel_container.maincap .arrow.right:hover,
+.carousel_wide_mode .carousel_container .arrow.right,
+.carousel_wide_mode .carousel_container .arrow.right:hover,
+.carousel_wide_mode .carousel_container.maincap .arrow.right:hover {
+  justify-content: flex-start !important;
+  transform: none !important;
+}
+
+/* Inner arrow badge in classic Store carousels (45x108px dark cyan-bordered HUD box) */
+html.responsive .carousel_container .arrow > div,
+.carousel_wide_mode .carousel_container .arrow > div,
+.carousel_container .arrow > div,
+.carousel_container .arrow.left > div,
+.carousel_container .arrow.right > div {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 45px !important;
+  height: 108px !important;
+  min-width: 45px !important;
+  min-height: 44px !important;
+  max-height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  transform: none !important;
+  background: rgba(11, 14, 23, 0.92) !important;
+  background-color: rgba(11, 14, 23, 0.92) !important;
+  background-image: none !important;
+  border: 1px solid #00f0ff !important;
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.4) !important;
+  box-sizing: border-box !important;
+  opacity: 0.78 !important;
+  transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease !important;
+}
+
+.carousel_container .arrow > div::after,
+.carousel_container .arrow.left > div::after,
+.carousel_container .arrow.right > div::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  margin: auto !important;
+  display: block !important;
+  width: 20px !important;
+  height: 40px !important;
+  background-color: transparent !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 100'%3E%3Cpolygon points='0,0.093 0,25.702 24.323,50.026 0,74.349 0,99.955 49.929,50.026' fill='%23e6f1ff'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: contain !important;
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+  pointer-events: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  z-index: 2 !important;
+}
+
+.carousel_container .arrow.left > div::after {
+  transform: rotate(180deg) !important;
+}
+
+.carousel_container .arrow.right > div::after {
+  transform: none !important;
+}
+
+html.responsive .carousel_container .arrow:hover > div,
+.carousel_wide_mode .carousel_container .arrow:hover > div,
+.carousel_container .arrow:hover > div,
+.carousel_container .arrow.left:hover > div,
+.carousel_container .arrow.right:hover > div {
+  background: #fcee09 !important;
+  background-color: #fcee09 !important;
+  background-image: none !important;
+  border-color: #fcee09 !important;
+  box-shadow: 0 0 14px rgba(252, 238, 9, 0.85) !important;
+  opacity: 1 !important;
+}
+
+.carousel_container .arrow:hover > div::after,
+.carousel_container .arrow.left:hover > div::after,
+.carousel_container .arrow.right:hover > div::after {
+  background-color: transparent !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 100'%3E%3Cpolygon points='0,0.093 0,25.702 24.323,50.026 0,74.349 0,99.955 49.929,50.026' fill='%23050608'/%3E%3C/svg%3E") !important;
+}
+
+/* React Store Carousel & Personal Calendar Buttons (Exact same 45x108px cyan-bordered HUD box + crisp silver chevron) */
+button.carousel__back-button,
+button.carousel__next-button,
+button.CarouselBtnLeft,
+button.CarouselBtnRight,
+[class*="carousel__back-button"],
+[class*="carousel__next-button"] {
+  box-sizing: border-box !important;
+  width: 45px !important;
+  min-width: 45px !important;
+  max-width: 45px !important;
+  height: 108px !important;
+  min-height: 44px !important;
+  max-height: 100% !important;
+  top: 50% !important;
+  bottom: auto !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  transform: translateY(-50%) !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: rgba(11, 14, 23, 0.92) !important;
+  background-color: rgba(11, 14, 23, 0.92) !important;
+  background-image: none !important;
+  border: 1px solid #00f0ff !important;
+  border-radius: 0 !important;
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.4) !important;
+  opacity: 0.78 !important;
+  overflow: hidden !important;
+  transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease !important;
+}
+
+button.carousel__back-button:disabled,
+button.carousel__next-button:disabled,
+button.CarouselBtnLeft:disabled,
+button.CarouselBtnRight:disabled,
+[class*="carousel__back-button"]:disabled,
+[class*="carousel__next-button"]:disabled {
+  opacity: 0.18 !important;
+  pointer-events: none !important;
+}
+
+button.carousel__back-button svg,
+button.carousel__next-button svg,
+button.CarouselBtnLeft svg,
+button.CarouselBtnRight svg,
+[class*="carousel__back-button"] svg,
+[class*="carousel__next-button"] svg {
+  width: 20px !important;
+  height: 40px !important;
+  min-width: 20px !important;
+  min-height: 40px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  background: none !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: #e6f1ff !important;
+  filter: none !important;
+  opacity: 1 !important;
+  flex-shrink: 0 !important;
+  overflow: visible !important;
+}
+
+button.carousel__back-button svg polygon,
+button.carousel__back-button svg path,
+button.carousel__next-button svg polygon,
+button.carousel__next-button svg path,
+button.CarouselBtnLeft svg polygon,
+button.CarouselBtnLeft svg path,
+button.CarouselBtnRight svg polygon,
+button.CarouselBtnRight svg path,
+[class*="carousel__back-button"] svg polygon,
+[class*="carousel__back-button"] svg path,
+[class*="carousel__next-button"] svg polygon,
+[class*="carousel__next-button"] svg path {
+  fill: #e6f1ff !important;
+}
+
+button.carousel__back-button svg polyline,
+button.carousel__back-button svg line,
+button.carousel__next-button svg polyline,
+button.carousel__next-button svg line,
+button.CarouselBtnLeft svg polyline,
+button.CarouselBtnLeft svg line,
+button.CarouselBtnRight svg polyline,
+button.CarouselBtnRight svg line,
+[class*="carousel__back-button"] svg polyline,
+[class*="carousel__back-button"] svg line,
+[class*="carousel__next-button"] svg polyline,
+[class*="carousel__next-button"] svg line {
+  stroke: #e6f1ff !important;
+}
+
+button.carousel__back-button:hover,
+button.carousel__next-button:hover,
+button.CarouselBtnLeft:hover,
+button.CarouselBtnRight:hover,
+[class*="carousel__back-button"]:hover,
+[class*="carousel__next-button"]:hover {
+  background: #fcee09 !important;
+  background-color: #fcee09 !important;
+  background-image: none !important;
+  border-color: #fcee09 !important;
+  box-shadow: 0 0 14px rgba(252, 238, 9, 0.85) !important;
+  opacity: 1 !important;
+}
+
+button.carousel__back-button:hover svg,
+button.carousel__next-button:hover svg,
+button.CarouselBtnLeft:hover svg,
+button.CarouselBtnRight:hover svg,
+[class*="carousel__back-button"]:hover svg,
+[class*="carousel__next-button"]:hover svg {
+  background: none !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  filter: brightness(0) !important;
+}
+
+button.carousel__back-button:hover svg polygon,
+button.carousel__back-button:hover svg path,
+button.carousel__next-button:hover svg polygon,
+button.carousel__next-button:hover svg path,
+button.CarouselBtnLeft:hover svg polygon,
+button.CarouselBtnLeft:hover svg path,
+button.CarouselBtnRight:hover svg polygon,
+button.CarouselBtnRight:hover svg path,
+[class*="carousel__back-button"]:hover svg polygon,
+[class*="carousel__back-button"]:hover svg path,
+[class*="carousel__next-button"]:hover svg polygon,
+[class*="carousel__next-button"]:hover svg path {
+  fill: #050608 !important;
+}
+
+button.carousel__back-button:hover svg polyline,
+button.carousel__back-button:hover svg line,
+button.carousel__next-button:hover svg polyline,
+button.carousel__next-button:hover svg line,
+button.CarouselBtnLeft:hover svg polyline,
+button.CarouselBtnLeft:hover svg line,
+button.CarouselBtnRight:hover svg polyline,
+button.CarouselBtnRight:hover svg line,
+[class*="carousel__back-button"]:hover svg polyline,
+[class*="carousel__back-button"]:hover svg line,
+[class*="carousel__next-button"]:hover svg polyline,
+[class*="carousel__next-button"]:hover svg line {
+  stroke: #050608 !important;
+}
+
+/* Carousel Pagination Thumbs / Dots (Hero Carousel & All Lower Store Carousels) */
+.carousel_container .carousel_thumbs,
+.carousel ._3HjnEmKg66o82ah74EIvmq,
+.carousel .I8j65FBXdOY-,
+.carousel div:has(> button[class*="carousel__dot"]),
+div:has(> button[class*="carousel__dot"]) {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  width: fit-content !important;
+  min-height: unset !important;
+  height: fit-content !important;
+  margin: 8px auto 12px !important;
+  padding: 8px 14px !important;
+  background: rgba(11, 14, 23, 0.9) !important;
+  border: 1px solid rgba(0, 240, 255, 0.3) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.carousel_container .carousel_thumbs > div,
+.carousel ._3HjnEmKg66o82ah74EIvmq > button,
+.carousel .I8j65FBXdOY- > button,
+.carousel button[class*="carousel__dot"],
+button[class*="carousel__dot"] {
+  display: block !important;
+  width: 12px !important;
+  height: 8px !important;
+  min-width: 12px !important;
+  min-height: 8px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: none !important;
+  background-color: rgba(0, 240, 255, 0.3) !important;
+  border: 1px solid rgba(0, 240, 255, 0.5) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  transition: all 0.2s ease-in-out !important;
+}
+
+/* Hide default Steam SVG/inner elements inside carousel dot buttons so old style never shows underneath */
+.carousel ._3HjnEmKg66o82ah74EIvmq > button > svg,
+.carousel .I8j65FBXdOY- > button > svg,
+.carousel button[class*="carousel__dot"] > svg,
+.carousel button[class*="carousel__dot"] > *,
+button[class*="carousel__dot"] > svg,
+button[class*="carousel__dot"] > * {
+  display: none !important;
+}
+
+.carousel_container .carousel_thumbs > div.focus,
+.carousel ._3HjnEmKg66o82ah74EIvmq > button.carousel__dot--selected,
+.carousel .I8j65FBXdOY- > button.carousel__dot--selected,
+.carousel button.carousel__dot--selected,
+button.carousel__dot--selected {
+  width: 18px !important;
+  background-color: #fcee09 !important;
+  border-color: #fcee09 !important;
+  box-shadow: 0 0 8px rgba(252, 238, 9, 0.7) !important;
+}
+
+/* Store Top Navigation Bar (Browse, Recommendations, Categories, Search) */
+div#store_nav_area .store_nav_bg,
+.store_header_btn,
+._-6WU-qJBwUo- .XLbP8xOkCYw-,
+.dm2SGcwBwj4- .WCG-2-OYepA- {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--cp-store-max-width);
+  margin: 16px auto 0;
+  padding: 6px 12px;
+  background: rgba(11, 14, 23, 0.95) !important;
+  border: 1px solid rgba(252, 238, 9, 0.4) !important;
+  border-left: 3px solid #fcee09 !important;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Store Search Input */
+._-6WU-qJBwUo- .XLbP8xOkCYw- .Tx-rbJxeMFs-,
+.dm2SGcwBwj4- .WCG-2-OYepA- ._5fxF1NcznNc-,
+#store_nav_search_term {
+  background: #06080e !important;
+  border: 1px solid rgba(0, 240, 255, 0.4) !important;
+  color: #fcee09 !important;
+  font-family: 'Share Tech Mono', monospace !important;
+}
+
+/* Featured & Recommended Main Capsule & Store Cards */
+.carousel_container .carousel_items > *,
+.store_main_capsule,
+.home_RightColumn,
+.game_area_purchase_game,
+.block_content_inner,
+.tab_row_item,
+.tab_preview,
+.home_content_item {
+  background: rgba(11, 14, 23, 0.94) !important;
+  border: 1px solid rgba(0, 240, 255, 0.32) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.85) !important;
+}
+
+/* Hover Preview Tooltip on Store */
+#global_hover,
+.hover_box,
+.hover_body {
+  background: #0b0e17 !important;
+  border: 1px solid #00f0ff !important;
+  color: #e6f1ff !important;
+  box-shadow: 0 0 16px rgba(0, 240, 255, 0.4) !important;
+}
+
+/* Store Headings */
+h2.home_page_content_title,
+.home_cluster_ctn h2,
+.page_content_ctn h2 {
+  color: #fcee09 !important;
+  font-family: 'Rajdhani', sans-serif !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  border-left: 3px solid #ff0055 !important;
+  padding-left: 10px !important;
+}
+
+/* Buttons */
+.btnv6_blue_hoverfade,
+.btn_green_white_innerfade,
+.btn_green_steamui,
+.home_gift_card_link {
+  background: #fcee09 !important;
+  color: #050608 !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  box-shadow: 0 0 10px rgba(252, 238, 9, 0.4) !important;
+}
+
+/* Discount Badges & Prices */
+.discount_block,
+._6QzykeEsckc- {
+  background: #0a0c14 !important;
+  border: 1px solid rgba(0, 240, 255, 0.35) !important;
+}
+
+.discount_final_price,
+.-HQzBzl6lqI- {
+  color: #fcee09 !important;
+  font-family: 'Share Tech Mono', monospace !important;
+  font-weight: 700 !important;
+}
+
+.discount_pct,
+.hPiY1A-1izA- {
+  background: #ff0055 !important;
+  color: #ffffff !important;
+  font-family: 'Share Tech Mono', monospace !important;
+  font-weight: 700 !important;
+}

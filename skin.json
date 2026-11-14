@@ -1,0 +1,118 @@
+{
+  "name": "Cyberpunk 2077 // Night City HUD",
+  "author": "RaveAgainstTheMachine",
+  "description": "High-contrast Cyberpunk 2077 Kiroshi Optics & Arasaka Netrunner HUD theme for Steam with docked Friends Panel and customizable panel positions.",
+  "version": "2.1.0",
+  "Steam-WebKit": "webkit.css",
+  "Patches": [
+    {
+      "MatchRegexString": ".*",
+      "TargetCss": "libraryroot.custom.css"
+    },
+    {
+      "MatchRegexString": "^Steam$",
+      "TargetCss": "libraryroot.custom.css",
+      "TargetJs": "libraryroot.custom.js"
+    },
+    {
+      "MatchRegexString": ".ModalDialogPopup",
+      "TargetCss": "libraryroot.custom.css"
+    },
+    {
+      "MatchRegexString": ".friendsui-container",
+      "TargetCss": "friends.custom.css"
+    },
+    {
+      "MatchRegexString": "Supernav$",
+      "TargetCss": "libraryroot.custom.css"
+    },
+    {
+      "MatchRegexString": "Menu$",
+      "TargetCss": "libraryroot.custom.css"
+    },
+    {
+      "MatchRegexString": "^notificationtoasts_",
+      "TargetCss": "libraryroot.custom.css"
+    },
+    {
+      "MatchRegexString": "^SP Overlay:",
+      "TargetCss": "libraryroot.custom.css"
+    },
+    {
+      "MatchRegexString": "https://.*\\.steampowered\\.com(/.*)?",
+      "TargetCss": "webkit.css"
+    },
+    {
+      "MatchRegexString": "https://steamcommunity\\.com(/.*)?",
+      "TargetCss": "webkit.css"
+    }
+  ],
+  "Conditions": {
+    "Games Panel Position": {
+      "description": "Choose whether the Library Games List panel is docked on the Left or Right side.",
+      "default": "Left",
+      "tab": "Layout",
+      "section": "Panels",
+      "values": {
+        "Left": {
+          "TargetCss": {
+            "affects": [".*"],
+            "src": "options/games-left.css"
+          }
+        },
+        "Right": {
+          "TargetCss": {
+            "affects": [".*"],
+            "src": "options/games-right.css"
+          }
+        }
+      }
+    },
+    "Friends Panel Position": {
+      "description": "Choose whether the docked Cyberpunk Friends Panel is on the Right side, Left side, or Hidden.",
+      "default": "Right",
+      "tab": "Layout",
+      "section": "Panels",
+      "values": {
+        "Right": {
+          "TargetCss": {
+            "affects": [".*"],
+            "src": "options/friends-right.css"
+          }
+        },
+        "Left": {
+          "TargetCss": {
+            "affects": [".*"],
+            "src": "options/friends-left.css"
+          }
+        },
+        "Hidden": {
+          "TargetCss": {
+            "affects": [".*"],
+            "src": "options/friends-hidden.css"
+          }
+        }
+      }
+    },
+    "Gamepage Info & Friends Column": {
+      "description": "Position of the Friends Who Play / Achievements / DLC column inside a Game Details page.",
+      "default": "Right",
+      "tab": "Layout",
+      "section": "Gamepage",
+      "values": {
+        "Right": {
+          "TargetCss": {
+            "affects": [".*"],
+            "src": "options/gamepage-info-right.css"
+          }
+        },
+        "Left": {
+          "TargetCss": {
+            "affects": [".*"],
+            "src": "options/gamepage-info-left.css"
+          }
+        }
+      }
+    }
+  }
+}

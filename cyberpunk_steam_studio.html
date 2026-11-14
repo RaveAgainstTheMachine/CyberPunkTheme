@@ -1,0 +1,2687 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cyberpunk 2077 // Steam Theme Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,400;0,600;0,700;1,700&family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&family=JetBrains+Mono:wght@400;600&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      color-scheme: dark;
+      --background: #040509;
+      --foreground: #e6f1ff;
+      --card: #090c14;
+      --border: #1b2436;
+      --muted-foreground: #7a8ba8;
+
+      --cp-yellow: #fcee09;
+      --cp-cyan: #00f0ff;
+      --cp-red: #ff0055;
+      --cp-magenta: #ff2a85;
+      --cp-green: #00ff9d;
+      --cp-bg-dark: #07080d;
+      --cp-bg-panel: #0d1019;
+      --cp-bg-card: #131824;
+      --cp-text-main: #e6f1ff;
+      --cp-text-dim: #7a8ba8;
+      --cp-cut: 10px;
+      --cp-glow: 12px;
+      --cp-scanline: 0.25;
+      --cp-font-head: 'Orbitron', sans-serif;
+      --cp-font-body: 'Rajdhani', sans-serif;
+      --cp-font-mono: 'Share Tech Mono', monospace;
+    }
+
+    html,
+    body {
+      background-color: #040509 !important;
+      color: #e6f1ff !important;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Custom Scrollbars */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #05070c;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--cp-cyan);
+      border-radius: 0px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--cp-yellow);
+    }
+
+    /* Cyberpunk Clipped Card Utility */
+    .cp-clip-br {
+      clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--cp-cut)), calc(100% - var(--cp-cut)) 100%, 0 100%);
+    }
+
+    .cp-clip-tl-br {
+      clip-path: polygon(var(--cp-cut) 0,
+          100% 0,
+          100% calc(100% - var(--cp-cut)),
+          calc(100% - var(--cp-cut)) 100%,
+          0 100%,
+          0 var(--cp-cut));
+    }
+
+    .cp-clip-btn {
+      clip-path: polygon(0 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%);
+    }
+
+    /* Scanline Overlay inside Steam Preview */
+    .cp-scanlines {
+      background: repeating-linear-gradient(0deg,
+          rgba(0, 0, 0, 0) 0px,
+          rgba(0, 0, 0, 0) 2px,
+          rgba(0, 240, 255, calc(var(--cp-scanline) * 0.14)) 3px,
+          rgba(0, 0, 0, calc(var(--cp-scanline) * 0.45)) 4px);
+      pointer-events: none;
+    }
+
+    /* Cyberpunk Grid Background */
+    .cp-grid-bg {
+      background-color: var(--cp-bg-dark);
+      background-image:
+        radial-gradient(circle at 80% 10%, rgba(255, 0, 85, 0.12), transparent 40%),
+        radial-gradient(circle at 20% 90%, rgba(0, 240, 255, 0.10), transparent 45%),
+        linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 28px 28px, 28px 28px;
+    }
+
+    /* Glitch Hover Effect */
+    @keyframes cp-glitch-pulse {
+
+      0%,
+      100% {
+        transform: translate(0, 0);
+      }
+
+      25% {
+        transform: translate(-1px, 1px);
+      }
+
+      50% {
+        transform: translate(1px, -1px);
+      }
+
+      75% {
+        transform: translate(-1px, 0px);
+      }
+    }
+
+    .cp-play-btn:hover {
+      animation: cp-glitch-pulse 0.25s infinite;
+      box-shadow: 0 0 calc(var(--cp-glow) * 1.5) var(--cp-yellow), -3px 0 0 var(--cp-red), 3px 0 0 var(--cp-cyan);
+    }
+
+    /* Range Slider Styling */
+    input[type="range"] {
+      -webkit-appearance: none;
+      appearance: none;
+      height: 5px;
+      background: #1a2133;
+      border-radius: 2px;
+      outline: none;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 14px;
+      height: 14px;
+      background: var(--cp-yellow);
+      border: 2px solid #07080d;
+      cursor: pointer;
+      box-shadow: 0 0 8px var(--cp-yellow);
+    }
+
+    .steam-preview-root {
+      font-family: var(--cp-font-body);
+      color: var(--cp-text-main);
+    }
+
+    .steam-preview-head {
+      font-family: var(--cp-font-head);
+    }
+
+    .steam-preview-mono {
+      font-family: var(--cp-font-mono);
+    }
+  </style>
+</head>
+
+<body
+  class="bg-[#040509] text-[#e6f1ff] min-h-screen w-full overflow-x-hidden antialiased selection:bg-[#fcee09] selection:text-black">
+
+  <div class="w-full max-w-none px-3 py-3 lg:px-5 lg:py-4 space-y-4">
+
+    <!-- Top Studio Header Bar -->
+    <header
+      class="flex flex-wrap items-center justify-between gap-3 px-4 py-3 rounded-lg border border-[#1b2436] bg-[#090c14] shadow-xl relative overflow-hidden">
+      <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#fcee09] via-[#00f0ff] to-[#ff0055]">
+      </div>
+      <div class="flex items-center gap-3.5">
+        <div
+          class="w-10 h-10 flex items-center justify-center bg-[#fcee09] text-black font-black tracking-tighter text-base cp-clip-br shadow-[0_0_15px_rgba(252,238,9,0.4)]"
+          style="font-family: 'Orbitron', sans-serif;">
+          CP77
+        </div>
+        <div>
+          <div class="flex flex-wrap items-center gap-2">
+            <h1 class="text-base font-bold tracking-tight text-white" style="font-family: 'Orbitron', sans-serif;">
+              CYBERPUNK 2077 // STEAM THEME STUDIO
+            </h1>
+            <span
+              class="px-2 py-0.5 text-[10px] font-mono uppercase tracking-widest rounded bg-[#00f0ff]/10 text-[#00f0ff] border border-[#00f0ff]/30">
+              v2.2.0 // FULLSCREEN PRODUCTION SUITE
+            </span>
+          </div>
+          <p class="text-xs text-[#7a8ba8] mt-0.5">
+            Full-viewport live preview &amp; complete production CSS/JS/JSON theme compiler for Steam Millennium
+            (`libraryroot.custom.css`, `webkit.css`, `friends.custom.css`, `options/*.css`, `libraryroot.custom.js`,
+            `skin.json`)
+          </p>
+        </div>
+      </div>
+
+      <!-- Preset Selector + Fullscreen / Expand / Instructions Controls -->
+      <div class="flex flex-wrap items-center gap-2">
+        <span class="text-xs font-mono uppercase tracking-wider text-[#7a8ba8] mr-1">Faction Preset:</span>
+        <button onclick="applyPreset('netrunner')" id="preset-netrunner"
+          class="preset-btn px-2.5 py-1.5 text-xs font-semibold rounded border border-[#fcee09] bg-[#fcee09]/15 text-[#fcee09] transition-all cursor-pointer">
+          ⚡ Night City Netrunner
+        </button>
+        <button onclick="applyPreset('arasaka')" id="preset-arasaka"
+          class="preset-btn px-2.5 py-1.5 text-xs font-semibold rounded border border-[#1b2436] bg-[#0d121f] text-[#e6f1ff] hover:border-[#ff0055]/60 transition-all cursor-pointer">
+          🩸 Arasaka Corp
+        </button>
+        <button onclick="applyPreset('mox')" id="preset-mox"
+          class="preset-btn px-2.5 py-1.5 text-xs font-semibold rounded border border-[#1b2436] bg-[#0d121f] text-[#e6f1ff] hover:border-[#ff2a85]/60 transition-all cursor-pointer">
+          💖 The Mox Neon
+        </button>
+        <button onclick="applyPreset('militech')" id="preset-militech"
+          class="preset-btn px-2.5 py-1.5 text-xs font-semibold rounded border border-[#1b2436] bg-[#0d121f] text-[#e6f1ff] hover:border-[#00ff9d]/60 transition-all cursor-pointer">
+          🪖 Militech Tactical
+        </button>
+
+        <div class="h-5 w-[1px] bg-[#1b2436] mx-1 hidden sm:block"></div>
+
+        <a href="#studio-instructions"
+          class="px-2.5 py-1.5 text-xs font-mono font-semibold rounded border border-[#00f0ff]/40 bg-[#00f0ff]/10 text-[#00f0ff] hover:bg-[#00f0ff]/20 transition-all">
+          📖 Instructions
+        </a>
+        <button onclick="toggleSidebar()" id="btn-toggle-sidebar"
+          class="px-2.5 py-1.5 text-xs font-mono font-semibold rounded border border-[#1b2436] bg-[#0d121f] text-[#e6f1ff] hover:border-[#00f0ff] transition-all cursor-pointer">
+          ◀ Hide Controls
+        </button>
+        <button onclick="toggleBrowserFullscreen()" id="btn-fullscreen"
+          class="px-2.5 py-1.5 text-xs font-mono font-semibold rounded border border-[#fcee09]/60 bg-[#fcee09] text-black font-bold hover:opacity-90 transition-all cursor-pointer">
+          ⛶ Fullscreen
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Full-Width Studio Flex Layout: Compact Controls Left (310px), Ultra-Wide Steam Mockup + Code Output Right (flex-1) -->
+    <div class="flex flex-col xl:flex-row gap-4 items-start w-full">
+
+      <!-- LEFT COLUMN: THEME CUSTOMIZER CONTROLS (310px fixed on XL screens so Right Preview gets maximum width) -->
+      <aside id="studio-sidebar" class="w-full xl:w-[310px] shrink-0 space-y-3.5 transition-all">
+
+        <!-- Color Palette Controls -->
+        <div class="p-4 rounded-lg border border-[#1b2436] bg-[#090c14] space-y-3.5">
+          <div class="flex items-center justify-between border-b border-[#1b2436] pb-2.5">
+            <h2
+              class="text-xs font-mono uppercase tracking-widest font-semibold flex items-center gap-2 text-[#e6f1ff]">
+              <span class="w-2 h-2 bg-[#fcee09] inline-block"></span>
+              01 // Chromatic Matrix
+            </h2>
+            <span class="text-[11px] font-mono text-[#7a8ba8]">HEX / RGB</span>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <!-- Primary Accent -->
+            <label class="block space-y-1 cursor-pointer">
+              <span class="text-xs text-[#7a8ba8] flex justify-between">
+                <span>Primary Accent</span>
+                <code id="lbl-yellow" class="font-mono text-[11px] text-[#e6f1ff]">#FCEE09</code>
+              </span>
+              <div class="flex items-center gap-2 p-1.5 rounded border border-[#1b2436] bg-black/40">
+                <input type="color" id="inp-yellow" value="#fcee09" oninput="updateTheme()"
+                  class="w-7 h-6 bg-transparent border-0 cursor-pointer">
+                <span class="text-xs font-mono text-[#7a8ba8]">Cyber Yellow</span>
+              </div>
+            </label>
+
+            <!-- Secondary Accent -->
+            <label class="block space-y-1 cursor-pointer">
+              <span class="text-xs text-[#7a8ba8] flex justify-between">
+                <span>HUD Cyan</span>
+                <code id="lbl-cyan" class="font-mono text-[11px] text-[#e6f1ff]">#00F0FF</code>
+              </span>
+              <div class="flex items-center gap-2 p-1.5 rounded border border-[#1b2436] bg-black/40">
+                <input type="color" id="inp-cyan" value="#00f0ff" oninput="updateTheme()"
+                  class="w-7 h-6 bg-transparent border-0 cursor-pointer">
+                <span class="text-xs font-mono text-[#7a8ba8]">Optic Cyan</span>
+              </div>
+            </label>
+
+            <!-- Danger / Glitch Red -->
+            <label class="block space-y-1 cursor-pointer">
+              <span class="text-xs text-[#7a8ba8] flex justify-between">
+                <span>Breach Red</span>
+                <code id="lbl-red" class="font-mono text-[11px] text-[#e6f1ff]">#FF0055</code>
+              </span>
+              <div class="flex items-center gap-2 p-1.5 rounded border border-[#1b2436] bg-black/40">
+                <input type="color" id="inp-red" value="#ff0055" oninput="updateTheme()"
+                  class="w-7 h-6 bg-transparent border-0 cursor-pointer">
+                <span class="text-xs font-mono text-[#7a8ba8]">SAMURAI Red</span>
+              </div>
+            </label>
+
+            <!-- Background Base -->
+            <label class="block space-y-1 cursor-pointer">
+              <span class="text-xs text-[#7a8ba8] flex justify-between">
+                <span>Chassis Void</span>
+                <code id="lbl-bg" class="font-mono text-[11px] text-[#e6f1ff]">#07080D</code>
+              </span>
+              <div class="flex items-center gap-2 p-1.5 rounded border border-[#1b2436] bg-black/40">
+                <input type="color" id="inp-bg" value="#07080d" oninput="updateTheme()"
+                  class="w-7 h-6 bg-transparent border-0 cursor-pointer">
+                <span class="text-xs font-mono text-[#7a8ba8]">Obsidian</span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- Layout & Millennium Options Controls -->
+        <div class="p-4 rounded-lg border border-[#1b2436] bg-[#090c14] space-y-3.5">
+          <div class="flex items-center justify-between border-b border-[#1b2436] pb-2.5">
+            <h2
+              class="text-xs font-mono uppercase tracking-widest font-semibold flex items-center gap-2 text-[#e6f1ff]">
+              <span class="w-2 h-2 bg-[#ff0055] inline-block"></span>
+              02 // HUD Docking &amp; Layout Options
+            </h2>
+            <span class="text-[11px] font-mono text-[#7a8ba8]">skin.json</span>
+          </div>
+
+          <div class="grid grid-cols-1 gap-2.5">
+            <div class="flex items-center justify-between text-xs">
+              <span class="text-[#7a8ba8]">Games List Sidebar</span>
+              <div class="flex rounded overflow-hidden border border-[#1b2436]">
+                <button id="btn-games-left" onclick="setLayoutOption('gamesSidebar', 'left')"
+                  class="px-2.5 py-1 font-mono text-[11px] bg-[#00f0ff]/20 text-[#00f0ff] border-r border-[#1b2436]">LEFT</button>
+                <button id="btn-games-right" onclick="setLayoutOption('gamesSidebar', 'right')"
+                  class="px-2.5 py-1 font-mono text-[11px] bg-[#0d121f] text-[#7a8ba8]">RIGHT</button>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between text-xs">
+              <span class="text-[#7a8ba8]">Docked Friends Panel</span>
+              <div class="flex rounded overflow-hidden border border-[#1b2436]">
+                <button id="btn-friends-right" onclick="setLayoutOption('friendsDock', 'right')"
+                  class="px-2.5 py-1 font-mono text-[11px] bg-[#00f0ff]/20 text-[#00f0ff] border-r border-[#1b2436]">RIGHT</button>
+                <button id="btn-friends-left" onclick="setLayoutOption('friendsDock', 'left')"
+                  class="px-2.5 py-1 font-mono text-[11px] bg-[#0d121f] text-[#7a8ba8] border-r border-[#1b2436]">LEFT</button>
+                <button id="btn-friends-hide" onclick="setLayoutOption('friendsDock', 'hide')"
+                  class="px-2.5 py-1 font-mono text-[11px] bg-[#0d121f] text-[#7a8ba8]">HIDE</button>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between text-xs">
+              <span class="text-[#7a8ba8]">Gamepage Info Column</span>
+              <div class="flex rounded overflow-hidden border border-[#1b2436]">
+                <button id="btn-info-right" onclick="setLayoutOption('gameInfoCol', 'right')"
+                  class="px-2.5 py-1 font-mono text-[11px] bg-[#00f0ff]/20 text-[#00f0ff] border-r border-[#1b2436]">RIGHT</button>
+                <button id="btn-info-left" onclick="setLayoutOption('gameInfoCol', 'left')"
+                  class="px-2.5 py-1 font-mono text-[11px] bg-[#0d121f] text-[#7a8ba8]">LEFT</button>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between text-xs">
+              <span class="text-[#7a8ba8]">Store Hero Ribbon</span>
+              <div class="flex rounded overflow-hidden border border-[#1b2436]">
+                <button id="btn-ribbon-show" onclick="setLayoutOption('heroRibbon', 'show')"
+                  class="px-2.5 py-1 font-mono text-[11px] bg-[#00f0ff]/20 text-[#00f0ff] border-r border-[#1b2436]">SHOW</button>
+                <button id="btn-ribbon-hide" onclick="setLayoutOption('heroRibbon', 'hide')"
+                  class="px-2.5 py-1 font-mono text-[11px] bg-[#0d121f] text-[#7a8ba8]">HIDE</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Geometry & Cyberware FX Controls -->
+        <div class="p-4 rounded-lg border border-[#1b2436] bg-[#090c14] space-y-4">
+          <div class="flex items-center justify-between border-b border-[#1b2436] pb-2.5">
+            <h2
+              class="text-xs font-mono uppercase tracking-widest font-semibold flex items-center gap-2 text-[#e6f1ff]">
+              <span class="w-2 h-2 bg-[#00f0ff] inline-block"></span>
+              03 // Geometry &amp; Kiroshi Optics
+            </h2>
+            <span class="text-[11px] font-mono text-[#7a8ba8]">HUD FX</span>
+          </div>
+
+          <!-- Corner Chamfer Cut -->
+          <div class="space-y-1.5">
+            <div class="flex justify-between text-xs">
+              <span class="text-[#7a8ba8]">45° Corner Chamfer Cut</span>
+              <span id="lbl-cut" class="font-mono text-[#00f0ff]">10px</span>
+            </div>
+            <input type="range" id="inp-cut" min="0" max="20" step="1" value="10" oninput="updateTheme()"
+              class="w-full">
+          </div>
+
+          <!-- Neon Bloom Intensity -->
+          <div class="space-y-1.5">
+            <div class="flex justify-between text-xs">
+              <span class="text-[#7a8ba8]">Neon Border Glow</span>
+              <span id="lbl-glow" class="font-mono text-[#00f0ff]">12px</span>
+            </div>
+            <input type="range" id="inp-glow" min="0" max="28" step="2" value="12" oninput="updateTheme()"
+              class="w-full">
+          </div>
+
+          <!-- CRT Scanline Opacity -->
+          <div class="space-y-1.5">
+            <div class="flex justify-between text-xs">
+              <span class="text-[#7a8ba8]">Kiroshi Scanline Overlay</span>
+              <span id="lbl-scan" class="font-mono text-[#00f0ff]">25%</span>
+            </div>
+            <input type="range" id="inp-scan" min="0" max="100" step="5" value="25" oninput="updateTheme()"
+              class="w-full">
+          </div>
+
+          <!-- Store Container Max Width -->
+          <div class="space-y-1.5">
+            <div class="flex justify-between text-xs">
+              <span class="text-[#7a8ba8]">Store Max Width (`--cp-store-max-width`)</span>
+              <span id="lbl-storew" class="font-mono text-[#00f0ff]">1200px</span>
+            </div>
+            <input type="range" id="inp-storew" min="980" max="1600" step="20" value="1200" oninput="updateTheme()"
+              class="w-full">
+          </div>
+
+          <!-- Font Family Selector -->
+          <div class="space-y-1.5 pt-1">
+            <label class="text-xs text-[#7a8ba8] block">HUD Display Typography</label>
+            <select id="inp-font" onchange="updateTheme()"
+              class="w-full px-3 py-2 text-xs rounded border border-[#1b2436] bg-[#07090f] text-[#e6f1ff] focus:outline-none focus:border-[#00f0ff]">
+              <option value="Orbitron" selected>Orbitron + Rajdhani (Authentic 2077 HUD)</option>
+              <option value="Chakra Petch">Chakra Petch + Rajdhani (Angular Mecha)</option>
+              <option value="Share Tech Mono">Share Tech Mono (Pure Netrunner Terminal)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Installation & Architecture Guide Card -->
+        <div class="p-4 rounded-lg border border-[#1b2436] bg-[#090c14] space-y-2.5">
+          <div class="flex items-center justify-between">
+            <h2
+              class="text-xs font-mono uppercase tracking-widest font-semibold flex items-center gap-2 text-[#fcee09]">
+              <span>⚡</span> 04 // Millennium Deployment Path
+            </h2>
+            <span
+              class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Steam
+              Ready</span>
+          </div>
+          <ol class="text-xs text-[#7a8ba8] space-y-1.5 list-decimal list-inside leading-relaxed">
+            <li>Theme folder: <code
+                class="text-[#e6f1ff] font-mono bg-black/50 px-1 py-0.5 rounded">Steam/millennium/themes/Cyberpunk2077/</code>
+            </li>
+            <li>Use the <strong>05 // Theme Code Generator</strong> tabs below to copy or download <code
+                class="text-[#00f0ff] font-mono">libraryroot.custom.css</code>, <code
+                class="text-[#00f0ff] font-mono">webkit.css</code>, <code
+                class="text-[#00f0ff] font-mono">friends.custom.css</code>, <code
+                class="text-[#00f0ff] font-mono">libraryroot.custom.js</code>, or the full bundle.</li>
+            <li>Press <kbd
+                class="px-1.5 py-0.5 text-[10px] font-mono bg-black border border-[#1b2436] rounded text-[#fcee09]">Ctrl
+                + R</kbd> inside Steam to hot-reload.</li>
+          </ol>
+        </div>
+
+      </aside>
+
+      <!-- RIGHT COLUMN: ULTRA-WIDE INTERACTIVE STEAM CLIENT PREVIEW + FULL CODE GENERATOR + INSTRUCTIONS -->
+      <main id="studio-main" class="flex-1 min-w-0 w-full space-y-5">
+
+        <!-- STEAM DESKTOP CLIENT LIVE MOCKUP -->
+        <section class="rounded-lg border border-[#1b2436] bg-[#05060a] overflow-hidden shadow-2xl relative w-full">
+
+          <!-- Mockup Mode Switcher Bar -->
+          <div
+            class="flex flex-wrap items-center justify-between gap-2 px-3 py-1.5 bg-[#080b12] border-b border-[#1b2436] text-[11px] font-mono">
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="text-[#7a8ba8]">LIVE CLIENT VIEWPORT:</span>
+              <button id="view-btn-library" onclick="switchClientView('library')"
+                class="px-2.5 py-0.5 rounded bg-[#fcee09] text-black font-bold cursor-pointer">LIBRARY // GAME
+                PAGE</button>
+              <button id="view-btn-store" onclick="switchClientView('store')"
+                class="px-2.5 py-0.5 rounded bg-[#111726] text-[#7a8ba8] hover:text-white cursor-pointer">STORE // HERO
+                CAROUSEL</button>
+              <button id="view-btn-menu" onclick="toggleTopDropdownPreview()"
+                class="px-2.5 py-0.5 rounded bg-[#111726] text-[#00f0ff] border border-[#00f0ff]/40 hover:bg-[#00f0ff]/10 cursor-pointer">TOGGLE
+                TOP MENU</button>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="text-[#7a8ba8] hidden sm:inline">Tip: Click <strong class="text-[#e6f1ff]">◀ Hide
+                  Controls</strong> or <strong class="text-[#fcee09]">⛶ Fullscreen</strong> above for 100% width</span>
+              <span class="text-[#00f0ff]">MILLENNIUM v2.2 // ZERO-PII</span>
+            </div>
+          </div>
+
+          <!-- Steam Top Menu Bar -->
+          <div id="steam-window" class="steam-preview-root cp-grid-bg relative select-none w-full overflow-x-auto">
+            <!-- Scanline Overlay -->
+            <div class="cp-scanlines absolute inset-0 z-20"></div>
+
+            <!-- Top Menu Dropdown Popup (Full 4-sided Cyan Inset Border, Auto-fit Width) -->
+            <div id="preview-top-dropdown" class="hidden absolute top-[62px] left-[54px] z-30 bg-[#0d1019] p-[6px]"
+              style="box-shadow: inset 0 0 0 1px var(--cp-cyan), inset 0 0 10px rgba(0, 240, 255, 0.18), 0 14px 32px rgba(0,0,0,0.92);">
+              <div
+                class="px-3.5 py-1.5 text-xs font-semibold text-[#e6f1ff] hover:bg-[#00f0ff]/15 hover:text-[#fcee09] cursor-pointer whitespace-nowrap">
+                Featured</div>
+              <div
+                class="px-3.5 py-1.5 text-xs font-semibold text-[#e6f1ff] hover:bg-[#00f0ff]/15 hover:text-[#fcee09] cursor-pointer whitespace-nowrap">
+                Discovery Queue</div>
+              <div
+                class="px-3.5 py-1.5 text-xs font-semibold text-[#e6f1ff] hover:bg-[#00f0ff]/15 hover:text-[#fcee09] cursor-pointer whitespace-nowrap">
+                Wishlist</div>
+              <div
+                class="px-3.5 py-1.5 text-xs font-semibold text-[#e6f1ff] hover:bg-[#00f0ff]/15 hover:text-[#fcee09] cursor-pointer whitespace-nowrap">
+                Personal Calendar</div>
+              <div
+                class="px-3.5 py-1.5 text-xs font-semibold text-[#e6f1ff] hover:bg-[#00f0ff]/15 hover:text-[#fcee09] cursor-pointer whitespace-nowrap">
+                Points Shop</div>
+              <div
+                class="px-3.5 py-1.5 text-xs font-semibold text-[#e6f1ff] hover:bg-[#00f0ff]/15 hover:text-[#fcee09] cursor-pointer whitespace-nowrap">
+                News &amp; Charts</div>
+            </div>
+
+            <!-- Top Titlebar -->
+            <div
+              class="flex flex-wrap items-center justify-between gap-2 px-4 py-2.5 bg-[#05060a]/95 border-b border-[var(--cp-cyan)]/30 relative z-10">
+              <!-- Left Nav Tabs -->
+              <div class="flex items-center gap-5">
+                <div class="flex items-center gap-2 text-xs text-[var(--cp-text-dim)] steam-preview-mono">
+                  <span class="text-[var(--cp-yellow)]">◀</span>
+                  <span class="text-[var(--cp-cyan)]">▶</span>
+                </div>
+                <nav class="flex items-center gap-2 text-sm font-bold tracking-wider steam-preview-head">
+                  <span id="nav-tab-store" onclick="switchClientView('store')"
+                    class="px-3 py-1 text-[var(--cp-text-dim)] hover:text-white cursor-pointer transition-colors">STORE</span>
+                  <span id="nav-tab-library" onclick="switchClientView('library')"
+                    class="px-3.5 py-1 bg-[var(--cp-yellow)] text-black cp-clip-br shadow-[0_0_12px_var(--cp-yellow)] cursor-pointer">
+                    LIBRARY
+                  </span>
+                  <span
+                    class="px-3 py-1 text-[var(--cp-text-dim)] hover:text-white cursor-pointer transition-colors">COMMUNITY</span>
+                  <span class="px-3 py-1 text-[var(--cp-cyan)] cursor-pointer">NETRUNNER_V</span>
+                </nav>
+              </div>
+
+              <!-- Right Status / Wallet / Profile -->
+              <div class="flex items-center gap-2.5 text-xs steam-preview-mono">
+                <span class="px-2 py-1 bg-[var(--cp-bg-panel)] border border-[var(--cp-cyan)]/40 text-[var(--cp-cyan)]">
+                  🔔 3 BREACHES
+                </span>
+                <span
+                  class="px-2.5 py-1 bg-[var(--cp-bg-panel)] border border-[var(--cp-yellow)]/50 text-[var(--cp-yellow)] font-bold">
+                  €$ 42,077
+                </span>
+                <div class="flex items-center gap-2 pl-2 border-l border-white/10">
+                  <div class="w-6 h-6 bg-gradient-to-br from-[var(--cp-yellow)] to-[var(--cp-red)] p-[1px]">
+                    <div
+                      class="w-full h-full bg-black flex items-center justify-center font-bold text-[10px] text-[var(--cp-yellow)]">
+                      V</div>
+                  </div>
+                  <span class="text-[var(--cp-text-main)] font-semibold">V // LVL 50</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- VIEW 1: STEAM LIBRARY + GAME PAGE + DOCKED FRIENDS -->
+            <div id="client-view-library" class="flex min-h-[540px] min-w-[920px] relative z-10">
+
+              <!-- Left Game List Sidebar -->
+              <div id="preview-games-sidebar"
+                class="w-[205px] shrink-0 bg-[#080a11]/95 border-r border-[var(--cp-cyan)]/25 p-2.5 flex flex-col justify-between">
+                <div class="space-y-2.5">
+                  <!-- Home Button -->
+                  <div class="flex items-center gap-2">
+                    <div
+                      class="flex-1 px-2.5 py-1.5 bg-[var(--cp-bg-card)] border border-[var(--cp-cyan)]/40 text-xs font-bold tracking-wider uppercase flex items-center justify-between text-[var(--cp-yellow)]">
+                      <span>HOME // DECK</span>
+                      <span class="text-[10px] steam-preview-mono text-[var(--cp-cyan)]">SYS.01</span>
+                    </div>
+                  </div>
+
+                  <!-- Search Input -->
+                  <div class="relative">
+                    <input type="text" readonly value="Search shards..."
+                      class="w-full bg-[#05060a] border border-[var(--cp-cyan)]/35 px-2.5 py-1 text-xs text-[var(--cp-text-dim)] steam-preview-mono focus:outline-none">
+                    <span class="absolute right-2 top-1.5 text-[10px] text-[var(--cp-cyan)]">⌕</span>
+                  </div>
+
+                  <!-- Category Header -->
+                  <div
+                    class="text-[10px] steam-preview-mono uppercase tracking-widest text-[var(--cp-cyan)] pt-1 flex items-center justify-between">
+                    <span>▾ INSTALLED CYBERWARE (6)</span>
+                  </div>
+
+                  <!-- Game Items List -->
+                  <div class="space-y-1 text-xs">
+                    <!-- Active Selected Game -->
+                    <div
+                      class="px-2.5 py-1.5 bg-gradient-to-r from-[var(--cp-yellow)]/20 to-transparent border-l-[3px] border-[var(--cp-yellow)] text-white font-bold flex items-center justify-between">
+                      <span class="truncate">Cyberpunk 2077</span>
+                      <span
+                        class="text-[9px] steam-preview-mono px-1 bg-[var(--cp-yellow)] text-black font-bold">READY</span>
+                    </div>
+                    <div
+                      class="px-2.5 py-1.5 text-[var(--cp-text-dim)] hover:text-white hover:bg-white/5 flex items-center justify-between transition-colors">
+                      <span class="truncate">ELDEN RING</span>
+                      <span class="text-[10px] steam-preview-mono text-[var(--cp-cyan)]">100%</span>
+                    </div>
+                    <div
+                      class="px-2.5 py-1.5 text-[var(--cp-text-dim)] hover:text-white hover:bg-white/5 flex items-center justify-between transition-colors">
+                      <span class="truncate">Ghostrunner 2</span>
+                    </div>
+                    <div
+                      class="px-2.5 py-1.5 text-[var(--cp-text-dim)] hover:text-white hover:bg-white/5 flex items-center justify-between transition-colors">
+                      <span class="truncate">DEUS EX: Mankind Divided</span>
+                    </div>
+                    <div
+                      class="px-2.5 py-1.5 text-[var(--cp-text-dim)] hover:text-white hover:bg-white/5 flex items-center justify-between transition-colors">
+                      <span class="truncate">NieR:Automata™</span>
+                    </div>
+                    <div
+                      class="px-2.5 py-1.5 text-[var(--cp-text-dim)] hover:text-white hover:bg-white/5 flex items-center justify-between transition-colors">
+                      <span class="truncate">System Shock Remake</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Sidebar Footer Download Status -->
+                <div class="p-2 bg-[#05060a] border border-[var(--cp-red)]/40 cp-clip-br">
+                  <div class="flex items-center justify-between text-[10px] steam-preview-mono text-[var(--cp-red)]">
+                    <span>NET_SYNC // ACTIVE</span>
+                    <span>1.2 GB/s</span>
+                  </div>
+                  <div class="w-full h-1.5 bg-black mt-1 overflow-hidden">
+                    <div class="h-full bg-gradient-to-r from-[var(--cp-red)] to-[var(--cp-yellow)] w-4/5"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Center Game Detail View -->
+              <div class="flex-1 min-w-0 flex flex-col justify-between bg-[#07090f]/80 overflow-hidden">
+
+                <!-- Hero Banner Area -->
+                <div class="relative p-4 pb-3 border-b border-[var(--cp-cyan)]/30 overflow-hidden"
+                  style="background: radial-gradient(circle at 85% 20%, rgba(252, 238, 9, 0.22), rgba(255, 0, 85, 0.16) 45%, rgba(7, 8, 13, 0.96) 85%);">
+                  <div
+                    class="flex items-center justify-between text-[10px] steam-preview-mono text-[var(--cp-cyan)] mb-2">
+                    <span>ARCHIVE // APP_ID: 1091500 // NIGHT CITY</span>
+                    <span class="text-[var(--cp-yellow)]">BUILD 2.2 // PHANTOM LIBERTY</span>
+                  </div>
+
+                  <div class="my-2">
+                    <div
+                      class="inline-block px-2 py-0.5 text-[10px] steam-preview-mono uppercase bg-[var(--cp-red)] text-white font-bold tracking-widest mb-1">
+                      OVERDRIVE // RAY TRACING ON
+                    </div>
+                    <h3
+                      class="text-2xl font-black tracking-tight uppercase steam-preview-head text-white drop-shadow-[0_2px_10px_rgba(0,240,255,0.35)]">
+                      CYBERPUNK <span class="text-[var(--cp-yellow)]">2077</span>
+                    </h3>
+                  </div>
+
+                  <!-- Play Bar & Telemetry Strip (All 6 Telemetry Items + Right Action Buttons Fully Visible) -->
+                  <div
+                    class="mt-3 p-2.5 bg-[#0a0d16]/95 border border-[var(--cp-cyan)]/40 cp-clip-br flex flex-wrap items-center justify-between gap-2.5"
+                    style="box-shadow: 0 0 var(--cp-glow) rgba(0, 240, 255, 0.14);">
+                    <div class="flex flex-wrap items-center gap-3.5">
+                      <button
+                        class="cp-play-btn cp-clip-btn px-4 py-2 bg-[var(--cp-yellow)] text-black font-black text-xs tracking-widest uppercase steam-preview-head transition-all cursor-pointer shrink-0">
+                        ▶ JACK IN // PLAY
+                      </button>
+
+                      <!-- CLOUD STATUS -->
+                      <div class="pl-2.5 border-l-2 border-[var(--cp-cyan)] shrink-0">
+                        <div class="text-[9px] steam-preview-mono uppercase tracking-wider text-[var(--cp-text-dim)]">
+                          CLOUD STATUS</div>
+                        <div class="text-[11px] font-bold text-white">Up to date</div>
+                      </div>
+
+                      <!-- LAST PLAYED -->
+                      <div class="pl-2.5 border-l-2 border-[var(--cp-cyan)] shrink-0">
+                        <div class="text-[9px] steam-preview-mono uppercase tracking-wider text-[var(--cp-text-dim)]">
+                          LAST PLAYED</div>
+                        <div class="text-[11px] font-bold text-white">Today</div>
+                      </div>
+
+                      <!-- PLAY TIME -->
+                      <div class="pl-2.5 border-l-2 border-[var(--cp-cyan)] shrink-0">
+                        <div class="text-[9px] steam-preview-mono uppercase tracking-wider text-[var(--cp-text-dim)]">
+                          PLAY TIME</div>
+                        <div class="text-[11px] font-bold text-white">1,133 hours</div>
+                      </div>
+
+                      <!-- ACHIEVEMENTS (Red Accent + Inline Progress Bar) -->
+                      <div class="pl-2.5 border-l-2 border-[var(--cp-red)] shrink-0">
+                        <div class="text-[9px] steam-preview-mono uppercase tracking-wider text-[var(--cp-text-dim)]">
+                          ACHIEVEMENTS</div>
+                        <div class="flex items-center gap-1.5">
+                          <span class="text-[11px] font-bold text-white">68/116</span>
+                          <span class="w-10 h-1.5 bg-[#202634] inline-block overflow-hidden">
+                            <span class="block h-full bg-[var(--cp-red)] w-[58%]"></span>
+                          </span>
+                        </div>
+                      </div>
+
+                      <!-- PLAYERS // 7D PEAK (Yellow Accent) -->
+                      <div class="pl-2.5 border-l-2 border-[var(--cp-yellow)] shrink-0">
+                        <div class="text-[9px] steam-preview-mono uppercase tracking-wider text-[var(--cp-text-dim)]">
+                          PLAYERS // 7D PEAK</div>
+                        <div class="text-[11px] font-bold text-[var(--cp-yellow)]">64,892 // 89,410</div>
+                      </div>
+
+                      <!-- SIZE ON DISK -->
+                      <div class="pl-2.5 border-l-2 border-[var(--cp-cyan)] shrink-0">
+                        <div class="text-[9px] steam-preview-mono uppercase tracking-wider text-[var(--cp-text-dim)]">
+                          SIZE ON DISK</div>
+                        <div class="text-[11px] font-bold text-white">84.62 GB</div>
+                      </div>
+                    </div>
+
+                    <!-- Right Action Square Buttons -->
+                    <div class="flex items-center gap-1 text-xs steam-preview-mono shrink-0">
+                      <span
+                        class="w-7 h-7 flex items-center justify-center bg-[#0d1019] border border-[#232d42] text-[var(--cp-text-dim)] hover:border-[var(--cp-cyan)] hover:text-[var(--cp-cyan)] cursor-pointer"
+                        title="Manage / Properties">⚙</span>
+                      <span
+                        class="w-7 h-7 flex items-center justify-center bg-[#0d1019] border border-[#232d42] text-[var(--cp-text-dim)] hover:border-[var(--cp-cyan)] hover:text-[var(--cp-cyan)] cursor-pointer"
+                        title="Show Game Details">ℹ</span>
+                      <span
+                        class="w-7 h-7 flex items-center justify-center bg-[#0d1019] border border-[var(--cp-cyan)]/60 text-[var(--cp-cyan)] cursor-pointer"
+                        title="Favorite">♥</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Lower Content Grid (Activity & Info Column, switches with gameInfoCol option) -->
+                <div id="preview-game-columns" class="p-3.5 grid grid-cols-12 gap-3 flex-1">
+                  <!-- Main Activity Feed (7 cols) -->
+                  <div
+                    class="col-span-7 p-3 bg-[var(--cp-bg-panel)] border border-[var(--cp-cyan)]/25 cp-clip-br space-y-2 relative">
+                    <div class="flex items-center justify-between border-b border-white/10 pb-1.5">
+                      <span
+                        class="text-[11px] font-bold uppercase tracking-wider steam-preview-head text-[var(--cp-yellow)]">
+                        // NCPD DATATERM FEED
+                      </span>
+                      <span class="text-[10px] steam-preview-mono text-[var(--cp-cyan)]">PATCH_NOTES_2.2</span>
+                    </div>
+                    <p class="text-xs text-[var(--cp-text-main)] font-semibold">
+                      Update 2.2 CrystalCoat™ &amp; Photo Mode Cyberware Overhaul
+                    </p>
+                    <p class="text-[11px] text-[var(--cp-text-dim)] leading-relaxed">
+                      Custom Rayfield paint jobs, Kiroshi optics frame-gen calibration, and Johnny Silverhand passenger
+                      events are now live across Night City.
+                    </p>
+                    <div class="pt-1 flex items-center gap-2 text-[10px] steam-preview-mono">
+                      <span
+                        class="px-2 py-0.5 bg-[var(--cp-red)]/15 border border-[var(--cp-red)]/40 text-[var(--cp-red)]">♥
+                        14,892</span>
+                      <span
+                        class="px-2 py-0.5 bg-[var(--cp-cyan)]/10 border border-[var(--cp-cyan)]/30 text-[var(--cp-cyan)]">💬
+                        1,204 SHARDS</span>
+                    </div>
+                  </div>
+
+                  <!-- Game Info Column (5 cols) -->
+                  <div
+                    class="col-span-5 p-3 bg-[var(--cp-bg-panel)] border border-[var(--cp-yellow)]/30 cp-clip-br space-y-2">
+                    <div class="flex items-center justify-between border-b border-white/10 pb-1.5">
+                      <span
+                        class="text-[11px] font-bold uppercase tracking-wider steam-preview-head text-[var(--cp-cyan)]">
+                        // NOTES &amp; TROPHIES
+                      </span>
+                      <span class="text-[10px] steam-preview-mono text-[var(--cp-yellow)]">58%</span>
+                    </div>
+                    <div class="space-y-2 pt-0.5">
+                      <div class="flex items-center gap-2.5">
+                        <div
+                          class="w-7 h-7 bg-[var(--cp-yellow)]/15 border border-[var(--cp-yellow)] flex items-center justify-center text-xs shrink-0">
+                          🏆</div>
+                        <div>
+                          <div class="text-xs font-bold text-white">The World</div>
+                          <div class="text-[10px] text-[var(--cp-text-dim)]">Complete the main storyline</div>
+                        </div>
+                      </div>
+                      <div class="flex items-center gap-2.5">
+                        <div
+                          class="w-7 h-7 bg-[var(--cp-cyan)]/15 border border-[var(--cp-cyan)] flex items-center justify-center text-xs shrink-0">
+                          ⚡</div>
+                        <div>
+                          <div class="text-xs font-bold text-white">Breathtaking</div>
+                          <div class="text-[10px] text-[var(--cp-text-dim)]">Collect all items belonging to Johnny</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Docked Friends List Panel (Right, Left, or Hidden) -->
+              <div id="preview-friends-dock"
+                class="w-[210px] shrink-0 bg-[#080a11]/95 border-l border-[var(--cp-cyan)]/30 p-2.5 flex flex-col justify-between">
+                <div class="space-y-2.5">
+                  <!-- Self Card -->
+                  <div class="flex items-center justify-between pb-2 border-b border-[var(--cp-cyan)]/20">
+                    <div class="flex items-center gap-2">
+                      <div
+                        class="w-7 h-7 border border-[var(--cp-cyan)] bg-[#0d1019] flex items-center justify-center text-xs font-bold text-[var(--cp-cyan)]">
+                        V</div>
+                      <div>
+                        <div class="text-xs font-bold text-white leading-none">NETRUNNER_V</div>
+                        <div class="text-[10px] steam-preview-mono text-[var(--cp-cyan)] mt-0.5">// ONLINE</div>
+                      </div>
+                    </div>
+                    <span
+                      class="px-1.5 py-0.5 text-[9px] steam-preview-mono border border-[var(--cp-cyan)]/40 text-[var(--cp-cyan)]">CHAT</span>
+                  </div>
+
+                  <!-- Filter Input -->
+                  <input type="text" readonly value="FILTER NETRUNNERS..."
+                    class="w-full bg-[#05060a] border border-[var(--cp-cyan)]/30 px-2 py-1 text-[10px] text-[var(--cp-text-dim)] steam-preview-mono">
+
+                  <!-- In-Game Group -->
+                  <div class="space-y-1.5">
+                    <div class="text-[10px] steam-preview-mono text-[var(--cp-yellow)] flex justify-between">
+                      <span>// IN-GAME (2)</span>
+                      <span>[-]</span>
+                    </div>
+                    <div class="flex items-center gap-2 p-1.5 bg-[#0d1019] border-l-2 border-[#00ff9d]">
+                      <div
+                        class="w-6 h-6 bg-[#00ff9d]/20 border border-[#00ff9d] flex items-center justify-center text-[10px] font-bold text-[#00ff9d] shrink-0">
+                        J</div>
+                      <div class="truncate">
+                        <div class="text-[11px] font-bold text-[#00ff9d] leading-tight">Jackie_Welles</div>
+                        <div class="text-[9px] text-[var(--cp-text-dim)] truncate">Cyberpunk 2077</div>
+                      </div>
+                    </div>
+                    <div class="flex items-center gap-2 p-1.5 bg-[#0d1019] border-l-2 border-[#00ff9d]">
+                      <div
+                        class="w-6 h-6 bg-[#00ff9d]/20 border border-[#00ff9d] flex items-center justify-center text-[10px] font-bold text-[#00ff9d] shrink-0">
+                        P</div>
+                      <div class="truncate">
+                        <div class="text-[11px] font-bold text-[#00ff9d] leading-tight">Panam_Palmer</div>
+                        <div class="text-[9px] text-[var(--cp-text-dim)] truncate">Badlands Convoy</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Online Group -->
+                  <div class="space-y-1.5">
+                    <div class="text-[10px] steam-preview-mono text-[var(--cp-cyan)] flex justify-between">
+                      <span>// ONLINE (2)</span>
+                      <span>[-]</span>
+                    </div>
+                    <div class="flex items-center gap-2 p-1.5 bg-[#0d1019] border-l-2 border-[var(--cp-cyan)]">
+                      <div
+                        class="w-6 h-6 bg-[var(--cp-cyan)]/20 border border-[var(--cp-cyan)] flex items-center justify-center text-[10px] font-bold text-[var(--cp-cyan)] shrink-0">
+                        J</div>
+                      <div class="truncate">
+                        <div class="text-[11px] font-bold text-[var(--cp-cyan)] leading-tight">Judy_Alvarez</div>
+                        <div class="text-[9px] text-[var(--cp-text-dim)]">Editing Braindance</div>
+                      </div>
+                    </div>
+                    <div class="flex items-center gap-2 p-1.5 bg-[#0d1019] border-l-2 border-[var(--cp-cyan)]">
+                      <div
+                        class="w-6 h-6 bg-[var(--cp-cyan)]/20 border border-[var(--cp-cyan)] flex items-center justify-center text-[10px] font-bold text-[var(--cp-cyan)] shrink-0">
+                        V</div>
+                      <div class="truncate">
+                        <div class="text-[11px] font-bold text-[var(--cp-cyan)] leading-tight">Viktor_Vektor</div>
+                        <div class="text-[9px] text-[var(--cp-text-dim)]">Ripperdoc Clinic</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  class="text-[9px] steam-preview-mono text-center text-[var(--cp-text-dim)] pt-2 border-t border-white/10">
+                  DOCKED // 285PX LIVE VIEW
+                </div>
+              </div>
+
+            </div>
+
+            <!-- VIEW 2: STEAM STORE HERO CAROUSEL + TOP RIBBON + SIDE-PEEK CAPSULES + 45x108PX EDGE ARROWS -->
+            <div id="client-view-store"
+              class="hidden min-h-[540px] min-w-[920px] p-5 relative z-10 flex flex-col justify-between">
+              <!-- Top Store Nav Ribbon -->
+              <div id="preview-store-ribbon"
+                class="flex items-center justify-between px-4 py-2 bg-[#0d1019]/95 border border-[var(--cp-yellow)]/45 border-l-[3px] border-l-[var(--cp-yellow)] mb-4">
+                <div class="flex items-center gap-5 text-xs font-bold tracking-wider uppercase steam-preview-head">
+                  <span class="text-[var(--cp-yellow)]">Browse ▾</span>
+                  <span class="text-[var(--cp-text-main)] hover:text-[var(--cp-cyan)] cursor-pointer">Recommendations
+                    ▾</span>
+                  <span class="text-[var(--cp-text-main)] hover:text-[var(--cp-cyan)] cursor-pointer">Categories
+                    ▾</span>
+                  <span class="text-[var(--cp-text-main)] hover:text-[var(--cp-cyan)] cursor-pointer">Hardware ▾</span>
+                  <span class="text-[var(--cp-text-main)] hover:text-[var(--cp-cyan)] cursor-pointer">Ways to Play
+                    ▾</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <div
+                    class="flex items-center gap-2 bg-[#05060a] border border-[var(--cp-cyan)]/40 px-2.5 py-1 text-xs steam-preview-mono text-[var(--cp-text-dim)]">
+                    <span>Search the store</span>
+                    <span class="text-[var(--cp-cyan)]">⌕</span>
+                  </div>
+                  <span class="text-xs font-bold text-white steam-preview-mono">★ Wishlist 19</span>
+                </div>
+              </div>
+
+              <!-- Featured & Recommended Header -->
+              <div class="flex items-center justify-between mb-2 px-4">
+                <span
+                  class="text-sm font-bold uppercase tracking-wider steam-preview-head text-[var(--cp-yellow)] border-l-[3px] border-[var(--cp-red)] pl-2.5">Featured
+                  &amp; Recommended</span>
+                <span
+                  class="px-2.5 py-1 bg-[var(--cp-yellow)] text-black font-bold text-[10px] uppercase tracking-wider cp-clip-btn">Send
+                  a Gift Card</span>
+              </div>
+
+              <!-- Store Carousel Container with Left/Right Side-Peek Capsules & Unified 45x108px Cyan-Bordered Edge Arrows -->
+              <div class="relative flex items-stretch justify-center gap-3 my-auto">
+
+                <!-- Left Side-Peek Capsule (Only the 45x108px inner arrow box highlights on hover, never covering the peek image) -->
+                <div
+                  class="group w-[150px] shrink-0 bg-[#0b0e17] border border-[var(--cp-cyan)]/25 relative overflow-hidden flex items-center justify-end cursor-pointer"
+                  style="background: radial-gradient(circle at 40% 50%, rgba(0, 240, 255, 0.12), #06080d 90%);">
+                  <div
+                    class="absolute inset-0 p-3 flex flex-col justify-end opacity-40 group-hover:opacity-65 transition-opacity">
+                    <span class="text-[10px] steam-preview-mono text-[var(--cp-cyan)]">PREVIOUS SLIDE</span>
+                    <span class="text-xs font-bold text-white steam-preview-head">GHOST OF TSUSHIMA</span>
+                  </div>
+                  <!-- 45x108px Arrow Box (Right Edge) -->
+                  <div
+                    class="relative z-10 w-[45px] h-[108px] flex items-center justify-center bg-[#0b0e17]/92 border border-[var(--cp-cyan)] shadow-[0_0_10px_rgba(0,240,255,0.4)] text-[#e6f1ff]/80 group-hover:bg-[var(--cp-yellow)] group-hover:border-[var(--cp-yellow)] group-hover:text-[#050608] group-hover:shadow-[0_0_14px_var(--cp-yellow)] transition-all">
+                    <svg class="w-[20px] h-[40px] fill-current rotate-180" viewBox="0 0 50 100">
+                      <polygon points="0,0.093 0,25.702 24.323,50.026 0,74.349 0,99.955 49.929,50.026" />
+                    </svg>
+                  </div>
+                </div>
+
+                <!-- Main Featured Store Capsule -->
+                <div
+                  class="flex-1 grid grid-cols-12 bg-[#0d1019] border border-[var(--cp-cyan)]/45 cp-clip-br overflow-hidden shadow-2xl">
+                  <div class="col-span-8 p-6 flex flex-col justify-end min-h-[290px] relative"
+                    style="background: radial-gradient(circle at 70% 30%, rgba(0, 240, 255, 0.22), rgba(255, 0, 85, 0.18) 55%, #07080d 95%);">
+                    <div
+                      class="absolute top-3 left-3 px-2 py-0.5 bg-[var(--cp-yellow)] text-black font-bold text-[10px] steam-preview-mono uppercase">
+                      TOP SELLER // NIGHT CITY
+                    </div>
+                    <h4 class="text-2xl font-black uppercase steam-preview-head text-white">CYBERPUNK 2077: ULTIMATE
+                      EDITION</h4>
+                    <p class="text-xs text-[var(--cp-text-dim)] mt-1">Includes Phantom Liberty spy-thriller expansion
+                      &amp; Update 2.2</p>
+                  </div>
+                  <div
+                    class="col-span-4 p-4 flex flex-col justify-between bg-[#090c14] border-l border-[var(--cp-cyan)]/25">
+                    <div>
+                      <div class="text-sm font-bold text-white steam-preview-head">Cyberpunk 2077</div>
+                      <div class="grid grid-cols-2 gap-1.5 mt-2">
+                        <div class="h-12 bg-[#131824] border border-[var(--cp-cyan)]/25"></div>
+                        <div class="h-12 bg-[#131824] border border-[var(--cp-cyan)]/25"></div>
+                        <div class="h-12 bg-[#131824] border border-[var(--cp-cyan)]/25"></div>
+                        <div class="h-12 bg-[#131824] border border-[var(--cp-cyan)]/25"></div>
+                      </div>
+                      <div class="mt-3 text-xs text-[var(--cp-green)] font-semibold">Overwhelmingly Positive</div>
+                    </div>
+                    <div class="flex items-center justify-between pt-2 border-t border-white/10">
+                      <span
+                        class="px-1.5 py-0.5 bg-[var(--cp-red)] text-white font-bold text-xs steam-preview-mono">-50%</span>
+                      <span class="text-xs font-bold text-[var(--cp-yellow)] steam-preview-mono">€$ 29.99</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Right Side-Peek Capsule (Only the 45x108px inner arrow box highlights on hover, never covering the peek image) -->
+                <div
+                  class="group w-[150px] shrink-0 bg-[#0b0e17] border border-[var(--cp-cyan)]/25 relative overflow-hidden flex items-center justify-start cursor-pointer"
+                  style="background: radial-gradient(circle at 60% 50%, rgba(255, 0, 85, 0.14), #06080d 90%);">
+                  <!-- 45x108px Arrow Box (Left Edge) -->
+                  <div
+                    class="relative z-10 w-[45px] h-[108px] flex items-center justify-center bg-[#0b0e17]/92 border border-[var(--cp-cyan)] shadow-[0_0_10px_rgba(0,240,255,0.4)] text-[#e6f1ff]/80 group-hover:bg-[var(--cp-yellow)] group-hover:border-[var(--cp-yellow)] group-hover:text-[#050608] group-hover:shadow-[0_0_14px_var(--cp-yellow)] transition-all">
+                    <svg class="w-[20px] h-[40px] fill-current" viewBox="0 0 50 100">
+                      <polygon points="0,0.093 0,25.702 24.323,50.026 0,74.349 0,99.955 49.929,50.026" />
+                    </svg>
+                  </div>
+                  <div
+                    class="absolute inset-0 p-3 flex flex-col justify-end text-right opacity-40 group-hover:opacity-65 transition-opacity">
+                    <span class="text-[10px] steam-preview-mono text-[var(--cp-yellow)]">NEXT SLIDE</span>
+                    <span class="text-xs font-bold text-white steam-preview-head">ELDEN RING</span>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Carousel Pagination Thumbs -->
+              <div class="flex items-center justify-center gap-1.5 mt-4">
+                <span class="w-5 h-2 bg-[var(--cp-yellow)] shadow-[0_0_8px_var(--cp-yellow)]"></span>
+                <span class="w-5 h-2 bg-[var(--cp-cyan)]/30"></span>
+                <span class="w-5 h-2 bg-[var(--cp-cyan)]/30"></span>
+                <span class="w-5 h-2 bg-[var(--cp-cyan)]/30"></span>
+                <span class="w-5 h-2 bg-[var(--cp-cyan)]/30"></span>
+                <span class="w-5 h-2 bg-[var(--cp-cyan)]/30"></span>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- COMPLETE MULTI-FILE THEME CODE GENERATOR PANEL -->
+        <section class="rounded-lg border border-[#1b2436] bg-[#090c14] overflow-hidden shadow-lg w-full">
+          <div
+            class="flex flex-wrap items-center justify-between gap-2 px-4 py-3 border-b border-[#1b2436] bg-[#07090f]">
+            <div class="flex flex-wrap items-center gap-1.5">
+              <span class="text-xs font-mono uppercase tracking-wider font-semibold text-[#fcee09] mr-2">
+                05 // Theme Code Compiler:
+              </span>
+              <button onclick="switchCodeTab('allcss')" id="tab-allcss"
+                class="px-2.5 py-1 text-xs font-mono rounded bg-[#fcee09] text-black font-bold transition-all cursor-pointer">
+                All-in-One CSS
+              </button>
+              <button onclick="switchCodeTab('librarycss')" id="tab-librarycss"
+                class="px-2.5 py-1 text-xs font-mono rounded bg-[#0d121f] text-[#7a8ba8] hover:text-white transition-all cursor-pointer">
+                libraryroot.custom.css
+              </button>
+              <button onclick="switchCodeTab('webkitcss')" id="tab-webkitcss"
+                class="px-2.5 py-1 text-xs font-mono rounded bg-[#0d121f] text-[#7a8ba8] hover:text-white transition-all cursor-pointer">
+                webkit.css
+              </button>
+              <button onclick="switchCodeTab('friendscss')" id="tab-friendscss"
+                class="px-2.5 py-1 text-xs font-mono rounded bg-[#0d121f] text-[#7a8ba8] hover:text-white transition-all cursor-pointer">
+                friends.custom.css
+              </button>
+              <button onclick="switchCodeTab('optionscss')" id="tab-optionscss"
+                class="px-2.5 py-1 text-xs font-mono rounded bg-[#0d121f] text-[#7a8ba8] hover:text-white transition-all cursor-pointer">
+                options/*.css
+              </button>
+              <button onclick="switchCodeTab('libraryjs')" id="tab-libraryjs"
+                class="px-2.5 py-1 text-xs font-mono rounded bg-[#0d121f] text-[#7a8ba8] hover:text-white transition-all cursor-pointer">
+                libraryroot.custom.js
+              </button>
+              <button onclick="switchCodeTab('skinjson')" id="tab-skinjson"
+                class="px-2.5 py-1 text-xs font-mono rounded bg-[#0d121f] text-[#7a8ba8] hover:text-white transition-all cursor-pointer">
+                skin.json
+              </button>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <button onclick="copyActiveCode()" id="btn-copy"
+                class="px-3 py-1.5 text-xs font-mono font-semibold rounded bg-[#00f0ff]/15 text-[#00f0ff] border border-[#00f0ff]/40 hover:bg-[#00f0ff] hover:text-black transition-all cursor-pointer">
+                📋 Copy Current Tab
+              </button>
+              <button onclick="downloadActiveCode()"
+                class="px-3 py-1.5 text-xs font-mono font-semibold rounded bg-[#fcee09] text-black hover:opacity-90 transition-all cursor-pointer">
+                ⬇ Download Tab File
+              </button>
+            </div>
+          </div>
+
+          <div class="relative">
+            <pre
+              class="p-4 text-xs font-mono leading-relaxed overflow-x-auto max-h-[380px] bg-[#04060a] text-[#c7d6f0] select-all"><code id="code-output"></code></pre>
+          </div>
+        </section>
+
+        <!-- 06 // COMPLETE ON-PAGE INSTRUCTIONS, FILE ARCHITECTURE & SETUP MANUAL -->
+        <section id="studio-instructions"
+          class="rounded-lg border border-[#1b2436] bg-[#090c14] p-5 shadow-lg space-y-4 w-full">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-[#1b2436] pb-3">
+            <div class="flex items-center gap-2.5">
+              <span class="w-2.5 h-2.5 bg-[#fcee09] inline-block shadow-[0_0_8px_#fcee09]"></span>
+              <h2 class="text-sm font-mono uppercase tracking-widest font-bold text-white">
+                06 // Complete Instructions, File Architecture &amp; Millennium Setup Guide
+              </h2>
+            </div>
+            <span class="text-[11px] font-mono text-[#00f0ff]">NIGHT CITY NETRUNNER MANUAL // v2.2.0</span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 text-xs leading-relaxed">
+
+            <!-- Card 1: Using the Studio & Fullscreen Mode -->
+            <div class="p-3.5 rounded border border-[#1b2436] bg-[#06080e] space-y-2">
+              <div class="font-mono font-bold text-[#fcee09] uppercase tracking-wider flex items-center gap-1.5">
+                <span>01.</span> Studio &amp; Fullscreen Controls
+              </div>
+              <ul class="space-y-1.5 text-[#7a8ba8] list-disc list-inside">
+                <li><strong class="text-[#e6f1ff]">Fullscreen Mode (<code
+                      class="text-[#fcee09]">⛶ Fullscreen</code>)</strong>: Click the top-right yellow button (or press
+                  <kbd class="px-1 py-0.5 bg-black border border-[#1b2436] rounded text-[#e6f1ff]">F11</kbd>) to expand
+                  the studio across your entire monitor.
+                </li>
+                <li><strong class="text-[#e6f1ff]">Expand Viewport (<code
+                      class="text-[#00f0ff]">◀ Hide Controls</code>)</strong>: Collapses the left customizer sidebar so
+                  the Steam preview stretches to 100% width with zero cutoff.</li>
+                <li><strong class="text-[#e6f1ff]">Viewport Switcher</strong>: Toggle between <strong>LIBRARY // GAME
+                    PAGE</strong>, <strong>STORE // HERO CAROUSEL</strong> (hover the side-peek capsules to preview the
+                  <code class="text-[#fcee09]">45×108px</code> arrow highlight), and <strong>TOGGLE TOP MENU</strong>.
+                </li>
+                <li><strong class="text-[#e6f1ff]">Live Code Compilation</strong>: Every color, slider, and layout
+                  button automatically recompiles all 7 tabs in real time.</li>
+              </ul>
+            </div>
+
+            <!-- Card 2: Millennium Theme Directory & File Map -->
+            <div class="p-3.5 rounded border border-[#1b2436] bg-[#06080e] space-y-2">
+              <div class="font-mono font-bold text-[#00f0ff] uppercase tracking-wider flex items-center gap-1.5">
+                <span>02.</span> Millennium File Architecture
+              </div>
+              <p class="text-[#7a8ba8]">
+                Place all theme files inside:<br>
+                <code
+                  class="text-[#e6f1ff] font-mono bg-black px-1.5 py-0.5 rounded block mt-1 break-all border border-[#1b2436]">C:\Program Files (x86)\Steam\millennium\themes\Cyberpunk2077\</code>
+              </p>
+              <ul class="space-y-1 text-[#7a8ba8] list-disc list-inside pt-1">
+                <li><code class="text-[#00f0ff] font-mono">skin.json</code> — Theme manifest &amp; UI toggles</li>
+                <li><code class="text-[#00f0ff] font-mono">libraryroot.custom.css</code> — Main Steam Desktop &amp;
+                  Library HUD</li>
+                <li><code class="text-[#00f0ff] font-mono">libraryroot.custom.js</code> — Docked Friends + Play Bar
+                  telemetry</li>
+                <li><code class="text-[#00f0ff] font-mono">webkit.css</code> — Store, Community, Carousel &amp; Edge
+                  Arrows</li>
+                <li><code class="text-[#00f0ff] font-mono">friends.custom.css</code> — Standalone Friends &amp; Chat
+                  styling</li>
+                <li><code class="text-[#00f0ff] font-mono">options/*.css</code> — Modular layout option stylesheets</li>
+              </ul>
+            </div>
+
+            <!-- Card 3: Applying & Hot-Reloading in Steam -->
+            <div class="p-3.5 rounded border border-[#1b2436] bg-[#06080e] space-y-2">
+              <div class="font-mono font-bold text-[#ff0055] uppercase tracking-wider flex items-center gap-1.5">
+                <span>03.</span> Applying &amp; Hot-Reloading
+              </div>
+              <ol class="space-y-1.5 text-[#7a8ba8] list-decimal list-inside">
+                <li>In Steam, open <strong class="text-[#e6f1ff]">Steam → Millennium → Themes</strong> and select
+                  <strong class="text-[#fcee09]">Cyberpunk 2077 // Night City HUD</strong>.
+                </li>
+                <li>Click the <strong class="text-[#e6f1ff]">⚙ Gear / Edit</strong> icon next to the theme in Millennium
+                  to toggle <em>Games Panel Position</em>, <em>Docked Friends Panel</em>, <em>Gamepage Info Column</em>,
+                  or <em>Store Hero Ribbon</em>.</li>
+                <li><strong class="text-[#e6f1ff]">Hot-Reload CSS/JS</strong>: Click inside the Steam Library or Store
+                  window and press <kbd
+                    class="px-1.5 py-0.5 bg-black border border-[#1b2436] rounded text-[#fcee09]">Ctrl + R</kbd> (or
+                  click the Store URL bar refresh icon) to apply edits immediately.</li>
+                <li><strong class="text-[#e6f1ff]">Resize Docked Friends</strong>: Drag the vertical cyan divider on the
+                  inner edge of the Docked Friends panel to resize its width (`180px`–`500px`).</li>
+              </ol>
+            </div>
+
+            <!-- Card 4: Sharing, Privacy & Attribution -->
+            <div class="p-3.5 rounded border border-[#1b2436] bg-[#06080e] space-y-2">
+              <div class="font-mono font-bold text-[#00ff9d] uppercase tracking-wider flex items-center gap-1.5">
+                <span>04.</span> Sharing, Privacy &amp; Clean-Room Info
+              </div>
+              <ul class="space-y-1.5 text-[#7a8ba8] list-disc list-inside">
+                <li><strong class="text-[#e6f1ff]">100% Zero PII</strong>: No SteamIDs, account names, tokens, or local
+                  user paths are stored anywhere in the theme. Friends list and player telemetry are queried dynamically
+                  at runtime on each user's client.</li>
+                <li><strong class="text-[#e6f1ff]">Share with Friends</strong>: Zip the <code
+                    class="text-[#e6f1ff] font-mono">Cyberpunk2077</code> folder and have your friend extract it into
+                  <code class="text-[#e6f1ff] font-mono">Steam/millennium/themes/Cyberpunk2077</code>.
+                </li>
+                <li><strong class="text-[#e6f1ff]">Licensing</strong>: Clean-room original CSS/JS code using SIL Open
+                  Font License (OFL) Google Fonts (<code class="text-[#e6f1ff]">Orbitron</code>, <code
+                    class="text-[#e6f1ff]">Rajdhani</code>, <code class="text-[#e6f1ff]">Share Tech Mono</code>).
+                  Unofficial fan-made theme; not affiliated with CD PROJEKT RED or Valve.</li>
+              </ul>
+            </div>
+
+          </div>
+        </section>
+
+      </main>
+    </div>
+
+  </div>
+
+  <script>
+    const state = {
+      activeTab: 'allcss',
+      preset: 'netrunner',
+      yellow: '#fcee09',
+      cyan: '#00f0ff',
+      red: '#ff0055',
+      bgDark: '#07080d',
+      bgPanel: '#0d1019',
+      bgCard: '#131824',
+      cut: 10,
+      glow: 12,
+      scan: 25,
+      storeMaxWidth: 1200,
+      font: 'Orbitron',
+      gamesSidebar: 'left',
+      friendsDock: 'right',
+      gameInfoCol: 'right',
+      heroRibbon: 'show'
+    };
+
+    const presets = {
+      netrunner: {
+        yellow: '#fcee09',
+        cyan: '#00f0ff',
+        red: '#ff0055',
+        bgDark: '#07080d',
+        bgPanel: '#0d1019',
+        bgCard: '#131824',
+        cut: 10,
+        glow: 12,
+        scan: 25,
+        storeMaxWidth: 1200,
+        font: 'Orbitron'
+      },
+      arasaka: {
+        yellow: '#ff003c',
+        cyan: '#e6f1ff',
+        red: '#ff003c',
+        bgDark: '#050507',
+        bgPanel: '#0b0b10',
+        bgCard: '#141118',
+        cut: 8,
+        glow: 10,
+        scan: 15,
+        storeMaxWidth: 1200,
+        font: 'Orbitron'
+      },
+      mox: {
+        yellow: '#ff2a85',
+        cyan: '#00f0ff',
+        red: '#bd00ff',
+        bgDark: '#090612',
+        bgPanel: '#120b22',
+        bgCard: '#1b1130',
+        cut: 12,
+        glow: 18,
+        scan: 30,
+        storeMaxWidth: 1200,
+        font: 'Chakra Petch'
+      },
+      militech: {
+        yellow: '#00ff9d',
+        cyan: '#fcee09',
+        red: '#ff5500',
+        bgDark: '#060a08',
+        bgPanel: '#0c1410',
+        bgCard: '#121f18',
+        cut: 6,
+        glow: 8,
+        scan: 40,
+        storeMaxWidth: 1200,
+        font: 'Share Tech Mono'
+      }
+    };
+
+    function hexToRgb(hex) {
+      const clean = hex.replace('#', '');
+      const num = parseInt(clean, 16);
+      return `${(num >> 16) & 255}, ${(num >> 8) & 255}, ${num & 255}`;
+    }
+
+    function applyPreset(name) {
+      const p = presets[name];
+      if (!p) return;
+      state.preset = name;
+
+      document.getElementById('inp-yellow').value = p.yellow;
+      document.getElementById('inp-cyan').value = p.cyan;
+      document.getElementById('inp-red').value = p.red;
+      document.getElementById('inp-bg').value = p.bgDark;
+      document.getElementById('inp-cut').value = p.cut;
+      document.getElementById('inp-glow').value = p.glow;
+      document.getElementById('inp-scan').value = p.scan;
+      document.getElementById('inp-storew').value = p.storeMaxWidth;
+      document.getElementById('inp-font').value = p.font;
+
+      document.querySelectorAll('.preset-btn').forEach(btn => {
+        btn.className = 'preset-btn px-3 py-1.5 text-xs font-semibold rounded border border-[#1b2436] bg-[#0d121f] text-[#e6f1ff] transition-all';
+      });
+      const activeBtn = document.getElementById(`preset-${name}`);
+      if (activeBtn) {
+        activeBtn.className = 'preset-btn px-3 py-1.5 text-xs font-semibold rounded border border-[#fcee09] bg-[#fcee09]/15 text-[#fcee09] transition-all';
+      }
+
+      updateTheme();
+    }
+
+    function setLayoutOption(key, val) {
+      state[key] = val;
+
+      if (key === 'gamesSidebar') {
+        const sb = document.getElementById('preview-games-sidebar');
+        sb.style.order = val === 'right' ? '2' : '0';
+        document.getElementById('btn-games-left').className = val === 'left'
+          ? 'px-2.5 py-1 font-mono text-[11px] bg-[#00f0ff]/20 text-[#00f0ff] border-r border-[#1b2436]'
+          : 'px-2.5 py-1 font-mono text-[11px] bg-[#0d121f] text-[#7a8ba8] border-r border-[#1b2436]';
+        document.getElementById('btn-games-right').className = val === 'right'
+          ? 'px-2.5 py-1 font-mono text-[11px] bg-[#00f0ff]/20 text-[#00f0ff]'
+          : 'px-2.5 py-1 font-mono text-[11px] bg-[#0d121f] text-[#7a8ba8]';
+      }
+
+      if (key === 'friendsDock') {
+        const fd = document.getElementById('preview-friends-dock');
+        if (val === 'hide') {
+          fd.classList.add('hidden');
+        } else {
+          fd.classList.remove('hidden');
+          fd.style.order = val === 'left' ? '-1' : '3';
+        }
+        ['right', 'left', 'hide'].forEach(opt => {
+          const btn = document.getElementById(`btn-friends-${opt}`);
+          btn.className = val === opt
+            ? 'px-2.5 py-1 font-mono text-[11px] bg-[#00f0ff]/20 text-[#00f0ff] border-r border-[#1b2436]'
+            : 'px-2.5 py-1 font-mono text-[11px] bg-[#0d121f] text-[#7a8ba8] border-r border-[#1b2436]';
+        });
+      }
+
+      if (key === 'gameInfoCol') {
+        const cols = document.getElementById('preview-game-columns');
+        cols.children[1].style.order = val === 'left' ? '-1' : '1';
+        document.getElementById('btn-info-right').className = val === 'right'
+          ? 'px-2.5 py-1 font-mono text-[11px] bg-[#00f0ff]/20 text-[#00f0ff] border-r border-[#1b2436]'
+          : 'px-2.5 py-1 font-mono text-[11px] bg-[#0d121f] text-[#7a8ba8] border-r border-[#1b2436]';
+        document.getElementById('btn-info-left').className = val === 'left'
+          ? 'px-2.5 py-1 font-mono text-[11px] bg-[#00f0ff]/20 text-[#00f0ff]'
+          : 'px-2.5 py-1 font-mono text-[11px] bg-[#0d121f] text-[#7a8ba8]';
+      }
+
+      if (key === 'heroRibbon') {
+        const rb = document.getElementById('preview-store-ribbon');
+        if (val === 'hide') rb.classList.add('hidden');
+        else rb.classList.remove('hidden');
+        document.getElementById('btn-ribbon-show').className = val === 'show'
+          ? 'px-2.5 py-1 font-mono text-[11px] bg-[#00f0ff]/20 text-[#00f0ff] border-r border-[#1b2436]'
+          : 'px-2.5 py-1 font-mono text-[11px] bg-[#0d121f] text-[#7a8ba8] border-r border-[#1b2436]';
+        document.getElementById('btn-ribbon-hide').className = val === 'hide'
+          ? 'px-2.5 py-1 font-mono text-[11px] bg-[#00f0ff]/20 text-[#00f0ff]'
+          : 'px-2.5 py-1 font-mono text-[11px] bg-[#0d121f] text-[#7a8ba8]';
+      }
+
+      renderCodeOutput();
+    }
+
+    function switchClientView(view) {
+      const lib = document.getElementById('client-view-library');
+      const store = document.getElementById('client-view-store');
+      const btnLib = document.getElementById('view-btn-library');
+      const btnStore = document.getElementById('view-btn-store');
+      const navLib = document.getElementById('nav-tab-library');
+      const navStore = document.getElementById('nav-tab-store');
+
+      if (view === 'store') {
+        lib.classList.add('hidden');
+        store.classList.remove('hidden');
+        btnStore.className = 'px-2.5 py-0.5 rounded bg-[#fcee09] text-black font-bold';
+        btnLib.className = 'px-2.5 py-0.5 rounded bg-[#111726] text-[#7a8ba8] hover:text-white';
+        navStore.className = 'px-3.5 py-1 bg-[var(--cp-yellow)] text-black cp-clip-br shadow-[0_0_12px_var(--cp-yellow)] cursor-pointer';
+        navLib.className = 'px-3 py-1 text-[var(--cp-text-dim)] hover:text-white cursor-pointer transition-colors';
+      } else {
+        store.classList.add('hidden');
+        lib.classList.remove('hidden');
+        btnLib.className = 'px-2.5 py-0.5 rounded bg-[#fcee09] text-black font-bold';
+        btnStore.className = 'px-2.5 py-0.5 rounded bg-[#111726] text-[#7a8ba8] hover:text-white';
+        navLib.className = 'px-3.5 py-1 bg-[var(--cp-yellow)] text-black cp-clip-br shadow-[0_0_12px_var(--cp-yellow)] cursor-pointer';
+        navStore.className = 'px-3 py-1 text-[var(--cp-text-dim)] hover:text-white cursor-pointer transition-colors';
+      }
+    }
+
+    function toggleTopDropdownPreview() {
+      const dd = document.getElementById('preview-top-dropdown');
+      dd.classList.toggle('hidden');
+    }
+
+    function updateTheme() {
+      state.yellow = document.getElementById('inp-yellow').value;
+      state.cyan = document.getElementById('inp-cyan').value;
+      state.red = document.getElementById('inp-red').value;
+      state.bgDark = document.getElementById('inp-bg').value;
+      state.cut = parseInt(document.getElementById('inp-cut').value, 10);
+      state.glow = parseInt(document.getElementById('inp-glow').value, 10);
+      state.scan = parseInt(document.getElementById('inp-scan').value, 10);
+      state.storeMaxWidth = parseInt(document.getElementById('inp-storew').value, 10);
+      state.font = document.getElementById('inp-font').value;
+
+      document.getElementById('lbl-yellow').textContent = state.yellow.toUpperCase();
+      document.getElementById('lbl-cyan').textContent = state.cyan.toUpperCase();
+      document.getElementById('lbl-red').textContent = state.red.toUpperCase();
+      document.getElementById('lbl-bg').textContent = state.bgDark.toUpperCase();
+      document.getElementById('lbl-cut').textContent = `${state.cut}px`;
+      document.getElementById('lbl-glow').textContent = `${state.glow}px`;
+      document.getElementById('lbl-scan').textContent = `${state.scan}%`;
+      document.getElementById('lbl-storew').textContent = `${state.storeMaxWidth}px`;
+
+      const root = document.documentElement;
+      root.style.setProperty('--cp-yellow', state.yellow);
+      root.style.setProperty('--cp-cyan', state.cyan);
+      root.style.setProperty('--cp-red', state.red);
+      root.style.setProperty('--cp-bg-dark', state.bgDark);
+      root.style.setProperty('--cp-cut', `${state.cut}px`);
+      root.style.setProperty('--cp-glow', `${state.glow}px`);
+      root.style.setProperty('--cp-scanline', (state.scan / 100).toFixed(2));
+      root.style.setProperty('--cp-font-head', `'${state.font}', sans-serif`);
+
+      renderCodeOutput();
+    }
+
+    function generateLibraryCSS() {
+      const yRgb = hexToRgb(state.yellow);
+      const cRgb = hexToRgb(state.cyan);
+      const rRgb = hexToRgb(state.red);
+      const scanAlpha = ((state.scan / 100) * 0.08).toFixed(3);
+
+      return `/* ==========================================================================
+   CYBERPUNK 2077 // NIGHT CITY NETRUNNER HUD FOR STEAM (MILLENNIUM)
+   File: libraryroot.custom.css (Main Steam Desktop Client & Library UI)
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Orbitron:wght@600;700;900&family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap');
+
+:root {
+  /* Core Cyberpunk 2077 Palette */
+  --cp-yellow: ${state.yellow};
+  --cp-yellow-rgb: ${yRgb};
+  --cp-cyan: ${state.cyan};
+  --cp-cyan-rgb: ${cRgb};
+  --cp-red: ${state.red};
+  --cp-red-rgb: ${rRgb};
+  --cp-green: #00ff9d;
+
+  /* Void & Chassis Surfaces */
+  --cp-bg-void: ${state.bgDark};
+  --cp-bg-panel: ${state.bgPanel};
+  --cp-bg-card: ${state.bgCard};
+  --cp-bg-hover: rgba(${cRgb}, 0.12);
+  --cp-bg-active: rgba(${yRgb}, 0.18);
+
+  /* Typography & HUD Geometry */
+  --cp-text-primary: #e6f1ff;
+  --cp-text-muted: #7a8ba8;
+  --cp-font-display: '${state.font}', 'Rajdhani', sans-serif;
+  --cp-font-ui: 'Rajdhani', 'Segoe UI', sans-serif;
+  --cp-font-mono: 'Share Tech Mono', monospace;
+  --cp-cut: ${state.cut}px;
+  --cp-glow: ${state.glow}px;
+  --cp-border-cyan: 1px solid rgba(${cRgb}, 0.38);
+  --cp-border-yellow: 1px solid rgba(${yRgb}, 0.65);
+
+  /* Layout Docking Variables (Controlled via options/*.css) */
+  --cp-sidebar-order: ${state.gamesSidebar === 'right' ? '2' : '0'};
+  --cp-friends-dock-width: 285px;
+  --cp-friends-dock-display: ${state.friendsDock === 'hide' ? 'none' : 'flex'};
+  --cp-friends-dock-order: ${state.friendsDock === 'left' ? '-1' : '99'};
+  --cp-gamepage-rightcol-order: ${state.gameInfoCol === 'left' ? '-1' : '2'};
+}
+
+/* 1. GLOBAL SHELL & KIROSHI SCANLINE OVERLAY */
+body, html, #react_root, .MainBrowserWindow {
+  background-color: var(--cp-bg-void) !important;
+  color: var(--cp-text-primary) !important;
+  font-family: var(--cp-font-ui) !important;
+}
+
+body.DesktopUI::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 99999;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0px,
+    transparent 2px,
+    rgba(${cRgb}, ${scanAlpha}) 3px,
+    rgba(0, 0, 0, ${(state.scan / 100 * 0.22).toFixed(3)}) 4px
+  );
+}
+
+/* 2. TOP HEADER BAR & NAVIGATION TABS */
+div[class*="steamdesktop_TopBar_"],
+div[class*="titlebarcontrols_"] {
+  background: linear-gradient(180deg, #040508 0%, var(--cp-bg-void) 100%) !important;
+  border-bottom: 1px solid rgba(${cRgb}, 0.35) !important;
+}
+
+div[class*="supernav_SuperNavMenu_"] {
+  font-family: var(--cp-font-display) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+}
+
+div[class*="supernav_Selected_"] {
+  background: var(--cp-yellow) !important;
+  color: #050608 !important;
+  padding: 4px 12px !important;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%);
+  box-shadow: 0 0 var(--cp-glow) rgba(${yRgb}, 0.55) !important;
+}
+
+/* 3. TOP BAR DROPDOWN MENUS (Full 4-Sided Cyan Inset Border & Auto-Fit Text Width) */
+html._14wqdluDeDnnEcg3OSLEmd body::before {
+  content: "" !important;
+  position: fixed !important;
+  inset: 0 !important;
+  pointer-events: none !important;
+  z-index: 99998 !important;
+  box-shadow:
+    inset 0 0 0 1px var(--cp-cyan),
+    inset 0 0 10px rgba(${cRgb}, 0.18) !important;
+}
+
+html._14wqdluDeDnnEcg3OSLEmd body.DesktopUI,
+html._14wqdluDeDnnEcg3OSLEmd body.DesktopUI #popup_target,
+body.DesktopUI .PP7LM0Ow1K5qkR8WElLpt {
+  background: var(--cp-bg-panel) !important;
+  border: none !important;
+  box-shadow:
+    inset 0 0 0 1px var(--cp-cyan),
+    inset 0 0 10px rgba(${cRgb}, 0.18) !important;
+  padding: 6px !important;
+  min-width: unset !important;
+  box-sizing: border-box !important;
+}
+
+body.DesktopUI .PP7LM0Ow1K5qkR8WElLpt > div,
+body.DesktopUI ._2jXHP0742MyApMUVUM8IFn,
+body.DesktopUI ._2uiDecKkKjAq7nimy3uLhG {
+  white-space: nowrap !important;
+  padding: 6px 14px !important;
+  font-family: var(--cp-font-ui) !important;
+  color: var(--cp-text-primary) !important;
+}
+
+body.DesktopUI ._2jXHP0742MyApMUVUM8IFn:hover,
+body.DesktopUI ._2uiDecKkKjAq7nimy3uLhG:hover {
+  background: rgba(${cRgb}, 0.16) !important;
+  color: var(--cp-yellow) !important;
+}
+
+/* 4. LEFT GAME LIST SIDEBAR & DOCKING ORDER */
+._9sPoVBFyE_vE87mnZJ5aB {
+  order: var(--cp-sidebar-order, 0) !important;
+  background: linear-gradient(180deg, var(--cp-bg-void) 0%, var(--cp-bg-panel) 100%) !important;
+  border-right: var(--cp-border-cyan) !important;
+}
+
+div[class*="gamelistentry_Container_"] {
+  border-left: 3px solid transparent !important;
+  transition: all 120ms ease !important;
+  font-weight: 600 !important;
+}
+
+div[class*="gamelistentry_Container_"]:hover {
+  background: var(--cp-bg-hover) !important;
+  border-left-color: var(--cp-cyan) !important;
+  color: #ffffff !important;
+}
+
+div[class*="gamelistentry_Selected_"] {
+  background: linear-gradient(90deg, var(--cp-bg-active) 0%, transparent 95%) !important;
+  border-left: 3px solid var(--cp-yellow) !important;
+  color: var(--cp-yellow) !important;
+}
+
+/* 5. GAME PAGE PLAY BAR & TELEMETRY STATS (ACHIEVEMENTS, PLAYERS // 7D PEAK, SIZE ON DISK) */
+div[class*="appactionbutton_ButtonChild_"] {
+  background: var(--cp-yellow) !important;
+  color: #050608 !important;
+  font-family: var(--cp-font-display) !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  border: none !important;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--cp-cut)), calc(100% - var(--cp-cut)) 100%, 0 100%) !important;
+  box-shadow: 0 0 var(--cp-glow) rgba(${yRgb}, 0.5) !important;
+}
+
+/* Play Bar Stats Container: allow wrapping without vertical clip on docked/narrow layouts */
+._3Y87YQY56ZCOqhgcZFaDc5 ._1YbtIWcfkQJOysLXQbwzRf,
+div.NarrowRightPanel ._3Y87YQY56ZCOqhgcZFaDc5 ._1YbtIWcfkQJOysLXQbwzRf {
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+._3Y87YQY56ZCOqhgcZFaDc5 ._1mDAVT4sTzFRwJtlKCw2Ws,
+._39RheXihcN6H2k2muQTjkI ._1YbtIWcfkQJOysLXQbwzRf ._1mDAVT4sTzFRwJtlKCw2Ws {
+  display: flex !important;
+  align-items: center !important;
+  gap: 18px !important;
+  row-gap: 8px !important;
+  flex-wrap: wrap !important;
+  opacity: 1 !important;
+  width: auto !important;
+  transform: none !important;
+}
+
+/* Play Bar Stat Columns with 2px Vertical Accent Bar */
+._3Y87YQY56ZCOqhgcZFaDc5 ._1mDAVT4sTzFRwJtlKCw2Ws ._1dg8hJMsAYISbeQUxcCJcv,
+._3Y87YQY56ZCOqhgcZFaDc5 ._1mDAVT4sTzFRwJtlKCw2Ws ._1kiZKVbDe-9Ikootk57kpA,
+._39RheXihcN6H2k2muQTjkI ._1YbtIWcfkQJOysLXQbwzRf ._1mDAVT4sTzFRwJtlKCw2Ws ._1dg8hJMsAYISbeQUxcCJcv,
+._39RheXihcN6H2k2muQTjkI ._1YbtIWcfkQJOysLXQbwzRf ._1mDAVT4sTzFRwJtlKCw2Ws ._1kiZKVbDe-9Ikootk57kpA,
+.cp-playbar-stat {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  min-height: 30px !important;
+  margin: 0 !important;
+  padding: 0 0 0 10px !important;
+  border-left: 2px solid var(--cp-cyan) !important;
+  box-sizing: border-box !important;
+}
+
+/* Hide default Steam SVG icons inside Play Bar stats */
+._3Y87YQY56ZCOqhgcZFaDc5 ._1mDAVT4sTzFRwJtlKCw2Ws ._1tIg-QIrwMNtCm7NcYADyi,
+._3Y87YQY56ZCOqhgcZFaDc5 ._1mDAVT4sTzFRwJtlKCw2Ws svg,
+._39RheXihcN6H2k2muQTjkI ._1YbtIWcfkQJOysLXQbwzRf ._1mDAVT4sTzFRwJtlKCw2Ws svg {
+  display: none !important;
+}
+
+._3Y87YQY56ZCOqhgcZFaDc5 ._1mDAVT4sTzFRwJtlKCw2Ws ._1kiZKVbDe-9Ikootk57kpA:has(._25YVDTaClw6Y2COPsU0UaV),
+.cp-playbar-stat.cp-stat-achievements {
+  border-left-color: var(--cp-red) !important;
+}
+
+.cp-playbar-stat.cp-stat-players {
+  border-left-color: var(--cp-yellow) !important;
+}
+
+._3Y87YQY56ZCOqhgcZFaDc5 ._1mDAVT4sTzFRwJtlKCw2Ws ._34lrt5-Fc3usZU6trA1P0-,
+.cp-playbar-stat .cp-stat-label {
+  order: 1 !important;
+  font-family: var(--cp-font-mono) !important;
+  font-size: 11px !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: var(--cp-text-muted) !important;
+  line-height: 1.2 !important;
+}
+
+._3Y87YQY56ZCOqhgcZFaDc5 ._1mDAVT4sTzFRwJtlKCw2Ws ._2TYVGoD27ZMfjRirKQNLfk,
+.cp-playbar-stat .cp-stat-value {
+  order: 2 !important;
+  font-family: var(--cp-font-ui) !important;
+  font-size: 13.5px !important;
+  font-weight: 700 !important;
+  color: var(--cp-text-primary) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 7px !important;
+}
+
+.cp-playbar-stat.cp-stat-players .cp-stat-value {
+  color: var(--cp-yellow) !important;
+}
+
+.cp-playbar-stat.cp-stat-players .cp-stat-peak {
+  color: #94a3b8 !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  margin-left: 4px !important;
+}
+
+.cp-playbar-stat .cp-stat-row {
+  order: 2 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+._3Y87YQY56ZCOqhgcZFaDc5 ._1mDAVT4sTzFRwJtlKCw2Ws ._25YVDTaClw6Y2COPsU0UaV,
+.cp-playbar-stat .cp-ach-bar {
+  width: 48px !important;
+  height: 5px !important;
+  background: rgba(255, 255, 255, 0.12) !important;
+  display: inline-block !important;
+  overflow: hidden !important;
+}
+
+._3Y87YQY56ZCOqhgcZFaDc5 ._1mDAVT4sTzFRwJtlKCw2Ws ._25YVDTaClw6Y2COPsU0UaV > div,
+.cp-playbar-stat .cp-ach-fill {
+  height: 100% !important;
+  background: var(--cp-red) !important;
+  box-shadow: 0 0 6px rgba(${rRgb}, 0.7) !important;
+}
+
+/* 6. DOCKED FRIENDS LIST PANEL */
+#cp-docked-friends-panel {
+  width: var(--cp-friends-dock-width, 285px) !important;
+  display: var(--cp-friends-dock-display, flex) !important;
+  order: var(--cp-friends-dock-order, 99) !important;
+  background: var(--cp-bg-panel) !important;
+  border-left: var(--cp-border-cyan) !important;
+  flex-direction: column !important;
+  z-index: 20 !important;
+}
+
+/* 7. GAME PAGE RIGHT INFO COLUMN ORDER */
+div[class*="appdetails_RightColumn_"] {
+  order: var(--cp-gamepage-rightcol-order, 2) !important;
+}`;
+    }
+
+    function generateWebkitCSS() {
+      const yRgb = hexToRgb(state.yellow);
+      const cRgb = hexToRgb(state.cyan);
+      const rRgb = hexToRgb(state.red);
+
+      return `/* ==========================================================================
+   CYBERPUNK 2077 // NIGHT CITY NETRUNNER HUD FOR STEAM (MILLENNIUM)
+   File: webkit.css (Steam Store, Community, Profile, Workshop & Market)
+   ========================================================================== */
+
+:root {
+  --cp-yellow: ${state.yellow};
+  --cp-cyan: ${state.cyan};
+  --cp-red: ${state.red};
+  --cp-bg-void: ${state.bgDark};
+  --cp-bg-panel: ${state.bgPanel};
+  --cp-bg-card: ${state.bgCard};
+  --cp-text-primary: #e6f1ff;
+  --cp-text-muted: #7a8ba8;
+  --cp-cut: ${state.cut}px;
+  --cp-store-max-width: ${state.storeMaxWidth}px;
+  --store-menu-overlap-height: 98px !important;
+}
+
+* {
+  --store-menu-overlap-height: 98px !important;
+}
+
+/* 1. STORE & COMMUNITY DARK VOID BACKGROUNDS */
+body,
+html,
+body.v6,
+body.responsive_page,
+.responsive_page_frame,
+.responsive_page_content,
+.page_content_ctn {
+  background-color: var(--cp-bg-void) !important;
+  background-image:
+    radial-gradient(circle at 80% 10%, rgba(${rRgb}, 0.09), transparent 40%),
+    radial-gradient(circle at 20% 90%, rgba(${cRgb}, 0.08), transparent 45%) !important;
+  color: var(--cp-text-primary) !important;
+}
+
+/* Keep Community Hub wrapper visible while clearing its opaque default wallpaper */
+body.responsive_page .apphub_background {
+  background-image: none !important;
+  background: transparent !important;
+}
+
+/* 2. STORE CONTAINER WIDTH & HORIZONTAL SIDE-SCROLL PEEK */
+body .page_content_ctn,
+body .page_content,
+body .market_page_fullwidth,
+body #BG_bottom,
+body .maincontent,
+body ._22xtsolKcQit92o-LBeRWD {
+  max-width: var(--cp-store-max-width, 1200px) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.carousel__slider-tray-wrapper {
+  overflow: visible !important;
+}
+
+.carousel__slide--hidden {
+  opacity: 0.25 !important;
+  filter: saturate(0.6) brightness(0.65) !important;
+  transition: opacity 220ms ease, filter 220ms ease !important;
+}
+
+/* 3. STORE CAROUSEL LEFT/RIGHT THEMED EDGE ARROWS (ADAPTIVE ROW-1 ANCHOR + UNIFIED 45x108PX BOX) */
+.carousel_container {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  grid-template-rows: auto !important;
+}
+
+.carousel_container > .carousel_items {
+  grid-row: 1 / 2 !important;
+  grid-column: 1 / 2 !important;
+}
+
+.carousel_container > .carousel_thumbs {
+  grid-row: 2 / 3 !important;
+  grid-column: 1 / 2 !important;
+  justify-self: center !important;
+}
+
+div:has(> button.carousel__back-button):has(> div > button[class*="carousel__dot"]),
+div:has(> button.CarouselBtnLeft):has(> div > button[class*="carousel__dot"]) {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  grid-template-rows: auto !important;
+}
+
+div:has(> button.carousel__back-button):has(> div > button[class*="carousel__dot"]) > div:not(:has(> button[class*="carousel__dot"])),
+div:has(> button.CarouselBtnLeft):has(> div > button[class*="carousel__dot"]) > div:not(:has(> button[class*="carousel__dot"])) {
+  grid-row: 1 / 2 !important;
+  grid-column: 1 / 2 !important;
+}
+
+div:has(> button.carousel__back-button):has(> div > button[class*="carousel__dot"]) > div:has(> button[class*="carousel__dot"]),
+div:has(> button.CarouselBtnLeft):has(> div > button[class*="carousel__dot"]) > div:has(> button[class*="carousel__dot"]) {
+  grid-row: 2 / 3 !important;
+  grid-column: 1 / 2 !important;
+  justify-self: center !important;
+}
+
+div:has(> button.carousel__back-button):has(> div > button[class*="carousel__dot"]) > button,
+div:has(> button.CarouselBtnLeft):has(> div > button[class*="carousel__dot"]) > button {
+  grid-row: 1 / 2 !important;
+  grid-column: 1 / 2 !important;
+}
+
+html.responsive .carousel_container .arrow,
+html.responsive .carousel_container .arrow:hover,
+.carousel_container .arrow,
+.carousel_container .arrow:hover,
+.carousel_container .arrow.left,
+.carousel_container .arrow.right,
+.carousel_container .arrow.left:hover,
+.carousel_container .arrow.right:hover {
+  grid-row: 1 / 2 !important;
+  grid-column: 1 / 2 !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  width: 45px !important;
+  height: 108px !important;
+  min-height: 44px !important;
+  max-height: 100% !important;
+  top: 50% !important;
+  bottom: auto !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  transform: translateY(-50%) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  opacity: 1 !important;
+}
+
+html.responsive .carousel_wide_mode .carousel_container .arrow,
+html.responsive .carousel_wide_mode .carousel_container .arrow:hover,
+html.responsive .carousel_wide_mode .carousel_container.maincap .arrow:hover,
+.carousel_wide_mode .carousel_container .arrow,
+.carousel_wide_mode .carousel_container .arrow:hover,
+.carousel_wide_mode .carousel_container.maincap .arrow:hover {
+  grid-row: 1 / 2 !important;
+  grid-column: 1 / 2 !important;
+  width: 500px !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  margin: 0 !important;
+  padding: 0 10px !important;
+  transform: none !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+html.responsive .carousel_wide_mode .carousel_container .arrow.left,
+html.responsive .carousel_wide_mode .carousel_container .arrow.left:hover,
+html.responsive .carousel_wide_mode .carousel_container.maincap .arrow.left:hover,
+.carousel_wide_mode .carousel_container .arrow.left,
+.carousel_wide_mode .carousel_container .arrow.left:hover,
+.carousel_wide_mode .carousel_container.maincap .arrow.left:hover {
+  justify-content: flex-end !important;
+  transform: none !important;
+}
+
+html.responsive .carousel_wide_mode .carousel_container .arrow.right,
+html.responsive .carousel_wide_mode .carousel_container .arrow.right:hover,
+html.responsive .carousel_wide_mode .carousel_container.maincap .arrow.right:hover,
+.carousel_wide_mode .carousel_container .arrow.right,
+.carousel_wide_mode .carousel_container .arrow.right:hover,
+.carousel_wide_mode .carousel_container.maincap .arrow.right:hover {
+  justify-content: flex-start !important;
+  transform: none !important;
+}
+
+html.responsive .carousel_container .arrow > div,
+.carousel_wide_mode .carousel_container .arrow > div,
+.carousel_container .arrow > div,
+.carousel_container .arrow.left > div,
+.carousel_container .arrow.right > div {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 45px !important;
+  height: 108px !important;
+  min-width: 45px !important;
+  min-height: 44px !important;
+  max-height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  transform: none !important;
+  background: rgba(11, 14, 23, 0.92) !important;
+  background-color: rgba(11, 14, 23, 0.92) !important;
+  background-image: none !important;
+  border: 1px solid var(--cp-cyan) !important;
+  box-shadow: 0 0 10px rgba(${cRgb}, 0.4) !important;
+  box-sizing: border-box !important;
+  opacity: 0.78 !important;
+  transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease !important;
+}
+
+.carousel_container .arrow > div::after,
+.carousel_container .arrow.left > div::after,
+.carousel_container .arrow.right > div::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  margin: auto !important;
+  display: block !important;
+  width: 20px !important;
+  height: 40px !important;
+  background-color: transparent !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 100'%3E%3Cpolygon points='0,0.093 0,25.702 24.323,50.026 0,74.349 0,99.955 49.929,50.026' fill='%23e6f1ff'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: contain !important;
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+  pointer-events: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  z-index: 2 !important;
+}
+
+.carousel_container .arrow.left > div::after {
+  transform: rotate(180deg) !important;
+}
+
+.carousel_container .arrow.right > div::after {
+  transform: none !important;
+}
+
+html.responsive .carousel_container .arrow:hover > div,
+.carousel_wide_mode .carousel_container .arrow:hover > div,
+.carousel_container .arrow:hover > div,
+.carousel_container .arrow.left:hover > div,
+.carousel_container .arrow.right:hover > div {
+  background: var(--cp-yellow) !important;
+  background-color: var(--cp-yellow) !important;
+  background-image: none !important;
+  border-color: var(--cp-yellow) !important;
+  box-shadow: 0 0 14px rgba(${yRgb}, 0.85) !important;
+  opacity: 1 !important;
+}
+
+.carousel_container .arrow:hover > div::after,
+.carousel_container .arrow.left:hover > div::after,
+.carousel_container .arrow.right:hover > div::after {
+  background-color: transparent !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 100'%3E%3Cpolygon points='0,0.093 0,25.702 24.323,50.026 0,74.349 0,99.955 49.929,50.026' fill='%23050608'/%3E%3C/svg%3E") !important;
+}
+
+button.carousel__back-button,
+button.carousel__next-button,
+button.CarouselBtnLeft,
+button.CarouselBtnRight,
+[class*="carousel__back-button"],
+[class*="carousel__next-button"] {
+  box-sizing: border-box !important;
+  width: 45px !important;
+  min-width: 45px !important;
+  max-width: 45px !important;
+  height: 108px !important;
+  min-height: 44px !important;
+  max-height: 100% !important;
+  top: 50% !important;
+  bottom: auto !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  transform: translateY(-50%) !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: rgba(11, 14, 23, 0.92) !important;
+  background-color: rgba(11, 14, 23, 0.92) !important;
+  background-image: none !important;
+  border: 1px solid var(--cp-cyan) !important;
+  border-radius: 0 !important;
+  box-shadow: 0 0 10px rgba(${cRgb}, 0.4) !important;
+  opacity: 0.78 !important;
+  overflow: hidden !important;
+  transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease !important;
+}
+
+button.carousel__back-button:disabled,
+button.carousel__next-button:disabled,
+button.CarouselBtnLeft:disabled,
+button.CarouselBtnRight:disabled,
+[class*="carousel__back-button"]:disabled,
+[class*="carousel__next-button"]:disabled {
+  opacity: 0.18 !important;
+  pointer-events: none !important;
+}
+
+button.carousel__back-button svg,
+button.carousel__next-button svg,
+button.CarouselBtnLeft svg,
+button.CarouselBtnRight svg,
+[class*="carousel__back-button"] svg,
+[class*="carousel__next-button"] svg {
+  width: 20px !important;
+  height: 40px !important;
+  min-width: 20px !important;
+  min-height: 40px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  background: none !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: #e6f1ff !important;
+  filter: none !important;
+  opacity: 1 !important;
+  flex-shrink: 0 !important;
+  overflow: visible !important;
+}
+
+button.carousel__back-button svg polygon,
+button.carousel__back-button svg path,
+button.carousel__next-button svg polygon,
+button.carousel__next-button svg path,
+button.CarouselBtnLeft svg polygon,
+button.CarouselBtnLeft svg path,
+button.CarouselBtnRight svg polygon,
+button.CarouselBtnRight svg path,
+[class*="carousel__back-button"] svg polygon,
+[class*="carousel__back-button"] svg path,
+[class*="carousel__next-button"] svg polygon,
+[class*="carousel__next-button"] svg path {
+  fill: #e6f1ff !important;
+}
+
+button.carousel__back-button svg polyline,
+button.carousel__back-button svg line,
+button.carousel__next-button svg polyline,
+button.carousel__next-button svg line,
+button.CarouselBtnLeft svg polyline,
+button.CarouselBtnLeft svg line,
+button.CarouselBtnRight svg polyline,
+button.CarouselBtnRight svg line,
+[class*="carousel__back-button"] svg polyline,
+[class*="carousel__back-button"] svg line,
+[class*="carousel__next-button"] svg polyline,
+[class*="carousel__next-button"] svg line {
+  stroke: #e6f1ff !important;
+}
+
+button.carousel__back-button:hover,
+button.carousel__next-button:hover,
+button.CarouselBtnLeft:hover,
+button.CarouselBtnRight:hover,
+[class*="carousel__back-button"]:hover,
+[class*="carousel__next-button"]:hover {
+  background: var(--cp-yellow) !important;
+  background-color: var(--cp-yellow) !important;
+  background-image: none !important;
+  border-color: var(--cp-yellow) !important;
+  box-shadow: 0 0 14px rgba(${yRgb}, 0.85) !important;
+  opacity: 1 !important;
+}
+
+button.carousel__back-button:hover svg,
+button.carousel__next-button:hover svg,
+button.CarouselBtnLeft:hover svg,
+button.CarouselBtnRight:hover svg,
+[class*="carousel__back-button"]:hover svg,
+[class*="carousel__next-button"]:hover svg {
+  background: none !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  filter: brightness(0) !important;
+}
+
+button.carousel__back-button:hover svg polygon,
+button.carousel__back-button:hover svg path,
+button.carousel__next-button:hover svg polygon,
+button.carousel__next-button:hover svg path,
+button.CarouselBtnLeft:hover svg polygon,
+button.CarouselBtnLeft:hover svg path,
+button.CarouselBtnRight:hover svg polygon,
+button.CarouselBtnRight:hover svg path,
+[class*="carousel__back-button"]:hover svg polygon,
+[class*="carousel__back-button"]:hover svg path,
+[class*="carousel__next-button"]:hover svg polygon,
+[class*="carousel__next-button"]:hover svg path {
+  fill: #050608 !important;
+}
+
+button.carousel__back-button:hover svg polyline,
+button.carousel__back-button:hover svg line,
+button.carousel__next-button:hover svg polyline,
+button.carousel__next-button:hover svg line,
+button.CarouselBtnLeft:hover svg polyline,
+button.CarouselBtnLeft:hover svg line,
+button.CarouselBtnRight:hover svg polyline,
+button.CarouselBtnRight:hover svg line,
+[class*="carousel__back-button"]:hover svg polyline,
+[class*="carousel__back-button"]:hover svg line,
+[class*="carousel__next-button"]:hover svg polyline,
+[class*="carousel__next-button"]:hover svg line {
+  stroke: #050608 !important;
+}
+
+/* 4. STORE TOP NAVIGATION RIBBON & CAROUSEL PAGINATION DOTS (ALL CAROUSELS) */
+div.store_nav_bg,
+.store_nav,
+._-6WU-qJBwUo- .XLbP8xOkCYw-,
+.dm2SGcwBwj4- .WCG-2-OYepA- {
+  background: var(--cp-bg-panel) !important;
+  border: 1px solid rgba(${cRgb}, 0.38) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.7), 0 0 10px rgba(${cRgb}, 0.14) !important;
+  margin-bottom: 14px !important;
+  position: relative !important;
+  z-index: 25 !important;
+}
+
+div.v9uRg57bwOaPsvAnkXESO,
+.carousel div:has(> button[class*="carousel__dot"]),
+div:has(> button[class*="carousel__dot"]) {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  margin-top: 8px !important;
+  padding: 5px 12px !important;
+  background: rgba(11, 14, 23, 0.9) !important;
+  border: 1px solid rgba(${cRgb}, 0.35) !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.65) !important;
+}
+
+div.v9uRg57bwOaPsvAnkXESO button[class*="carousel__dot"],
+.carousel button[class*="carousel__dot"],
+button[class*="carousel__dot"] {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  width: 12px !important;
+  height: 8px !important;
+  min-width: 12px !important;
+  min-height: 8px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  background: none !important;
+  background-color: rgba(${cRgb}, 0.25) !important;
+  border: 1px solid rgba(${cRgb}, 0.45) !important;
+  border-radius: 1px !important;
+  box-shadow: none !important;
+  transition: all 140ms ease !important;
+}
+
+button[class*="carousel__dot"] > svg,
+button[class*="carousel__dot"] > * {
+  display: none !important;
+}
+
+div.v9uRg57bwOaPsvAnkXESO button[class*="carousel__dot"]:hover,
+.carousel button[class*="carousel__dot"]:hover,
+button[class*="carousel__dot"]:hover {
+  background: none !important;
+  background-color: var(--cp-cyan) !important;
+  border-color: var(--cp-cyan) !important;
+  box-shadow: 0 0 8px rgba(${cRgb}, 0.75) !important;
+}
+
+div.v9uRg57bwOaPsvAnkXESO button[class*="carousel__dot--selected"],
+.carousel button[class*="carousel__dot--selected"],
+button[class*="carousel__dot--selected"] {
+  width: 18px !important;
+  min-width: 18px !important;
+  background: none !important;
+  background-color: var(--cp-yellow) !important;
+  border-color: var(--cp-yellow) !important;
+  box-shadow: 0 0 10px rgba(${yRgb}, 0.85) !important;
+}
+
+/* 5. STORE CAPSULES, CARDS & DISCOUNT BADGES */
+.home_cluster_ctn .home_main_cap,
+.store_main_capsule,
+.apphub_Card,
+.market_listing_row {
+  background: var(--cp-bg-card) !important;
+  border: 1px solid rgba(${cRgb}, 0.32) !important;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--cp-cut)), calc(100% - var(--cp-cut)) 100%, 0 100%);
+}
+
+.discount_pct {
+  background: var(--cp-yellow) !important;
+  color: #050608 !important;
+  font-weight: 800 !important;
+}
+
+.discount_final_price {
+  color: var(--cp-cyan) !important;
+  font-weight: 700 !important;
+}`;
+    }
+
+    function generateFriendsCSS() {
+      const cRgb = hexToRgb(state.cyan);
+      const yRgb = hexToRgb(state.yellow);
+      return `/* ==========================================================================
+   CYBERPUNK 2077 // NIGHT CITY NETRUNNER HUD FOR STEAM (MILLENNIUM)
+   File: friends.custom.css (Standalone & Docked Friends / Chat UI)
+   ========================================================================== */
+
+:root {
+  --cp-yellow: ${state.yellow};
+  --cp-cyan: ${state.cyan};
+  --cp-red: ${state.red};
+  --cp-bg-void: ${state.bgDark};
+  --cp-bg-panel: ${state.bgPanel};
+  --cp-bg-card: ${state.bgCard};
+}
+
+.friendlist,
+.friendsui-container,
+body.friendsui {
+  background: var(--cp-bg-void) !important;
+  color: #e6f1ff !important;
+}
+
+.friendStatusHover:hover {
+  background: rgba(${cRgb}, 0.14) !important;
+  border-left: 2px solid var(--cp-yellow) !important;
+}
+
+.ingame .friendSmallText,
+.ingame .playerName {
+  color: #00ff9d !important;
+}
+
+.online .friendSmallText,
+.online .playerName {
+  color: var(--cp-cyan) !important;
+}
+
+.chatWindow {
+  background: var(--cp-bg-panel) !important;
+  border: 1px solid rgba(${cRgb}, 0.35) !important;
+}
+
+.chatEntry {
+  background: var(--cp-bg-void) !important;
+  border-top: 1px solid rgba(${yRgb}, 0.4) !important;
+}`;
+    }
+
+    function generateOptionsCSS() {
+      return `/* ==========================================================================
+   CYBERPUNK 2077 // MODULAR LAYOUT OPTION FILES (options/*.css)
+   Referenced by skin.json Conditions for live user toggles in Millennium
+   ========================================================================== */
+
+/* --- options/games-left.css --- */
+:root { --cp-sidebar-order: 0; }
+
+/* --- options/games-right.css --- */
+:root { --cp-sidebar-order: 2; }
+
+/* --- options/friends-right.css --- */
+:root {
+  --cp-friends-dock-display: flex;
+  --cp-friends-dock-order: 99;
+}
+
+/* --- options/friends-left.css --- */
+:root {
+  --cp-friends-dock-display: flex;
+  --cp-friends-dock-order: -1;
+}
+
+/* --- options/friends-hidden.css --- */
+:root {
+  --cp-friends-dock-display: none;
+}
+
+/* --- options/gamepage-info-right.css --- */
+:root { --cp-gamepage-rightcol-order: 2; }
+
+/* --- options/gamepage-info-left.css --- */
+:root { --cp-gamepage-rightcol-order: -1; }`;
+    }
+
+    function generateLibraryJS() {
+      return `/* ==========================================================================
+   CYBERPUNK 2077 // NIGHT CITY NETRUNNER HUD FOR STEAM (MILLENNIUM)
+   File: libraryroot.custom.js
+   Features:
+     1. Live Docked Friends Panel + Bidirectional Side Resizers
+     2. Game Page Play Bar Telemetry (Achievements + Progress Bar, Live Players
+        & 7-Day Peak via Official Valve WebAPI ?format=json + SteamCharts 7D,
+        and Size on Disk)
+   ========================================================================== */
+
+(function () {
+  'use strict';
+
+  const PLAYBAR_STATS_SELECTOR = '._3Y87YQY56ZCOqhgcZFaDc5 ._1mDAVT4sTzFRwJtlKCw2Ws';
+  const CACHE_TTL_MS = 5 * 60 * 1000;
+  const RETRY_FAIL_MS = 20 * 1000;
+  const SEVEN_DAYS_MS = 7 * 24 * 60 * 60 * 1000;
+  const PEAK_HISTORY_KEY = 'cp_peak7d_history_v1';
+  const playerStatsCache = new Map();
+  let topChartsCache = { ts: 0, promise: null, byAppId: new Map() };
+
+  function getFiber(el) {
+    if (!el) return null;
+    const key = Object.keys(el).find((k) => k.startsWith('__reactFiber'));
+    return key ? el[key] : null;
+  }
+
+  function getCurrentGameContext(playBarStatsEl) {
+    let appId = null;
+    let overview = null;
+    let achievements = null;
+
+    try {
+      let fiber = getFiber(playBarStatsEl);
+      let depth = 0;
+      while (fiber && depth < 45) {
+        const props = fiber.memoizedProps;
+        if (props) {
+          if (!overview && props.overview && props.overview.appid) {
+            overview = props.overview;
+            appId = Number(props.overview.appid);
+          }
+          if (!achievements && props.achievements) achievements = props.achievements;
+          if (!appId && (props.appid || props.nAppID)) appId = Number(props.appid || props.nAppID);
+        }
+        fiber = fiber.return;
+        depth++;
+      }
+    } catch (_) {}
+
+    if (appId) {
+      const appStore = window.appStore || (window.opener && window.opener.appStore);
+      const appDetailsStore = window.appDetailsStore || (window.opener && window.opener.appDetailsStore);
+      if (!overview && appStore && typeof appStore.GetAppOverviewByAppID === 'function') {
+        overview = appStore.GetAppOverviewByAppID(appId);
+      }
+      if (!achievements && appDetailsStore && typeof appDetailsStore.GetAchievements === 'function') {
+        achievements = appDetailsStore.GetAchievements(appId);
+      }
+    }
+    return { appId, overview, achievements };
+  }
+
+  function formatSizeBytes(bytes) {
+    const b = Number(bytes);
+    if (!b || isNaN(b) || b <= 0) return null;
+    const gb = b / (1024 * 1024 * 1024);
+    if (gb >= 1) return gb.toFixed(2) + ' GB';
+    return Math.max(1, Math.round(b / (1024 * 1024))) + ' MB';
+  }
+
+  async function fetchTextWithTimeout(url, timeoutMs) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), timeoutMs || 8000);
+    try {
+      const res = await fetch(url, { signal: controller.signal });
+      return res.ok ? await res.text() : null;
+    } catch (_) {
+      return null;
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+
+  function recordRolling7dPeak(appId, val) {
+    const now = Date.now();
+    try {
+      const map = JSON.parse(localStorage.getItem(PEAK_HISTORY_KEY) || '{}');
+      const key = String(appId);
+      const list = Array.isArray(map[key]) ? map[key].filter((s) => s && now - s[0] <= SEVEN_DAYS_MS) : [];
+      if (val > 0) list.push([now, val]);
+      map[key] = list.slice(-50);
+      localStorage.setItem(PEAK_HISTORY_KEY, JSON.stringify(map));
+      return list.reduce((m, s) => Math.max(m, s[1] || 0), 0) || null;
+    } catch (_) {
+      return val > 0 ? val : null;
+    }
+  }
+
+  async function getSteamOfficialChartsMap() {
+    if (topChartsCache.byAppId.size > 0 && Date.now() - topChartsCache.ts < CACHE_TTL_MS) {
+      return topChartsCache.byAppId;
+    }
+    if (topChartsCache.promise) return topChartsCache.promise;
+    topChartsCache.promise = (async () => {
+      const map = new Map();
+      const [cTxt, mTxt] = await Promise.all([
+        fetchTextWithTimeout('https://api.steampowered.com/ISteamChartsService/GetGamesByConcurrentPlayers/v1/?format=json', 6000),
+        fetchTextWithTimeout('https://api.steampowered.com/ISteamChartsService/GetMostPlayedGames/v1/?format=json', 6000),
+      ]);
+      [mTxt, cTxt].forEach((txt) => {
+        if (!txt) return;
+        try {
+          const data = JSON.parse(txt);
+          const ranks = (data && data.response && data.response.ranks) || [];
+          ranks.forEach((r) => {
+            const id = Number(r.appid);
+            if (!id) return;
+            const prev = map.get(id) || { current: null, peak: null };
+            map.set(id, {
+              current: typeof r.concurrent_in_game === 'number' ? r.concurrent_in_game : prev.current,
+              peak: typeof r.peak_in_game === 'number' ? Math.max(r.peak_in_game, prev.peak || 0) : prev.peak,
+            });
+          });
+        } catch (_) {}
+      });
+      if (map.size > 0) {
+        topChartsCache.byAppId = map;
+        topChartsCache.ts = Date.now();
+      }
+      topChartsCache.promise = null;
+      return topChartsCache.byAppId;
+    })();
+    return topChartsCache.promise;
+  }
+
+  async function fetchSteamCharts7dPeak(appId) {
+    const raw = await fetchTextWithTimeout('https://r.jina.ai/https://steamcharts.com/app/' + appId + '/chart-data.json', 8000);
+    if (raw) {
+      const match = raw.match(/\\[\\s*\\[\\s*\\d+\\s*,\\s*\\d+[\\s\\S]*\\]\\s*\\]/);
+      if (match) {
+        try {
+          const pts = JSON.parse(match[0]);
+          const latestTs = pts.length ? Number(pts[pts.length - 1][0]) : Date.now();
+          const cutoff = Math.max(Date.now(), latestTs) - SEVEN_DAYS_MS;
+          let max7d = 0;
+          for (let i = pts.length - 1; i >= 0; i--) {
+            if (Number(pts[i][0]) < cutoff) break;
+            if (Number(pts[i][1]) > max7d) max7d = Number(pts[i][1]);
+          }
+          return { max7d: max7d || null, latestVal: pts.length ? Number(pts[pts.length - 1][1]) : null };
+        } catch (_) {}
+      }
+    }
+    return { max7d: null, latestVal: null };
+  }
+
+  async function fetchPlayerStatsForApp(appId) {
+    if (!appId || appId >= 2000000000) return null;
+    const entry = { current: null, peak7d: null, ts: Date.now(), fetching: true };
+    playerStatsCache.set(appId, entry);
+
+    const curUrl = 'https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=' + appId + '&format=json';
+    const [curTxt, chartsMap, scRes] = await Promise.all([
+      fetchTextWithTimeout(curUrl, 6000),
+      getSteamOfficialChartsMap(),
+      fetchSteamCharts7dPeak(appId),
+    ]);
+
+    if (curTxt) {
+      try {
+        const j = JSON.parse(curTxt);
+        if (j && j.response && typeof j.response.player_count === 'number') entry.current = j.response.player_count;
+      } catch (_) {}
+    }
+
+    const top = chartsMap ? chartsMap.get(Number(appId)) : null;
+    if (entry.current === null && top && typeof top.current === 'number') entry.current = top.current;
+    if (entry.current === null && scRes && typeof scRes.latestVal === 'number') entry.current = scRes.latestVal;
+
+    const rolling = recordRolling7dPeak(appId, Math.max(entry.current || 0, (top && top.peak) || 0, (scRes && scRes.max7d) || 0));
+    const peaks = [scRes && scRes.max7d, top && top.peak, rolling, entry.current].filter((v) => typeof v === 'number' && v > 0);
+    if (peaks.length) entry.peak7d = Math.max.apply(null, peaks);
+
+    entry.fetching = false;
+    entry.ts = Date.now();
+    updateGamePagePlayBar();
+    return entry;
+  }
+
+  function updateGamePagePlayBar() {
+    const playBarStats = document.querySelector(PLAYBAR_STATS_SELECTOR);
+    if (!playBarStats) return;
+    const { appId, overview, achievements } = getCurrentGameContext(playBarStats);
+    if (!appId || appId >= 2000000000) return;
+
+    let playersEl = playBarStats.querySelector('.cp-stat-players');
+    const pStats = playerStatsCache.get(appId);
+    const needsRefresh = !pStats || (!pStats.fetching && Date.now() - pStats.ts >= (pStats.current !== null || pStats.peak7d !== null ? CACHE_TTL_MS : RETRY_FAIL_MS));
+    if (needsRefresh) fetchPlayerStatsForApp(appId);
+
+    if (!playersEl) {
+      playersEl = document.createElement('div');
+      playersEl.className = 'cp-playbar-stat cp-stat-players';
+      playBarStats.appendChild(playersEl);
+    }
+
+    const activeStats = playerStatsCache.get(appId) || pStats;
+    if (!activeStats || activeStats.fetching) {
+      playersEl.innerHTML = '<div class="cp-stat-label">PLAYERS // 7D PEAK</div><div class="cp-stat-value">...</div>';
+    } else if (activeStats.current !== null || activeStats.peak7d !== null) {
+      const curStr = activeStats.current !== null ? activeStats.current.toLocaleString('en-US') : '--';
+      const peakStr = activeStats.peak7d !== null ? activeStats.peak7d.toLocaleString('en-US') : null;
+      playersEl.innerHTML = peakStr
+        ? '<div class="cp-stat-label">PLAYERS // 7D PEAK</div><div class="cp-stat-value">' + curStr + ' <span class="cp-stat-peak">// ' + peakStr + '</span></div>'
+        : '<div class="cp-stat-label">PLAYERS</div><div class="cp-stat-value">' + curStr + '</div>';
+    }
+
+    const sizeStr = formatSizeBytes(overview && (overview.size_on_disk || overview.m_ulSizeOnDisk));
+    if (sizeStr) {
+      let sizeEl = playBarStats.querySelector('.cp-stat-size');
+      if (!sizeEl) {
+        sizeEl = document.createElement('div');
+        sizeEl.className = 'cp-playbar-stat cp-stat-size';
+        playBarStats.appendChild(sizeEl);
+      }
+      sizeEl.innerHTML = '<div class="cp-stat-label">SIZE ON DISK</div><div class="cp-stat-value">' + sizeStr + '</div>';
+    }
+  }
+
+  setInterval(updateGamePagePlayBar, 2500);
+})();`;
+    }
+
+    function generateSkinJson() {
+      return JSON.stringify({
+        "name": "Cyberpunk 2077 // Night City HUD",
+        "author": "RaveAgainstTheMachine",
+        "description": "High-contrast Cyberpunk 2077 HUD overhaul for Steam with docked Friends panel, live game telemetry, and modular layout controls.",
+        "version": "2.2.0",
+        "Steam-WebKit": "webkit.css",
+        "Patches": [
+          {
+            "MatchRegexString": ".*",
+            "TargetCss": "libraryroot.custom.css"
+          },
+          {
+            "MatchRegexString": "^Steam$",
+            "TargetCss": "libraryroot.custom.css",
+            "TargetJs": "libraryroot.custom.js"
+          },
+          {
+            "MatchRegexString": ".friendsui-container",
+            "TargetCss": "friends.custom.css"
+          }
+        ],
+        "Conditions": {
+          "Games Panel Position": {
+            "default": state.gamesSidebar === 'right' ? "Right" : "Left",
+            "values": {
+              "Left": { "TargetCss": { "affects": ["^Steam$"], "src": "options/games-left.css" } },
+              "Right": { "TargetCss": { "affects": ["^Steam$"], "src": "options/games-right.css" } }
+            }
+          },
+          "Docked Friends Panel": {
+            "default": state.friendsDock === 'left' ? "Left" : (state.friendsDock === 'hide' ? "Hidden" : "Right"),
+            "values": {
+              "Right": { "TargetCss": { "affects": ["^Steam$"], "src": "options/friends-right.css" } },
+              "Left": { "TargetCss": { "affects": ["^Steam$"], "src": "options/friends-left.css" } },
+              "Hidden": { "TargetCss": { "affects": ["^Steam$"], "src": "options/friends-hidden.css" } }
+            }
+          },
+          "Gamepage Info Column": {
+            "default": state.gameInfoCol === 'left' ? "Left" : "Right",
+            "values": {
+              "Right": { "TargetCss": { "affects": ["^Steam$"], "src": "options/gamepage-info-right.css" } },
+              "Left": { "TargetCss": { "affects": ["^Steam$"], "src": "options/gamepage-info-left.css" } }
+            }
+          }
+        }
+      }, null, 2);
+    }
+
+    function generateAllInOneCSS() {
+      return [
+        generateLibraryCSS(),
+        '',
+        generateWebkitCSS(),
+        '',
+        generateFriendsCSS(),
+        '',
+        generateOptionsCSS()
+      ].join('\n');
+    }
+
+    function getActiveCodeContent() {
+      switch (state.activeTab) {
+        case 'allcss': return generateAllInOneCSS();
+        case 'librarycss': return generateLibraryCSS();
+        case 'webkitcss': return generateWebkitCSS();
+        case 'friendscss': return generateFriendsCSS();
+        case 'optionscss': return generateOptionsCSS();
+        case 'libraryjs': return generateLibraryJS();
+        case 'skinjson': return generateSkinJson();
+        default: return generateAllInOneCSS();
+      }
+    }
+
+    function getActiveFileName() {
+      switch (state.activeTab) {
+        case 'allcss': return 'cyberpunk2077-complete-theme.css';
+        case 'librarycss': return 'libraryroot.custom.css';
+        case 'webkitcss': return 'webkit.css';
+        case 'friendscss': return 'friends.custom.css';
+        case 'optionscss': return 'options-bundle.css';
+        case 'libraryjs': return 'libraryroot.custom.js';
+        case 'skinjson': return 'skin.json';
+        default: return 'libraryroot.custom.css';
+      }
+    }
+
+    function renderCodeOutput() {
+      const codeEl = document.getElementById('code-output');
+      codeEl.textContent = getActiveCodeContent();
+    }
+
+    function switchCodeTab(tab) {
+      state.activeTab = tab;
+      const tabs = ['allcss', 'librarycss', 'webkitcss', 'friendscss', 'optionscss', 'libraryjs', 'skinjson'];
+      tabs.forEach(t => {
+        const btn = document.getElementById(`tab-${t}`);
+        if (!btn) return;
+        btn.className = t === tab
+          ? 'px-2.5 py-1 text-xs font-mono rounded bg-[#fcee09] text-black font-bold transition-all'
+          : 'px-2.5 py-1 text-xs font-mono rounded bg-[#0d121f] text-[#7a8ba8] hover:text-white transition-all';
+      });
+      renderCodeOutput();
+    }
+
+    function copyActiveCode() {
+      const text = getActiveCodeContent();
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.getElementById('btn-copy');
+        const original = btn.innerHTML;
+        btn.innerHTML = '✓ Copied to Clipboard!';
+        setTimeout(() => { btn.innerHTML = original; }, 1800);
+      });
+    }
+
+    function downloadActiveCode() {
+      const filename = getActiveFileName();
+      const content = getActiveCodeContent();
+      const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    function toggleSidebar() {
+      const sb = document.getElementById('studio-sidebar');
+      const btn = document.getElementById('btn-toggle-sidebar');
+      if (!sb || !btn) return;
+      sb.classList.toggle('hidden');
+      if (sb.classList.contains('hidden')) {
+        btn.innerHTML = '▶ Show Controls';
+        btn.className = 'px-2.5 py-1.5 text-xs font-mono font-semibold rounded border border-[#00f0ff] bg-[#00f0ff]/20 text-[#00f0ff] transition-all cursor-pointer';
+      } else {
+        btn.innerHTML = '◀ Hide Controls';
+        btn.className = 'px-2.5 py-1.5 text-xs font-mono font-semibold rounded border border-[#1b2436] bg-[#0d121f] text-[#e6f1ff] hover:border-[#00f0ff] transition-all cursor-pointer';
+      }
+    }
+
+    function toggleBrowserFullscreen() {
+      const btn = document.getElementById('btn-fullscreen');
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen?.().then(() => {
+          if (btn) btn.innerHTML = '⛶ Exit Fullscreen';
+        }).catch(() => { });
+      } else {
+        document.exitFullscreen?.().then(() => {
+          if (btn) btn.innerHTML = '⛶ Fullscreen';
+        }).catch(() => { });
+      }
+    }
+
+    // Initialize on load
+    updateTheme();
+  </script>
+</body>
+
+</html>

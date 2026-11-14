@@ -1,0 +1,17 @@
+/* Games Panel on Right */
+._9sPoVBFyE_vE87mnZJ5aB {
+  order: 20 !important;
+}
+._276E6ijBpjMA2_iTxNhhjc {
+  order: 19 !important;
+}
+/* Open Search Filter Modal to the left when Games Panel is on the right */
+._20QAC4WMXm8qFE8waUT5oo .vCCmYvn9yQ_V8CpKupllU ._1dgAMymUAUYzUcZjUjOFm7 .Woh0kBQCmatzC1daBX9i6 {
+  inset-inline-start: auto !important;
+  inset-inline-end: 42px !important;
+  transform-origin: 100% 0 !important;
+}
+._20QAC4WMXm8qFE8waUT5oo .vCCmYvn9yQ_V8CpKupllU ._1dgAMymUAUYzUcZjUjOFm7:before {
+  inset-inline-start: auto !important;
+  inset-inline-end: 30px !important;
+}
