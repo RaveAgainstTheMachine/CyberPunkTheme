@@ -85,7 +85,7 @@ A high-contrast Cyberpunk 2077 Kiroshi Optics & Netrunner HUD theme for the Stea
    ```powershell
    git clone https://github.com/RaveAgainstTheMachine/CyberPunkTheme.git "C:\Program Files (x86)\Steam\millennium\themes\Cyberpunk2077"
    ```
-3. Open **Steam Settings -> Millennium -> Themes**, select **Cyberpunk 2077 // Night City HUD**, and reload/restart Steam. (On an open Store tab, press `Ctrl + R` to refresh stylesheets.)
+3. Open **Steam Settings -> Millennium -> Themes**, select **Cyberpunk 2077 // Night City HUD**, and reload/restart Steam. (On an open Store tab, right-click and select **Reload** or click the **Reload** button in the top left to refresh stylesheets.)
 
 ## Repository Structure
 
