@@ -85,3 +85,107 @@ body,
   background: var(--cp-bg-card) !important;
   border-left: 2px solid var(--cp-cyan) !important;
 }
+
+
+/* ==========================================================================
+   FRIENDS & CHAT TABS, HEADERS, SEARCH, VOICE BAR & CONTEXT MENUS
+   ========================================================================== */
+html:has(> body.ContextMenuPopupBody),
+html.client_chat_frame body.ContextMenuPopupBody,
+html.web_chat_frame body.ContextMenuPopupBody {
+  background: transparent !important;
+}
+
+.singleWindowFocusBar,
+.TitleBar,
+.LegacyPopup .TitleBar,
+.titleBarContainer.ChatTabs,
+.friendListHeaderContainer {
+  background: var(--cp-bg-panel) !important;
+  border-bottom: 1px solid rgba(0, 240, 255, 0.35) !important;
+  color: var(--cp-text-main) !important;
+}
+
+.chatTabSetContainer {
+  background: var(--cp-bg-panel) !important;
+  border-bottom: 1px solid rgba(0, 240, 255, 0.28) !important;
+}
+
+._2XZq-_f6npaQdAgeRzKIkz {
+  background: var(--cp-bg-card) !important;
+  border: 1px solid rgba(0, 240, 255, 0.22) !important;
+  color: var(--cp-text-muted) !important;
+}
+
+._2XZq-_f6npaQdAgeRzKIkz:hover {
+  border-color: var(--cp-cyan) !important;
+  color: var(--cp-cyan) !important;
+}
+
+._2XZq-_f6npaQdAgeRzKIkz.Yd-DsWkYiFiYwpci--Yk_ {
+  background: rgba(252, 238, 9, 0.14) !important;
+  border-color: var(--cp-yellow) !important;
+  color: var(--cp-yellow) !important;
+}
+
+.chatTabSelector {
+  background: var(--cp-bg-card) !important;
+  border: 1px solid rgba(0, 240, 255, 0.35) !important;
+  color: var(--cp-cyan) !important;
+}
+
+.chatWindow .chatHeader:not(.titleBarContainer),
+.chatWindow .chatHeader .chatRoomGroupHeader {
+  background: var(--cp-bg-panel) !important;
+  border-bottom: 1px solid rgba(0, 240, 255, 0.3) !important;
+}
+
+.chatDialogs,
+.chatWindow .chatHistoryScroll,
+.chatWindow .chatHistory {
+  background: var(--cp-bg-void) !important;
+}
+
+.ChatSpeaker .speakerName {
+  color: var(--cp-yellow) !important;
+  font-family: var(--cp-font-mono) !important;
+}
+
+.ChatSpeaker .online .speakerName {
+  color: var(--cp-cyan) !important;
+}
+
+.ChatSpeaker .ingame .speakerName {
+  color: var(--cp-green) !important;
+}
+
+.msg.timeDivision .preHorizDivider {
+  border-color: rgba(0, 240, 255, 0.3) !important;
+  color: var(--cp-yellow) !important;
+  font-family: var(--cp-font-mono) !important;
+}
+
+.friendlist .socialTabSearchContainer,
+.friendlist .socialListTab .friendsTabButtonsContainer,
+.friendlist .socialListTab .TabSearchButton .socialSearchContainer {
+  background: var(--cp-bg-panel) !important;
+  border-bottom: 1px solid rgba(0, 240, 255, 0.25) !important;
+}
+
+.friendlist .socialListTab .TabSearchButton .inputContainer input {
+  background: var(--cp-bg-card) !important;
+  border: 1px solid rgba(0, 240, 255, 0.4) !important;
+  color: var(--cp-text-main) !important;
+  font-family: var(--cp-font-mono) !important;
+}
+
+.friendlist .socialListTab .TabSearchButton .inputContainer input:focus {
+  border-color: var(--cp-yellow) !important;
+}
+
+.friendListFooter,
+.friendListHeaderContainer .activeVoicePushToTalk,
+.ChatMessageEntryVoice {
+  background: var(--cp-bg-panel) !important;
+  border-top: 1px solid rgba(0, 240, 255, 0.25) !important;
+}

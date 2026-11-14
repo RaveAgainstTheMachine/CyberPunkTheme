@@ -19,7 +19,31 @@
       "TargetCss": "libraryroot.custom.css"
     },
     {
+      "MatchRegexString": ".PopupFullWindow",
+      "TargetCss": "libraryroot.custom.css"
+    },
+    {
+      "MatchRegexString": ".ContextMenuPopupBody",
+      "TargetCss": "libraryroot.custom.css"
+    },
+    {
+      "MatchRegexString": ".Rp8QOGJ2DypeDniMnRBhr",
+      "TargetCss": "libraryroot.custom.css"
+    },
+    {
+      "MatchRegexString": "[href=\"/css/gamerecording.css\"]",
+      "TargetCss": "libraryroot.custom.css"
+    },
+    {
       "MatchRegexString": ".friendsui-container",
+      "TargetCss": "friends.custom.css"
+    },
+    {
+      "MatchRegexString": ".client_chat_frame",
+      "TargetCss": "friends.custom.css"
+    },
+    {
+      "MatchRegexString": ".web_chat_frame",
       "TargetCss": "friends.custom.css"
     },
     {
@@ -31,6 +55,14 @@
       "TargetCss": "libraryroot.custom.css"
     },
     {
+      "MatchRegexString": "PopupMenu$",
+      "TargetCss": "libraryroot.custom.css"
+    },
+    {
+      "MatchRegexString": "Dialog$",
+      "TargetCss": "libraryroot.custom.css"
+    },
+    {
       "MatchRegexString": "^notificationtoasts_",
       "TargetCss": "libraryroot.custom.css"
     },
@@ -39,12 +71,20 @@
       "TargetCss": "libraryroot.custom.css"
     },
     {
-      "MatchRegexString": "https://.*\\.steampowered\\.com(/.*)?",
+      "MatchRegexString": "^SP Desktop",
+      "TargetCss": "libraryroot.custom.css"
+    },
+    {
+      "MatchRegexString": "https?://.*\\.steampowered\\.com(/.*)?",
       "TargetCss": "webkit.css"
     },
     {
-      "MatchRegexString": "https://steamcommunity\\.com(/.*)?",
+      "MatchRegexString": "https?://([^/]+\\.)?steamcommunity\\.com(/.*)?",
       "TargetCss": "webkit.css"
+    },
+    {
+      "MatchRegexString": "https?://steamloopback\\.host(/.*)?",
+      "TargetCss": "libraryroot.custom.css"
     }
   ],
   "Conditions": {

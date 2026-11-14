@@ -62,6 +62,32 @@ body.DesktopUI,
   font-family: var(--cp-font-ui) !important;
 }
 
+/* Preserve transparency for floating popup menus, toast frames, and in-game overlay backdrop */
+html:has(> body.ContextMenuPopupBody),
+body.ContextMenuPopupBody,
+body.ContextMenuPopupBody.DesktopUI,
+body:has(> ._1OOQPJx0nCNP9ME9toCmV7),
+body.DesktopUI:has(> ._1OOQPJx0nCNP9ME9toCmV7),
+body:has(> .PP7LM0Ow1K5qkR8WElLpt),
+body.DesktopUI:has(> .PP7LM0Ow1K5qkR8WElLpt) {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+body.QsvsRVwbsApgKt1MhM0fz,
+body.QsvsRVwbsApgKt1MhM0fz.DesktopUI {
+  background-color: rgba(7, 8, 13, 0.45) !important;
+  background-image:
+    radial-gradient(circle at 50% 0%, rgba(0, 240, 255, 0.07) 0%, transparent 55%) !important;
+}
+
+body.ContextMenuPopupBody::after,
+body:has(> ._1OOQPJx0nCNP9ME9toCmV7)::after,
+body.QsvsRVwbsApgKt1MhM0fz.DesktopUI::after {
+  display: none !important;
+}
+
 /* Subtle CRT Scanline Overlay across Steam window */
 body::after {
   content: "";
@@ -742,8 +768,10 @@ div.NarrowRightPanel ._3Y87YQY56ZCOqhgcZFaDc5 ._1YbtIWcfkQJOysLXQbwzRf {
 
 ._3Y87YQY56ZCOqhgcZFaDc5 ._1mDAVT4sTzFRwJtlKCw2Ws ._1tIg-QIrwMNtCm7NcYADyi,
 ._3Y87YQY56ZCOqhgcZFaDc5 ._1mDAVT4sTzFRwJtlKCw2Ws svg,
+._3Y87YQY56ZCOqhgcZFaDc5 ._1mDAVT4sTzFRwJtlKCw2Ws ._1kiZKVbDe-9Ikootk57kpA > :not(._3m_zjRTQBqcfzCjXLXUHcR):has(svg),
 ._39RheXihcN6H2k2muQTjkI ._1YbtIWcfkQJOysLXQbwzRf ._1mDAVT4sTzFRwJtlKCw2Ws ._1tIg-QIrwMNtCm7NcYADyi,
-._39RheXihcN6H2k2muQTjkI ._1YbtIWcfkQJOysLXQbwzRf ._1mDAVT4sTzFRwJtlKCw2Ws svg {
+._39RheXihcN6H2k2muQTjkI ._1YbtIWcfkQJOysLXQbwzRf ._1mDAVT4sTzFRwJtlKCw2Ws svg,
+._39RheXihcN6H2k2muQTjkI ._1YbtIWcfkQJOysLXQbwzRf ._1mDAVT4sTzFRwJtlKCw2Ws ._1kiZKVbDe-9Ikootk57kpA > :not(._3m_zjRTQBqcfzCjXLXUHcR):has(svg) {
   display: none !important;
 }
 
@@ -756,6 +784,7 @@ div.NarrowRightPanel ._3Y87YQY56ZCOqhgcZFaDc5 ._1YbtIWcfkQJOysLXQbwzRf {
   display: flex !important;
   flex-direction: column !important;
   justify-content: center !important;
+  gap: 0 !important;
   min-height: 30px !important;
   margin: 0 !important;
   padding: 0 0 0 10px !important;
@@ -1356,4 +1385,381 @@ button.DialogButton.Primary {
 
 .cp-fp-item.offline .cp-fp-item-sub {
   color: #475569;
+}
+
+
+/* ==========================================================================
+   11. ALL CLIENT CONTEXT MENUS, SUBMENUS, DROPDOWNS & NOTIFICATION TRAY
+   ========================================================================== */
+body.DesktopUI .PP7LM0Ow1K5qkR8WElLpt,
+body.DesktopUI ._3pofGqV0buiKAfMPEs3_82,
+body .PP7LM0Ow1K5qkR8WElLpt,
+.GreenEnvelopeMenu,
+.ContextMenuPopupBody .PP7LM0Ow1K5qkR8WElLpt,
+body.DesktopUI ._2EstNjFIIZm_WUSKm5Wt7n {
+  background: var(--cp-bg-panel) !important;
+  background-color: var(--cp-bg-panel) !important;
+  background-image: none !important;
+  border: 1px solid var(--cp-cyan) !important;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.88), inset 0 0 10px rgba(0, 240, 255, 0.14) !important;
+  color: var(--cp-text-main) !important;
+  padding: 4px !important;
+}
+
+body.DesktopUI ._1n7Wloe5jZ6fSuvV18NNWI,
+body.DesktopUI ._1BAKXmqQdWRWmWX9_CbhuY,
+body ._1n7Wloe5jZ6fSuvV18NNWI,
+body ._1BAKXmqQdWRWmWX9_CbhuY,
+body.DesktopUI ._2EstNjFIIZm_WUSKm5Wt7n ._1oERP7bVictkby2hP4BBva {
+  color: var(--cp-text-main) !important;
+  font-family: var(--cp-font-ui) !important;
+  font-weight: 600 !important;
+  border-left: 2px solid transparent !important;
+  transition: background 0.12s ease, border-color 0.12s ease, color 0.12s ease !important;
+}
+
+body.DesktopUI ._1n7Wloe5jZ6fSuvV18NNWI:hover,
+body.DesktopUI ._1n7Wloe5jZ6fSuvV18NNWI._18z-3vkWndCBO5WJgFldRK,
+body.DesktopUI ._1BAKXmqQdWRWmWX9_CbhuY:hover,
+body ._1n7Wloe5jZ6fSuvV18NNWI:hover,
+body ._1BAKXmqQdWRWmWX9_CbhuY:hover,
+body.DesktopUI ._2EstNjFIIZm_WUSKm5Wt7n ._1oERP7bVictkby2hP4BBva:hover {
+  background: linear-gradient(90deg, rgba(0, 240, 255, 0.18) 0%, rgba(252, 238, 9, 0.08) 100%) !important;
+  border-left-color: var(--cp-yellow) !important;
+  color: var(--cp-yellow) !important;
+}
+
+body.DesktopUI .WUOrULWKkGLl3ZUQdDXg8,
+body.DesktopUI .IjIBR_wDDi2N77Oz4KAT4,
+body.DesktopUI ._2kvdTEDgtIT7T9wZIzanom,
+body.DesktopUI ._3EvKu7VyTGMoDtbyugKQ5H,
+body.DesktopUI ._2jXHP0742MyApMUVUM8IFn._21GPYlKBCLsHQpTsHw_RL_ {
+  border-color: rgba(0, 240, 255, 0.25) !important;
+  color: var(--cp-cyan) !important;
+}
+
+body.DesktopUI .Z5iAXBkRFGnwpXsO8ANTl._1n7Wloe5jZ6fSuvV18NNWI:has(.SVGIcon_Trash):hover {
+  background: rgba(255, 0, 85, 0.18) !important;
+  border-left-color: var(--cp-red) !important;
+  color: var(--cp-red) !important;
+}
+
+/* Green Envelope & Notifications Dropdown Panel */
+body.DesktopUI ._2EstNjFIIZm_WUSKm5Wt7n .MCa4RMSvWJwwWjcZP2wTT {
+  background: var(--cp-bg-card) !important;
+  border-bottom: 1px solid rgba(0, 240, 255, 0.25) !important;
+}
+
+body.DesktopUI ._2EstNjFIIZm_WUSKm5Wt7n .MCa4RMSvWJwwWjcZP2wTT ._3zQLPuC3M-NPNa1tVda9Dz {
+  color: var(--cp-yellow) !important;
+  font-family: var(--cp-font-mono) !important;
+  text-transform: uppercase !important;
+}
+
+body.DesktopUI ._2EstNjFIIZm_WUSKm5Wt7n ._3sTMvhkGXqBzwhsP2-IA5P,
+body.DesktopUI ._2EstNjFIIZm_WUSKm5Wt7n ._3sTMvhkGXqBzwhsP2-IA5P ._2m6H7Jmk-G-Nrbif_wDoTx,
+body.DesktopUI ._2EstNjFIIZm_WUSKm5Wt7n ._1SQjN025UZ0z_8AkWHCsGd {
+  background: transparent !important;
+  color: var(--cp-text-main) !important;
+}
+
+body.DesktopUI ._2EstNjFIIZm_WUSKm5Wt7n ._3sTMvhkGXqBzwhsP2-IA5P ._1VRx9qVxigUC4qeM0NWNMR::before {
+  background: var(--cp-yellow) !important;
+}
+
+body.DesktopUI ._2EstNjFIIZm_WUSKm5Wt7n .p2CKe5nuC_8YgWL_lZbNn {
+  background: rgba(11, 14, 23, 0.96) !important;
+  border-top: 1px solid rgba(0, 240, 255, 0.25) !important;
+}
+
+/* Dialog Dropdown Listboxes & Emoji Picker Popups */
+.DesktopUI .DialogMenuPosition.visible > ._DialogInputContainer,
+.DesktopUI .DialogMenuPosition.visible ._DialogInputContainer,
+body .PP7LM0Ow1K5qkR8WElLpt .tid_OE5NJWCCVJQP1PfRc {
+  background: var(--cp-bg-panel) !important;
+  border: 1px solid var(--cp-cyan) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.85), 0 0 12px rgba(0, 240, 255, 0.16) !important;
+  color: var(--cp-text-main) !important;
+}
+
+.DesktopUI .DialogMenuPosition.visible ._DialogInputContainer ._2oAiZidGyUxL-hfupFDQ2m {
+  color: var(--cp-text-main) !important;
+  border-left: 2px solid transparent !important;
+}
+
+.DesktopUI .DialogMenuPosition.visible ._DialogInputContainer ._2oAiZidGyUxL-hfupFDQ2m:hover,
+.DesktopUI .DialogMenuPosition.visible ._DialogInputContainer ._2oAiZidGyUxL-hfupFDQ2m._2U_Y7A-0lddoJdrJBvf8JE {
+  background: rgba(0, 240, 255, 0.15) !important;
+  border-left-color: var(--cp-yellow) !important;
+  color: var(--cp-yellow) !important;
+}
+
+body .PP7LM0Ow1K5qkR8WElLpt .tid_OE5NJWCCVJQP1PfRc ._1yVkTX9Mo_7qb2sxWhM0Cr,
+body .PP7LM0Ow1K5qkR8WElLpt .tid_OE5NJWCCVJQP1PfRc .EuFePPYFGrcf99uLXmBYN {
+  background: var(--cp-bg-card) !important;
+  border-bottom: 1px solid rgba(0, 240, 255, 0.25) !important;
+}
+
+body .PP7LM0Ow1K5qkR8WElLpt .tid_OE5NJWCCVJQP1PfRc .dUQIH8Qg80N6kjB8UQO0P:hover {
+  background: rgba(252, 238, 9, 0.16) !important;
+  box-shadow: inset 0 0 0 1px var(--cp-yellow) !important;
+}
+
+/* ==========================================================================
+   12. DESKTOP & IN-GAME NOTIFICATION TOASTS
+   ========================================================================== */
+._1OOQPJx0nCNP9ME9toCmV7 {
+  background: linear-gradient(135deg, rgba(16, 21, 34, 0.96) 0%, rgba(7, 8, 13, 0.98) 100%) !important;
+  border: 1px solid var(--cp-cyan) !important;
+  border-left: 4px solid var(--cp-yellow) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.85), 0 0 14px rgba(0, 240, 255, 0.25) !important;
+  color: var(--cp-text-main) !important;
+}
+
+._1OOQPJx0nCNP9ME9toCmV7 ._2NdiftmP-B3C4LPWnNGTCB,
+._1OOQPJx0nCNP9ME9toCmV7 ._3-H47wPl1Ng3lh7xGZOPIg {
+  color: var(--cp-text-main) !important;
+}
+
+/* ==========================================================================
+   13. SETTINGS, MILLENNIUM SETTINGS, PROPERTIES & FORM CONTROLS
+   ========================================================================== */
+._2sssIwe0duyIrFvat2oXzH,
+.DialogContent._DialogLayout:not(.CFTLX2wIKOK3hNV-fS7_V),
+.MillenniumSettings.ModalDialogPopup .DialogContent {
+  background: var(--cp-bg-void) !important;
+  color: var(--cp-text-main) !important;
+}
+
+body ._2kwFFHckg8jvnwJfg9-la8,
+body ._2kwFFHckg8jvnwJfg9-la8 ._18QCu-7MTzd51UpVbYysDy,
+.MillenniumDesktopSidebar {
+  background: var(--cp-bg-panel) !important;
+  border-right: 1px solid rgba(0, 240, 255, 0.28) !important;
+}
+
+body ._2kwFFHckg8jvnwJfg9-la8 ._18QCu-7MTzd51UpVbYysDy ._1-vlriAtKYDViAEunue4VO,
+.MillenniumDesktopSidebar .MillenniumDesktopSidebar_LibraryItemButton {
+  color: var(--cp-text-muted) !important;
+  border-left: 2px solid transparent !important;
+  font-family: var(--cp-font-ui) !important;
+  font-weight: 600 !important;
+}
+
+body ._2kwFFHckg8jvnwJfg9-la8 ._18QCu-7MTzd51UpVbYysDy ._1-vlriAtKYDViAEunue4VO:hover:not(._2DpXjzK3WWsOtUWUrcuOG7),
+.MillenniumDesktopSidebar .MillenniumDesktopSidebar_LibraryItemButton:hover {
+  background: rgba(0, 240, 255, 0.1) !important;
+  color: var(--cp-cyan) !important;
+}
+
+body ._2kwFFHckg8jvnwJfg9-la8 ._18QCu-7MTzd51UpVbYysDy ._1-vlriAtKYDViAEunue4VO._2DpXjzK3WWsOtUWUrcuOG7 {
+  background: rgba(252, 238, 9, 0.14) !important;
+  border-left: 3px solid var(--cp-yellow) !important;
+  color: var(--cp-yellow) !important;
+}
+
+body .DialogHeader,
+body .DialogBody .DialogHeader {
+  color: var(--cp-yellow) !important;
+  font-family: var(--cp-font-mono) !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+}
+
+body .DialogSubHeader,
+body .SettingsDialogSubHeader,
+body .DialogControlsSectionHeader {
+  color: var(--cp-cyan) !important;
+  font-family: var(--cp-font-mono) !important;
+  border-bottom: 1px solid rgba(0, 240, 255, 0.22) !important;
+}
+
+body .DialogControlsSection,
+body .DialogBody .onPxgvGKxGbKdE7dDWrMx ._2HosnnI_K6IvS1QMGhq46P,
+body .DialogBody ._3RNLmzBdpcg55exL2SwhT1 ._3K8Afwm4bvd9vSIzAz9siX {
+  background: var(--cp-bg-card) !important;
+  border: 1px solid rgba(0, 240, 255, 0.22) !important;
+}
+
+body .DialogBody .onPxgvGKxGbKdE7dDWrMx ._2HosnnI_K6IvS1QMGhq46P:hover {
+  border-color: var(--cp-yellow) !important;
+  background: rgba(252, 238, 9, 0.08) !important;
+}
+
+/* Toggle Switches */
+._9Ql-oVe_j8E-vsDdyVdWo {
+  background: rgba(16, 21, 34, 0.95) !important;
+  border: 1px solid rgba(0, 240, 255, 0.4) !important;
+}
+
+._9Ql-oVe_j8E-vsDdyVdWo ._2bl0iQ9xigbq4Zd1NI6NZl::before {
+  background: rgba(122, 139, 163, 0.35) !important;
+}
+
+._9Ql-oVe_j8E-vsDdyVdWo.yLrDAetGoWx0GYqA6ShfS ._2bl0iQ9xigbq4Zd1NI6NZl::before {
+  background: rgba(0, 240, 255, 0.45) !important;
+}
+
+._9Ql-oVe_j8E-vsDdyVdWo ._1PQppcgkuXQAiFPar9AGi- {
+  background: var(--cp-text-muted) !important;
+}
+
+._9Ql-oVe_j8E-vsDdyVdWo.yLrDAetGoWx0GYqA6ShfS ._1PQppcgkuXQAiFPar9AGi- {
+  background: var(--cp-yellow) !important;
+  box-shadow: var(--cp-glow-yellow) !important;
+}
+
+/* Radio Buttons & Checkboxes */
+.DialogRoundCheckboxField .DialogRoundCheckboxField_OuterCircle,
+div[role="radiogroup"] div[role="radio"] {
+  border-color: rgba(0, 240, 255, 0.45) !important;
+}
+
+.DialogRoundCheckboxField .DialogRoundCheckboxField_Control.Active .DialogRoundCheckboxField_InnerCircle,
+._7EGqd8bdiXJBd2fj5Hh8r ._2sQtvR60AbFF5UzDwY9hit._1gKI37LOWj1Df3QSnxvKyF,
+div[role="radiogroup"] div[role="radio"][aria-checked="true"] {
+  background: var(--cp-yellow) !important;
+  border-color: var(--cp-yellow) !important;
+  color: var(--cp-text-dark) !important;
+}
+
+.DialogCheckbox {
+  background: var(--cp-bg-card) !important;
+  border: 1px solid rgba(0, 240, 255, 0.45) !important;
+}
+
+/* Range Sliders */
+._1udlGGE4F5pggcpxovorUd ._2_vG6TwMW2XtyLlTEaODH9 {
+  background: rgba(0, 240, 255, 0.25) !important;
+}
+
+._1udlGGE4F5pggcpxovorUd ._11PBfip2UlKlY3vWSz8PA4 {
+  background: var(--cp-yellow) !important;
+  border: 1px solid #050608 !important;
+  box-shadow: var(--cp-glow-yellow) !important;
+}
+
+._1udlGGE4F5pggcpxovorUd:hover ._11PBfip2UlKlY3vWSz8PA4 {
+  background: var(--cp-cyan) !important;
+  box-shadow: var(--cp-glow-cyan) !important;
+}
+
+/* Dropdown Inputs & Text Fields */
+._DialogInputContainer,
+.DialogDropDown._DialogInputContainer,
+.DialogTextInputBase {
+  background: rgba(16, 21, 34, 0.92) !important;
+  border: 1px solid rgba(0, 240, 255, 0.38) !important;
+  color: var(--cp-text-main) !important;
+}
+
+._DialogInputContainer:hover,
+.DialogTextInputBase:focus {
+  border-color: var(--cp-yellow) !important;
+  box-shadow: 0 0 8px rgba(252, 238, 9, 0.25) !important;
+}
+
+/* ==========================================================================
+   14. NEWS / PATCH NOTES MODAL, ACHIEVEMENTS MODAL & STARTUP LOGIN
+   ========================================================================== */
+._2pA5CW91XQQDfo6yZEdPd-,
+._37MAYpIjl0IDA1xVhhsuX8 ._19eb8NMS53lqZR33su0kTr,
+.HruWVPwIDh2FFOOH7OiSs .gioyPMOZttYFcnmgLnsWf,
+.ODpLjkbgMnhnQTcm8ZCMO ._3Fjw7Sm_QUgOr8r3khWTSm,
+._3FQHgRosfNJYE44Fsd_U6z,
+._2JobstxtZVYF3078DblN2M {
+  background: var(--cp-bg-card) !important;
+  border: 1px solid rgba(0, 240, 255, 0.28) !important;
+  color: var(--cp-text-main) !important;
+}
+
+.HruWVPwIDh2FFOOH7OiSs .gioyPMOZttYFcnmgLnsWf .iYW5hWQwg14WYT4PV3xe_:hover {
+  border-color: var(--cp-yellow) !important;
+  color: var(--cp-yellow) !important;
+}
+
+/* Startup Login / Account Switcher */
+.Rp8QOGJ2DypeDniMnRBhr .VZ6x_grhNkIYJG__jEEyp.DesktopUI,
+.Rp8QOGJ2DypeDniMnRBhr ._27A5ub1QLLIMmgywKVMg4z,
+.Rp8QOGJ2DypeDniMnRBhr .lat0M-V5X4uYd6Mpm1DJ1 {
+  background: var(--cp-bg-panel) !important;
+  border: 1px solid rgba(0, 240, 255, 0.35) !important;
+  color: var(--cp-text-main) !important;
+}
+
+.Rp8QOGJ2DypeDniMnRBhr ._27A5ub1QLLIMmgywKVMg4z .l_0WJ2pzm_5Zp7gfT_UZz:hover,
+.Rp8QOGJ2DypeDniMnRBhr ._27A5ub1QLLIMmgywKVMg4z ._1mt2mPMVEDfpOhhWePy9hc:hover {
+  border-color: var(--cp-yellow) !important;
+  background: rgba(252, 238, 9, 0.12) !important;
+}
+
+/* ==========================================================================
+   15. DOWNLOADS, COLLECTIONS, SOUNDTRACKS & GAME RECORDING / SCREENSHOTS
+   ========================================================================== */
+._1bq4x9pa4-9RLY-dXWUZTp,
+._373v1eWNyaPKhgnea9FZSt,
+._1VNuYHM6BPBOJspC6zPf5r.IbePLaw-vSvhG1GTenYFg,
+._20JlDJD9-uoCjNLGp_8mY6,
+._1f9_BgoyE1cjqyeKD8dh9u {
+  background: var(--cp-bg-card) !important;
+  border: 1px solid rgba(0, 240, 255, 0.25) !important;
+  color: var(--cp-text-main) !important;
+}
+
+._1VNuYHM6BPBOJspC6zPf5r.IbePLaw-vSvhG1GTenYFg:hover {
+  border-color: var(--cp-cyan) !important;
+  background: var(--cp-bg-card-hover) !important;
+}
+
+._2Dd4T78PcCTUVgOtDGFY5j .rz1mrOnj9WN6UErES7qsq,
+._2Dd4T78PcCTUVgOtDGFY5j ._2Th-vimU76KOpmdy45yu52,
+._2Dd4T78PcCTUVgOtDGFY5j ._2rqTSCLSSEycEiuCS_OkpX,
+._23zCI_59RJTWRvY-_YCFb9 ._1c7FWVusLDkD_Lv6ZB0uTY,
+._23zCI_59RJTWRvY-_YCFb9 ._5ZEYSTRBHDswDtriduXW0 {
+  background: var(--cp-bg-card) !important;
+  border: 1px solid rgba(0, 240, 255, 0.28) !important;
+  color: var(--cp-text-main) !important;
+}
+
+/* ==========================================================================
+   16. IN-GAME OVERLAY (SP OVERLAY) TOOLBAR & FLOATING WINDOWS
+   ========================================================================== */
+._1EI98QaSW75zbVd3gxgBfS ._3OzkVrQFFPv0aV41N4MrHV,
+.fi6UDkxJq66MLo2z9wabQ .vCykYvbW9JAoUuOZK3L8M,
+.fi6UDkxJq66MLo2z9wabQ .iu7jaxFxWk1sYge_kwKmz._3KwfoP3QLtY80hx0gtZBZ4 {
+  background: var(--cp-bg-panel) !important;
+  border: 1px solid rgba(0, 240, 255, 0.42) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.8), 0 0 12px rgba(0, 240, 255, 0.16) !important;
+}
+
+._3OzkVrQFFPv0aV41N4MrHV .fbu3l7kPiBeb3EKCjIb8n ._3ZLaTxSHxeGcoKlIy_-Z0L {
+  background: var(--cp-bg-card) !important;
+  border: 1px solid rgba(0, 240, 255, 0.3) !important;
+  color: var(--cp-text-main) !important;
+}
+
+._3OzkVrQFFPv0aV41N4MrHV .fbu3l7kPiBeb3EKCjIb8n ._3ZLaTxSHxeGcoKlIy_-Z0L._1BXjK5v8XI_SEhGola5ftn,
+.fi6UDkxJq66MLo2z9wabQ .vCykYvbW9JAoUuOZK3L8M .BoygotvcKo4DC4dSix8G3:hover {
+  background: var(--cp-yellow) !important;
+  border-color: var(--cp-yellow) !important;
+  color: var(--cp-text-dark) !important;
+}
+
+/* ==========================================================================
+   17. TITLEBAR WINDOW CONTROLS & SIDEBAR FILTER / COLLECTION POLISH
+   ========================================================================== */
+.title-area .title-area-icon:hover {
+  background: rgba(0, 240, 255, 0.16) !important;
+  color: var(--cp-cyan) !important;
+}
+
+.title-area .title-area-icon.closeButton:hover {
+  background: var(--cp-red) !important;
+  color: #ffffff !important;
+}
+
+._3x1HklzyDs4TEjACrRO2tB ._20QAC4WMXm8qFE8waUT5oo,
+._3x1HklzyDs4TEjACrRO2tB ._2sYIghGVXJr6tsQVvcryy8 {
+  background: var(--cp-bg-panel) !important;
+  border-color: rgba(0, 240, 255, 0.25) !important;
 }
