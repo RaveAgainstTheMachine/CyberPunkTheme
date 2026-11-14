@@ -6391,8 +6391,12 @@ div.NarrowRightPanel ._3Y87YQY56ZCOqhgcZFaDc5 ._1YbtIWcfkQJOysLXQbwzRf {
    9. CONTEXT MENUS, DROPDOWNS, SETTINGS & MODAL DIALOGS
    ========================================================================== */
 /* Fixed viewport border overlay on popup menu windows so subpixel rounding never clips the right border */
-html._14wqdluDeDnnEcg3OSLEmd body {
-  background: #090c14 !important;
+html._14wqdluDeDnnEcg3OSLEmd body,
+html._14wqdluDeDnnEcg3OSLEmd body.ContextMenuPopupBody,
+html._14wqdluDeDnnEcg3OSLEmd body.ContextMenuPopupBody.DesktopUI {
+  background: var(--cp-bg-panel) !important;
+  background-color: var(--cp-bg-panel) !important;
+  background-image: none !important;
 }
 
 html._14wqdluDeDnnEcg3OSLEmd body::before {
@@ -6401,23 +6405,46 @@ html._14wqdluDeDnnEcg3OSLEmd body::before {
   inset: 0 !important;
   pointer-events: none !important;
   z-index: 99998 !important;
-  box-shadow: inset 0 0 0 1px var(--cp-cyan), inset 0 0 10px rgba(0, 240, 255, 0.18) !important;
+  box-shadow: inset 0 0 0 1px var(--cp-cyan), inset 0 0 10px rgba(0, 240, 255, 0.16) !important;
 }
 
-body.DesktopUI .PP7LM0Ow1K5qkR8WElLpt,
-.contextMenuContents,
-.DesktopUI .DialogMenuPosition.visible ._DialogInputContainer {
-  background: #090c14 !important;
+/* Inline menus/popups outside PopupWindow frames get a single outer border; PopupWindows use body::before above */
+html:not(._14wqdluDeDnnEcg3OSLEmd) .PP7LM0Ow1K5qkR8WElLpt,
+html:not(._14wqdluDeDnnEcg3OSLEmd) .GreenEnvelopeMenu,
+.DesktopUI .DialogMenuPosition.visible > ._DialogInputContainer {
+  background: var(--cp-bg-panel) !important;
+  background-color: var(--cp-bg-panel) !important;
+  background-image: none !important;
   border: none !important;
-  box-shadow: inset 0 0 0 1px var(--cp-cyan), inset 0 0 10px rgba(0, 240, 255, 0.18) !important;
-  padding: 6px !important;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.88), inset 0 0 0 1px var(--cp-cyan), inset 0 0 10px rgba(0, 240, 255, 0.14) !important;
+  color: var(--cp-text-main) !important;
+  padding: 4px !important;
   min-width: unset !important;
   box-sizing: border-box !important;
 }
 
+html._14wqdluDeDnnEcg3OSLEmd .PP7LM0Ow1K5qkR8WElLpt,
+html._14wqdluDeDnnEcg3OSLEmd .GreenEnvelopeMenu,
+html._14wqdluDeDnnEcg3OSLEmd > body > ._2EstNjFIIZm_WUSKm5Wt7n {
+  background: var(--cp-bg-panel) !important;
+  background-color: var(--cp-bg-panel) !important;
+  background-image: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: var(--cp-text-main) !important;
+  padding: 4px !important;
+  min-width: unset !important;
+  box-sizing: border-box !important;
+}
+
+/* Inner menu/notification flex containers stay borderless so popup menus never render double borders */
 body.DesktopUI ._2EstNjFIIZm_WUSKm5Wt7n,
-body.DesktopUI ._3pofGqV0buiKAfMPEs3_82 {
+body.DesktopUI ._3pofGqV0buiKAfMPEs3_82,
+.PP7LM0Ow1K5qkR8WElLpt .contextMenuContents,
+._3pofGqV0buiKAfMPEs3_82 {
   background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
   padding: 0 !important;
   margin: 0 !important;
   border: none !important;
@@ -6739,20 +6766,7 @@ button.DialogButton.Primary {
 /* ==========================================================================
    11. ALL CLIENT CONTEXT MENUS, SUBMENUS, DROPDOWNS & NOTIFICATION TRAY
    ========================================================================== */
-body.DesktopUI .PP7LM0Ow1K5qkR8WElLpt,
-body.DesktopUI ._3pofGqV0buiKAfMPEs3_82,
-body .PP7LM0Ow1K5qkR8WElLpt,
-.GreenEnvelopeMenu,
-.ContextMenuPopupBody .PP7LM0Ow1K5qkR8WElLpt,
-body.DesktopUI ._2EstNjFIIZm_WUSKm5Wt7n {
-  background: var(--cp-bg-panel) !important;
-  background-color: var(--cp-bg-panel) !important;
-  background-image: none !important;
-  border: 1px solid var(--cp-cyan) !important;
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.88), inset 0 0 10px rgba(0, 240, 255, 0.14) !important;
-  color: var(--cp-text-main) !important;
-  padding: 4px !important;
-}
+/* Section 9 handles outer single-border styling for both PopupWindow (::before) and inline menus. */
 
 body.DesktopUI ._1n7Wloe5jZ6fSuvV18NNWI,
 body.DesktopUI ._1BAKXmqQdWRWmWX9_CbhuY,
@@ -6822,7 +6836,6 @@ body.DesktopUI ._2EstNjFIIZm_WUSKm5Wt7n .p2CKe5nuC_8YgWL_lZbNn {
 
 /* Dialog Dropdown Listboxes & Emoji Picker Popups */
 .DesktopUI .DialogMenuPosition.visible > ._DialogInputContainer,
-.DesktopUI .DialogMenuPosition.visible ._DialogInputContainer,
 body .PP7LM0Ow1K5qkR8WElLpt .tid_OE5NJWCCVJQP1PfRc {
   background: var(--cp-bg-panel) !important;
   border: 1px solid var(--cp-cyan) !important;
@@ -7134,11 +7147,12 @@ div[role="radiogroup"] div[role="radio"][aria-checked="true"] {
   --cp-font-ui: 'Rajdhani', 'Motiva Sans', sans-serif;
   --cp-font-mono: 'Share Tech Mono', Consolas, monospace;
   --cp-store-max-width: 1200px;
-  --store-menu-overlap-height: 98px !important;
 }
 
-* {
-  --store-menu-overlap-height: 98px !important;
+/* Keep sticky v7 Store nav & open mega-menu above Category sticky sub-nav tabs (z-index: 150) */
+.uKlZfaGB3Rs-,
+.uKlZfaGB3Rs-.tTiIJKFmOJA- {
+  z-index: 200 !important;
 }
 
 :root,
@@ -7504,12 +7518,12 @@ html.responsive .carousel_container .arrow:hover > div,
 }
 
 /* React Store Carousel & Personal Calendar Buttons (Exact same 45x108px cyan-bordered HUD box + crisp silver chevron) */
-button.carousel__back-button,
-button.carousel__next-button,
+button.carousel__back-button:not(.-LFP33ltPBY-):not([class*="carousel__dot"]),
+button.carousel__next-button:not(.-LFP33ltPBY-):not([class*="carousel__dot"]),
 button.CarouselBtnLeft,
 button.CarouselBtnRight,
-[class*="carousel__back-button"],
-[class*="carousel__next-button"],
+[class*="carousel__back-button"]:not(.-LFP33ltPBY-):not([class*="carousel__dot"]),
+[class*="carousel__next-button"]:not(.-LFP33ltPBY-):not([class*="carousel__dot"]),
 .nHdn-Ea4zSg- .CarouselBtnLeft,
 .nHdn-Ea4zSg- .CarouselBtnRight,
 ._5uN-ZG0AdmQ-.iZzul86MCHw- .CarouselBtnLeft,
@@ -7544,30 +7558,31 @@ button.CarouselBtnRight,
   transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease !important;
 }
 
-[class*="SliderBody"] button.carousel__back-button,
+[class*="SliderBody"] button.carousel__back-button:not(.-LFP33ltPBY-):not([class*="carousel__dot"]),
 [class*="SliderBody"] button.CarouselBtnLeft,
-[class*="SliderBody"] button[class*="carousel__back-button"],
-.carousel > button.carousel__back-button,
+[class*="SliderBody"] button[class*="carousel__back-button"]:not(.-LFP33ltPBY-):not([class*="carousel__dot"]),
+.carousel > button.carousel__back-button:not(.-LFP33ltPBY-):not([class*="carousel__dot"]),
 .carousel > button.CarouselBtnLeft,
-.carousel > button[class*="carousel__back-button"],
+.carousel > button[class*="carousel__back-button"]:not(.-LFP33ltPBY-):not([class*="carousel__dot"]),
 .nHdn-Ea4zSg- .CarouselBtnLeft,
 ._5uN-ZG0AdmQ-.iZzul86MCHw- .CarouselBtnLeft,
-.MUbRKQFMT7E- button.CarouselBtnLeft {
+.MUbRKQFMT7E- button.CarouselBtnLeft,
+.DLM2-MZGpkc-.itooywG7rxQ- {
   inset-inline-start: -68px !important;
   inset-inline-end: unset !important;
   transform: translateY(-50%) !important;
 }
 
-[class*="SliderBody"] button.carousel__next-button,
+[class*="SliderBody"] button.carousel__next-button:not(.-LFP33ltPBY-):not([class*="carousel__dot"]),
 [class*="SliderBody"] button.CarouselBtnRight,
-[class*="SliderBody"] button[class*="carousel__next-button"],
-.carousel > button.carousel__next-button,
+[class*="SliderBody"] button[class*="carousel__next-button"]:not(.-LFP33ltPBY-):not([class*="carousel__dot"]),
+.carousel > button.carousel__next-button:not(.-LFP33ltPBY-):not([class*="carousel__dot"]),
 .carousel > button.CarouselBtnRight,
-.carousel > button[class*="carousel__next-button"],
+.carousel > button[class*="carousel__next-button"]:not(.-LFP33ltPBY-):not([class*="carousel__dot"]),
 .nHdn-Ea4zSg- .CarouselBtnRight,
 ._5uN-ZG0AdmQ-.iZzul86MCHw- .CarouselBtnRight,
 .MUbRKQFMT7E- button.CarouselBtnRight,
-.DLM2-MZGpkc- {
+.DLM2-MZGpkc-:not(.itooywG7rxQ-) {
   inset-inline-end: -68px !important;
   inset-inline-start: unset !important;
   transform: translateY(-50%) !important;
@@ -7577,10 +7592,14 @@ button.CarouselBtnRight,
 .home_pagecontent_ctn .ctn_background .carousel_container.paging_capsules,
 .recommended_by_steam_labs_ctn .carousel_container.paging_capsules,
 .deep_dive_block .carousel_container.paging_capsules,
-._5uN-ZG0AdmQ-,
 .F6Wso3e7oqk- ._5w6AlYMyKXw-,
 .PillScrollRowCtn > .F6Wso3e7oqk-.tvKN6VPvEYo- {
   margin-inline: 0 !important;
+  padding-inline: 0 !important;
+}
+
+/* Keep Category/Hub SaleSection outer margin-inline: auto centered while zeroing inner carousel horizontal gutter */
+._5uN-ZG0AdmQ-.iZzul86MCHw- {
   padding-inline: 0 !important;
 }
 
@@ -7604,15 +7623,16 @@ button.CarouselBtnRight,
   .deep_dive_block .carousel_container .arrow.left:hover,
   .carousel_container:not(.maincap) .arrow.left,
   .carousel_container:not(.maincap) .arrow.left:hover,
-  [class*="SliderBody"] button.carousel__back-button,
+  [class*="SliderBody"] button.carousel__back-button:not(.-LFP33ltPBY-):not([class*="carousel__dot"]),
   [class*="SliderBody"] button.CarouselBtnLeft,
-  [class*="SliderBody"] button[class*="carousel__back-button"],
-  .carousel > button.carousel__back-button,
+  [class*="SliderBody"] button[class*="carousel__back-button"]:not(.-LFP33ltPBY-):not([class*="carousel__dot"]),
+  .carousel > button.carousel__back-button:not(.-LFP33ltPBY-):not([class*="carousel__dot"]),
   .carousel > button.CarouselBtnLeft,
-  .carousel > button[class*="carousel__back-button"],
+  .carousel > button[class*="carousel__back-button"]:not(.-LFP33ltPBY-):not([class*="carousel__dot"]),
   .nHdn-Ea4zSg- .CarouselBtnLeft,
   ._5uN-ZG0AdmQ-.iZzul86MCHw- .CarouselBtnLeft,
-  .MUbRKQFMT7E- button.CarouselBtnLeft {
+  .MUbRKQFMT7E- button.CarouselBtnLeft,
+  .DLM2-MZGpkc-.itooywG7rxQ- {
     inset-inline-start: -48px !important;
   }
 
@@ -7634,16 +7654,16 @@ button.CarouselBtnRight,
   .deep_dive_block .carousel_container .arrow.right:hover,
   .carousel_container:not(.maincap) .arrow.right,
   .carousel_container:not(.maincap) .arrow.right:hover,
-  [class*="SliderBody"] button.carousel__next-button,
+  [class*="SliderBody"] button.carousel__next-button:not(.-LFP33ltPBY-):not([class*="carousel__dot"]),
   [class*="SliderBody"] button.CarouselBtnRight,
-  [class*="SliderBody"] button[class*="carousel__next-button"],
-  .carousel > button.carousel__next-button,
+  [class*="SliderBody"] button[class*="carousel__next-button"]:not(.-LFP33ltPBY-):not([class*="carousel__dot"]),
+  .carousel > button.carousel__next-button:not(.-LFP33ltPBY-):not([class*="carousel__dot"]),
   .carousel > button.CarouselBtnRight,
-  .carousel > button[class*="carousel__next-button"],
+  .carousel > button[class*="carousel__next-button"]:not(.-LFP33ltPBY-):not([class*="carousel__dot"]),
   .nHdn-Ea4zSg- .CarouselBtnRight,
   ._5uN-ZG0AdmQ-.iZzul86MCHw- .CarouselBtnRight,
   .MUbRKQFMT7E- button.CarouselBtnRight,
-  .DLM2-MZGpkc- {
+  .DLM2-MZGpkc-:not(.itooywG7rxQ-) {
     inset-inline-end: -48px !important;
   }
 
@@ -7666,22 +7686,24 @@ button.CarouselBtnRight,
   }
 }
 
-button.carousel__back-button:disabled,
-button.carousel__next-button:disabled,
+button.carousel__back-button:not(.-LFP33ltPBY-):not([class*="carousel__dot"]):disabled,
+button.carousel__next-button:not(.-LFP33ltPBY-):not([class*="carousel__dot"]):disabled,
 button.CarouselBtnLeft:disabled,
 button.CarouselBtnRight:disabled,
-[class*="carousel__back-button"]:disabled,
-[class*="carousel__next-button"]:disabled {
+[class*="carousel__back-button"]:not(.-LFP33ltPBY-):not([class*="carousel__dot"]):disabled,
+[class*="carousel__next-button"]:not(.-LFP33ltPBY-):not([class*="carousel__dot"]):disabled,
+.DLM2-MZGpkc-:disabled {
   opacity: 0.18 !important;
   pointer-events: none !important;
 }
 
-button.carousel__back-button svg,
-button.carousel__next-button svg,
+button.carousel__back-button:not(.-LFP33ltPBY-):not([class*="carousel__dot"]) svg,
+button.carousel__next-button:not(.-LFP33ltPBY-):not([class*="carousel__dot"]) svg,
 button.CarouselBtnLeft svg,
 button.CarouselBtnRight svg,
-[class*="carousel__back-button"] svg,
-[class*="carousel__next-button"] svg {
+[class*="carousel__back-button"]:not(.-LFP33ltPBY-):not([class*="carousel__dot"]) svg,
+[class*="carousel__next-button"]:not(.-LFP33ltPBY-):not([class*="carousel__dot"]) svg,
+.DLM2-MZGpkc- svg {
   width: 20px !important;
   height: 40px !important;
   min-width: 20px !important;
@@ -7700,42 +7722,47 @@ button.CarouselBtnRight svg,
   overflow: visible !important;
 }
 
-button.carousel__back-button svg polygon,
-button.carousel__back-button svg path,
-button.carousel__next-button svg polygon,
-button.carousel__next-button svg path,
+button.carousel__back-button:not(.-LFP33ltPBY-):not([class*="carousel__dot"]) svg polygon,
+button.carousel__back-button:not(.-LFP33ltPBY-):not([class*="carousel__dot"]) svg path,
+button.carousel__next-button:not(.-LFP33ltPBY-):not([class*="carousel__dot"]) svg polygon,
+button.carousel__next-button:not(.-LFP33ltPBY-):not([class*="carousel__dot"]) svg path,
 button.CarouselBtnLeft svg polygon,
 button.CarouselBtnLeft svg path,
 button.CarouselBtnRight svg polygon,
 button.CarouselBtnRight svg path,
-[class*="carousel__back-button"] svg polygon,
-[class*="carousel__back-button"] svg path,
-[class*="carousel__next-button"] svg polygon,
-[class*="carousel__next-button"] svg path {
+[class*="carousel__back-button"]:not(.-LFP33ltPBY-):not([class*="carousel__dot"]) svg polygon,
+[class*="carousel__back-button"]:not(.-LFP33ltPBY-):not([class*="carousel__dot"]) svg path,
+[class*="carousel__next-button"]:not(.-LFP33ltPBY-):not([class*="carousel__dot"]) svg polygon,
+[class*="carousel__next-button"]:not(.-LFP33ltPBY-):not([class*="carousel__dot"]) svg path,
+.DLM2-MZGpkc- svg polygon,
+.DLM2-MZGpkc- svg path {
   fill: #e6f1ff !important;
 }
 
-button.carousel__back-button svg polyline,
-button.carousel__back-button svg line,
-button.carousel__next-button svg polyline,
-button.carousel__next-button svg line,
+button.carousel__back-button:not(.-LFP33ltPBY-):not([class*="carousel__dot"]) svg polyline,
+button.carousel__back-button:not(.-LFP33ltPBY-):not([class*="carousel__dot"]) svg line,
+button.carousel__next-button:not(.-LFP33ltPBY-):not([class*="carousel__dot"]) svg polyline,
+button.carousel__next-button:not(.-LFP33ltPBY-):not([class*="carousel__dot"]) svg line,
 button.CarouselBtnLeft svg polyline,
 button.CarouselBtnLeft svg line,
 button.CarouselBtnRight svg polyline,
 button.CarouselBtnRight svg line,
-[class*="carousel__back-button"] svg polyline,
-[class*="carousel__back-button"] svg line,
-[class*="carousel__next-button"] svg polyline,
-[class*="carousel__next-button"] svg line {
+[class*="carousel__back-button"]:not(.-LFP33ltPBY-):not([class*="carousel__dot"]) svg polyline,
+[class*="carousel__back-button"]:not(.-LFP33ltPBY-):not([class*="carousel__dot"]) svg line,
+[class*="carousel__next-button"]:not(.-LFP33ltPBY-):not([class*="carousel__dot"]) svg polyline,
+[class*="carousel__next-button"]:not(.-LFP33ltPBY-):not([class*="carousel__dot"]) svg line,
+.DLM2-MZGpkc- svg polyline,
+.DLM2-MZGpkc- svg line {
   stroke: #e6f1ff !important;
 }
 
-button.carousel__back-button:hover,
-button.carousel__next-button:hover,
+button.carousel__back-button:not(.-LFP33ltPBY-):not([class*="carousel__dot"]):hover,
+button.carousel__next-button:not(.-LFP33ltPBY-):not([class*="carousel__dot"]):hover,
 button.CarouselBtnLeft:hover,
 button.CarouselBtnRight:hover,
-[class*="carousel__back-button"]:hover,
-[class*="carousel__next-button"]:hover {
+[class*="carousel__back-button"]:not(.-LFP33ltPBY-):not([class*="carousel__dot"]):hover,
+[class*="carousel__next-button"]:not(.-LFP33ltPBY-):not([class*="carousel__dot"]):hover,
+.DLM2-MZGpkc-:hover {
   background: #fcee09 !important;
   background-color: #fcee09 !important;
   background-image: none !important;
@@ -7744,45 +7771,50 @@ button.CarouselBtnRight:hover,
   opacity: 1 !important;
 }
 
-button.carousel__back-button:hover svg,
-button.carousel__next-button:hover svg,
+button.carousel__back-button:not(.-LFP33ltPBY-):not([class*="carousel__dot"]):hover svg,
+button.carousel__next-button:not(.-LFP33ltPBY-):not([class*="carousel__dot"]):hover svg,
 button.CarouselBtnLeft:hover svg,
 button.CarouselBtnRight:hover svg,
-[class*="carousel__back-button"]:hover svg,
-[class*="carousel__next-button"]:hover svg {
+[class*="carousel__back-button"]:not(.-LFP33ltPBY-):not([class*="carousel__dot"]):hover svg,
+[class*="carousel__next-button"]:not(.-LFP33ltPBY-):not([class*="carousel__dot"]):hover svg,
+.DLM2-MZGpkc-:hover svg {
   background: none !important;
   background-color: transparent !important;
   background-image: none !important;
   filter: brightness(0) !important;
 }
 
-button.carousel__back-button:hover svg polygon,
-button.carousel__back-button:hover svg path,
-button.carousel__next-button:hover svg polygon,
-button.carousel__next-button:hover svg path,
+button.carousel__back-button:not(.-LFP33ltPBY-):not([class*="carousel__dot"]):hover svg polygon,
+button.carousel__back-button:not(.-LFP33ltPBY-):not([class*="carousel__dot"]):hover svg path,
+button.carousel__next-button:not(.-LFP33ltPBY-):not([class*="carousel__dot"]):hover svg polygon,
+button.carousel__next-button:not(.-LFP33ltPBY-):not([class*="carousel__dot"]):hover svg path,
 button.CarouselBtnLeft:hover svg polygon,
 button.CarouselBtnLeft:hover svg path,
 button.CarouselBtnRight:hover svg polygon,
 button.CarouselBtnRight:hover svg path,
-[class*="carousel__back-button"]:hover svg polygon,
-[class*="carousel__back-button"]:hover svg path,
-[class*="carousel__next-button"]:hover svg polygon,
-[class*="carousel__next-button"]:hover svg path {
+[class*="carousel__back-button"]:not(.-LFP33ltPBY-):not([class*="carousel__dot"]):hover svg polygon,
+[class*="carousel__back-button"]:not(.-LFP33ltPBY-):not([class*="carousel__dot"]):hover svg path,
+[class*="carousel__next-button"]:not(.-LFP33ltPBY-):not([class*="carousel__dot"]):hover svg polygon,
+[class*="carousel__next-button"]:not(.-LFP33ltPBY-):not([class*="carousel__dot"]):hover svg path,
+.DLM2-MZGpkc-:hover svg polygon,
+.DLM2-MZGpkc-:hover svg path {
   fill: #050608 !important;
 }
 
-button.carousel__back-button:hover svg polyline,
-button.carousel__back-button:hover svg line,
-button.carousel__next-button:hover svg polyline,
-button.carousel__next-button:hover svg line,
+button.carousel__back-button:not(.-LFP33ltPBY-):not([class*="carousel__dot"]):hover svg polyline,
+button.carousel__back-button:not(.-LFP33ltPBY-):not([class*="carousel__dot"]):hover svg line,
+button.carousel__next-button:not(.-LFP33ltPBY-):not([class*="carousel__dot"]):hover svg polyline,
+button.carousel__next-button:not(.-LFP33ltPBY-):not([class*="carousel__dot"]):hover svg line,
 button.CarouselBtnLeft:hover svg polyline,
 button.CarouselBtnLeft:hover svg line,
 button.CarouselBtnRight:hover svg polyline,
 button.CarouselBtnRight:hover svg line,
-[class*="carousel__back-button"]:hover svg polyline,
-[class*="carousel__back-button"]:hover svg line,
-[class*="carousel__next-button"]:hover svg polyline,
-[class*="carousel__next-button"]:hover svg line {
+[class*="carousel__back-button"]:not(.-LFP33ltPBY-):not([class*="carousel__dot"]):hover svg polyline,
+[class*="carousel__back-button"]:not(.-LFP33ltPBY-):not([class*="carousel__dot"]):hover svg line,
+[class*="carousel__next-button"]:not(.-LFP33ltPBY-):not([class*="carousel__dot"]):hover svg polyline,
+[class*="carousel__next-button"]:not(.-LFP33ltPBY-):not([class*="carousel__dot"]):hover svg line,
+.DLM2-MZGpkc-:hover svg polyline,
+.DLM2-MZGpkc-:hover svg line {
   stroke: #050608 !important;
 }
 
@@ -7848,11 +7880,9 @@ button.carousel__dot--selected {
   box-shadow: 0 0 8px rgba(252, 238, 9, 0.7) !important;
 }
 
-/* Store Top Navigation Bar (Browse, Recommendations, Categories, Search) */
+/* Store Top Navigation Bar (Classic & v7 Browse / Recommendations / Categories / Search) */
 div#store_nav_area .store_nav_bg,
-.store_header_btn,
-._-6WU-qJBwUo- .XLbP8xOkCYw-,
-.dm2SGcwBwj4- .WCG-2-OYepA- {
+.store_header_btn {
   box-sizing: border-box;
   width: 100%;
   max-width: var(--cp-store-max-width);
@@ -7862,6 +7892,29 @@ div#store_nav_area .store_nav_bg,
   border: 1px solid rgba(252, 238, 9, 0.4) !important;
   border-left: 3px solid #fcee09 !important;
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Keep v7 Store Nav compact at 46px height (matching --store-menu-floating-height) so sticky Category tabs dock below without overlap */
+._-6WU-qJBwUo- .XLbP8xOkCYw-,
+.dm2SGcwBwj4- .WCG-2-OYepA- {
+  box-sizing: border-box !important;
+  width: 100%;
+  max-width: var(--cp-store-max-width);
+  height: 46px !important;
+  min-height: 46px !important;
+  margin: 0 auto !important;
+  padding: 0 12px !important;
+  background: rgba(11, 14, 23, 0.95) !important;
+  border: 1px solid rgba(252, 238, 9, 0.4) !important;
+  border-left: 3px solid #fcee09 !important;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Scrolled sticky Store Nav wrapper backdrop prevents page content peeking in the side gutters */
+._-6WU-qJBwUo-.ajIc0TZWAPI- {
+  background: rgba(5, 6, 10, 0.94) !important;
+  backdrop-filter: blur(8px) !important;
+  border-bottom: 1px solid rgba(0, 240, 255, 0.25) !important;
 }
 
 /* Store Search Input */
@@ -8136,15 +8189,81 @@ a.S-0da5Ll-j0-:hover {
 }
 
 /* Mega-Menu Open Panel (Browse / Recommendations / Categories / Hardware / Ways to Play / More) */
-.WHV9yn7TELM- .RZQWX-64UNU-,
-.WHV9yn7TELM- .zYCq2k90p58-,
-.WHV9yn7TELM- .dUvJZktS6bk-,
-._-6WU-qJBwUo- .hjG2apu1gQc-,
-.dm2SGcwBwj4- .rGuH1gD4ryg- {
-  background: var(--cp-bg-panel) !important;
+/* Backdrop dimmer below mega-menu must remain a clean borderless scrim */
+._-6WU-qJBwUo- .hjG2apu1gQc- {
+  background: rgba(5, 6, 10, 0.72) !important;
   background-image: none !important;
-  border: 1px solid var(--cp-cyan) !important;
-  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.9), 0 0 16px rgba(0, 240, 255, 0.2) !important;
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: blur(2px) !important;
+}
+
+/* Outer full-width mega-menu drawer strip (single crisp cyan HUD boundary) */
+.WHV9yn7TELM- .RZQWX-64UNU-,
+.dm2SGcwBwj4- .rGuH1gD4ryg- {
+  background: rgba(8, 10, 18, 0.97) !important;
+  background-image: none !important;
+  border: none !important;
+  border-top: 1px solid rgba(0, 240, 255, 0.7) !important;
+  border-bottom: 1px solid var(--cp-cyan) !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.92), 0 4px 20px rgba(0, 240, 255, 0.16) !important;
+}
+
+/* Inner centered wrappers inside mega-menu stay borderless so we don't draw double/triple nested cyan boxes */
+.WHV9yn7TELM- .zYCq2k90p58-,
+.WHV9yn7TELM- .dUvJZktS6bk- {
+  background: transparent !important;
+  background-image: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Mega-menu sub-cards (Ways to Play / Special Sections / Browse / Recommendations) */
+.WHV9yn7TELM- .fHaybiqsJ6M-,
+.WHV9yn7TELM- .a-U-GT11cxQ-,
+.WHV9yn7TELM- .QHiQcR8jG10- {
+  background: rgba(13, 18, 30, 0.92) !important;
+  background-image: none !important;
+  border: 1px solid rgba(0, 240, 255, 0.3) !important;
+  box-shadow: none !important;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease !important;
+}
+
+.WHV9yn7TELM- .fHaybiqsJ6M-:hover,
+.WHV9yn7TELM- .a-U-GT11cxQ-:hover,
+.WHV9yn7TELM- .QHiQcR8jG10-:hover {
+  border-color: var(--cp-yellow) !important;
+  box-shadow: 0 0 12px rgba(252, 238, 9, 0.35) !important;
+}
+
+/* Category / Genre / VR Hub sticky sub-nav tab bar & FacetedBrowse filters */
+.i8Nz35tfmTA-,
+.FahnD6ZWvck- {
+  background: rgba(8, 10, 18, 0.94) !important;
+  background-image: none !important;
+  border-top: 1px solid rgba(0, 240, 255, 0.22) !important;
+  border-bottom: 1px solid rgba(0, 240, 255, 0.32) !important;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.75) !important;
+}
+
+.-hv44tztogk-,
+._5uN-ZG0AdmQ-.hBOvJNgGqZc- {
+  background: rgba(11, 14, 23, 0.9) !important;
+  background-image: none !important;
+}
+
+/* Steam News Hub top sign-in banner & Discovery Queue banner */
+.-CiPbviVzto-,
+.dycaOmod9zw- {
+  background: linear-gradient(135deg, rgba(11, 14, 23, 0.96) 0%, rgba(18, 28, 46, 0.96) 100%) !important;
+  background-image: linear-gradient(135deg, rgba(11, 14, 23, 0.96) 0%, rgba(18, 28, 46, 0.96) 100%) !important;
+  border: 1px solid rgba(0, 240, 255, 0.35) !important;
+  border-left: 3px solid var(--cp-yellow) !important;
+}
+
+.q6mo6TFfdDs- {
+  background: rgba(11, 14, 23, 0.92) !important;
+  border: 1px solid rgba(0, 240, 255, 0.25) !important;
 }
 
 .WHV9yn7TELM- a.PcE8-n5Eb6Y-,

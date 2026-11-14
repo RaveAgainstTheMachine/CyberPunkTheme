@@ -1043,8 +1043,12 @@ div.NarrowRightPanel ._3Y87YQY56ZCOqhgcZFaDc5 ._1YbtIWcfkQJOysLXQbwzRf {
    9. CONTEXT MENUS, DROPDOWNS, SETTINGS & MODAL DIALOGS
    ========================================================================== */
 /* Fixed viewport border overlay on popup menu windows so subpixel rounding never clips the right border */
-html._14wqdluDeDnnEcg3OSLEmd body {
-  background: #090c14 !important;
+html._14wqdluDeDnnEcg3OSLEmd body,
+html._14wqdluDeDnnEcg3OSLEmd body.ContextMenuPopupBody,
+html._14wqdluDeDnnEcg3OSLEmd body.ContextMenuPopupBody.DesktopUI {
+  background: var(--cp-bg-panel) !important;
+  background-color: var(--cp-bg-panel) !important;
+  background-image: none !important;
 }
 
 html._14wqdluDeDnnEcg3OSLEmd body::before {
@@ -1053,23 +1057,46 @@ html._14wqdluDeDnnEcg3OSLEmd body::before {
   inset: 0 !important;
   pointer-events: none !important;
   z-index: 99998 !important;
-  box-shadow: inset 0 0 0 1px var(--cp-cyan), inset 0 0 10px rgba(0, 240, 255, 0.18) !important;
+  box-shadow: inset 0 0 0 1px var(--cp-cyan), inset 0 0 10px rgba(0, 240, 255, 0.16) !important;
 }
 
-body.DesktopUI .PP7LM0Ow1K5qkR8WElLpt,
-.contextMenuContents,
-.DesktopUI .DialogMenuPosition.visible ._DialogInputContainer {
-  background: #090c14 !important;
+/* Inline menus/popups outside PopupWindow frames get a single outer border; PopupWindows use body::before above */
+html:not(._14wqdluDeDnnEcg3OSLEmd) .PP7LM0Ow1K5qkR8WElLpt,
+html:not(._14wqdluDeDnnEcg3OSLEmd) .GreenEnvelopeMenu,
+.DesktopUI .DialogMenuPosition.visible > ._DialogInputContainer {
+  background: var(--cp-bg-panel) !important;
+  background-color: var(--cp-bg-panel) !important;
+  background-image: none !important;
   border: none !important;
-  box-shadow: inset 0 0 0 1px var(--cp-cyan), inset 0 0 10px rgba(0, 240, 255, 0.18) !important;
-  padding: 6px !important;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.88), inset 0 0 0 1px var(--cp-cyan), inset 0 0 10px rgba(0, 240, 255, 0.14) !important;
+  color: var(--cp-text-main) !important;
+  padding: 4px !important;
   min-width: unset !important;
   box-sizing: border-box !important;
 }
 
+html._14wqdluDeDnnEcg3OSLEmd .PP7LM0Ow1K5qkR8WElLpt,
+html._14wqdluDeDnnEcg3OSLEmd .GreenEnvelopeMenu,
+html._14wqdluDeDnnEcg3OSLEmd > body > ._2EstNjFIIZm_WUSKm5Wt7n {
+  background: var(--cp-bg-panel) !important;
+  background-color: var(--cp-bg-panel) !important;
+  background-image: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: var(--cp-text-main) !important;
+  padding: 4px !important;
+  min-width: unset !important;
+  box-sizing: border-box !important;
+}
+
+/* Inner menu/notification flex containers stay borderless so popup menus never render double borders */
 body.DesktopUI ._2EstNjFIIZm_WUSKm5Wt7n,
-body.DesktopUI ._3pofGqV0buiKAfMPEs3_82 {
+body.DesktopUI ._3pofGqV0buiKAfMPEs3_82,
+.PP7LM0Ow1K5qkR8WElLpt .contextMenuContents,
+._3pofGqV0buiKAfMPEs3_82 {
   background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
   padding: 0 !important;
   margin: 0 !important;
   border: none !important;
@@ -1391,20 +1418,7 @@ button.DialogButton.Primary {
 /* ==========================================================================
    11. ALL CLIENT CONTEXT MENUS, SUBMENUS, DROPDOWNS & NOTIFICATION TRAY
    ========================================================================== */
-body.DesktopUI .PP7LM0Ow1K5qkR8WElLpt,
-body.DesktopUI ._3pofGqV0buiKAfMPEs3_82,
-body .PP7LM0Ow1K5qkR8WElLpt,
-.GreenEnvelopeMenu,
-.ContextMenuPopupBody .PP7LM0Ow1K5qkR8WElLpt,
-body.DesktopUI ._2EstNjFIIZm_WUSKm5Wt7n {
-  background: var(--cp-bg-panel) !important;
-  background-color: var(--cp-bg-panel) !important;
-  background-image: none !important;
-  border: 1px solid var(--cp-cyan) !important;
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.88), inset 0 0 10px rgba(0, 240, 255, 0.14) !important;
-  color: var(--cp-text-main) !important;
-  padding: 4px !important;
-}
+/* Section 9 handles outer single-border styling for both PopupWindow (::before) and inline menus. */
 
 body.DesktopUI ._1n7Wloe5jZ6fSuvV18NNWI,
 body.DesktopUI ._1BAKXmqQdWRWmWX9_CbhuY,
@@ -1474,7 +1488,6 @@ body.DesktopUI ._2EstNjFIIZm_WUSKm5Wt7n .p2CKe5nuC_8YgWL_lZbNn {
 
 /* Dialog Dropdown Listboxes & Emoji Picker Popups */
 .DesktopUI .DialogMenuPosition.visible > ._DialogInputContainer,
-.DesktopUI .DialogMenuPosition.visible ._DialogInputContainer,
 body .PP7LM0Ow1K5qkR8WElLpt .tid_OE5NJWCCVJQP1PfRc {
   background: var(--cp-bg-panel) !important;
   border: 1px solid var(--cp-cyan) !important;
